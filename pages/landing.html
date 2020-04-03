@@ -1,0 +1,97 @@
+<!doctype html>
+<html lang="pt-br">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="../css/main.css">
+    <link rel="stylesheet" href="../css/sideModal.css">
+ 
+    <!-- Required styles for MDC Web -->
+    <link rel="stylesheet" href="../css/material-components-web.css">
+ 
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+
+    <!-- MDC Material Icons -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+
+    <title>The Helper</title>
+  </head>
+  <body>
+
+    <!-- NAVBAR -->
+    <nav class="navbar navbar-expand-sm bg-primary navbar-dark px-4 py-26">
+        <a class="navbar-brand text-white ml-4 bold" href="#">The helper</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>      
+        <div class="collapse navbar-collapse flex-row-reverse" id="navbarSupportedContent">
+          <div class="form-inline pr-22">
+            <button class="btn my-1 px-3 mr-3 my-sm-0 no-animation login">entrar</button>
+            <button class="btn my-1 my-sm-0 no-animation register">cadastrar-se</button>
+          </div>
+        </div>
+    </nav>
+
+    <!-- Side Modal -->
+    <div class="backdrop">
+        <div class="sideModal shadow-lg">
+            <h2 class="modal-title" >Login</h2>
+            <form>
+              <div class="pt-4">
+                <label class="mdc-text-field mdc-text-field--outlined" style="width: 100%;">
+                  <input type="text" class="mdc-text-field__input" aria-labelledby="my-label-id">
+                  <span class="mdc-notched-outline">
+                    <span class="mdc-notched-outline__leading"></span>
+                    <span class="mdc-notched-outline__notch">
+                      <span class="mdc-floating-label" id="my-label-id">Usuário</span>
+                    </span>
+                    <span class="mdc-notched-outline__trailing">
+                    </span>
+                  </span>
+                </label>
+              </div>
+              <div class="pt-4">
+                <label class="mdc-text-field mdc-text-field--outlined mdc-text-field--with-trailing-icon" style="width: 100%;">
+                  <input type="password" class="mdc-text-field__input" aria-labelledby="my-label-id">
+                  <span class="mdc-notched-outline">
+                    <span class="mdc-notched-outline__leading"></span>
+                    <span class="mdc-notched-outline__notch">
+                      <span class="mdc-floating-label" id="my-label-id">Senha</span>
+                    </span>
+                    <span class="mdc-notched-outline__trailing">
+                      <i class="material-icons mdc-text-field__icon mdc-text-field__icon--trailing" tabindex="0" role="button">visibility</i>
+                    </span>
+                  </span>
+                </label>
+              </div>
+              <div class="grid-login pb-4">
+                <div class="checkbox py-2">
+                  <label>
+                      <input type="checkbox" value="">
+                      Lembrar senha
+                  </label>
+                </div>
+                <div class="label-sm">
+                  <a href="#" class="pt-14 float-right">
+                    Esqueci minha senha
+                  </a>
+                </div>
+              </div>
+              <button type="submit" class="btn btn-primary btn-block btn-raised register">entrar</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Required MDC Web JavaScript library -->
+    <script src="https://unpkg.com/material-components-web@latest/dist/material-components-web.min.js"></script>  
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+    <script src="../scripts/main.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+  </body>
+</html>

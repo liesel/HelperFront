@@ -1,0 +1,36 @@
+body {
+    font-family: Raleway,Roboto,Helvetica,Arial,sans-serif !important;
+}
+
+.bold {
+    font-weight: bold !important;
+}
+
+.btn {
+    font-family: Raleway,Roboto,Helvetica,Arial,sans-serif !important;
+    text-transform: lowercase !important;
+    font-weight: bold !important;
+}
+
+.btn.login {
+    color: #159CCF !important;
+    background-color: #ffffff !important;
+}
+
+.btn.register {
+    color: #ffffff !important;
+    background-color: #1594C4 !important;
+}
+
+.navbar.py-26 {
+    padding-top: 12px;
+    padding-bottom: 12px;
+}
+
+.pr-22 {
+    padding-right: 22px;
+}
+
+.navbar.bg-primary {
+    background-color: #173863 !important;
+}

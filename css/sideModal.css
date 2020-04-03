@@ -1,0 +1,54 @@
+.active {
+    display: block !important;
+}
+
+.backdrop {
+    display: none;
+    position: absolute;
+    top: 64px;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #00000061;
+}
+
+.backdrop .sideModal {
+    position: inherit;
+    right: 0;
+    width: 422px;
+    height: 100%;
+    background-color: #ffffff;
+    padding: 38px 46px 38px 48px;
+}
+
+.modal-title {
+    font-size: 24px;
+    font-weight: 900;
+    text-transform: capitalize;
+}
+
+mdc-text-field--focused {
+    color: #1594C4;
+}
+
+.grid-login {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-row: 1fr;
+}
+
+.grid-login .label-sm {
+    position: relative;
+    padding-top: 1.5rem;
+}
+
+.label-sm a {
+    margin: 0;
+    font-size: 14px;
+    font-weight: bold;
+    color: #1594C4;
+}
+
+.pt-14 {
+    padding-top: 14px;
+}
