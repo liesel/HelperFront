@@ -23,8 +23,9 @@
 
 .modal-title {
     font-size: 24px;
-    font-weight: 900;
+    font-weight: 800;
     text-transform: capitalize;
+    color: #102745;
 }
 
 mdc-text-field--focused {
@@ -35,20 +36,73 @@ mdc-text-field--focused {
     display: grid;
     grid-template-columns: 1fr 1fr;
     grid-row: 1fr;
+    margin-left: -10px;
 }
 
 .grid-login .label-sm {
     position: relative;
-    padding-top: 1.5rem;
+    padding-top: 10px;
 }
 
-.label-sm a {
+.mdc-notched-outline {
+    pointer-events: all !important;
+    -webkit-touch-callout: none !important; /* iOS Safari */
+    -webkit-user-select: none !important; /* Safari */
+     -khtml-user-select: none !important; /* Konqueror HTML */
+       -moz-user-select: none !important; /* Old versions of Firefox */
+        -ms-user-select: none !important; /* Internet Explorer/Edge */
+            user-select: none !important; /* Non-prefixed version, currently
+                                  supported by Chrome, Opera and Firefox */
+}
+
+.mdc-notched-outline__notch, .mdc-notched-outline__trailing {
+    pointer-events: all !important;
+    -webkit-touch-callout: none !important; /* iOS Safari */
+    -webkit-user-select: none !important; /* Safari */
+     -khtml-user-select: none !important; /* Konqueror HTML */
+       -moz-user-select: none !important; /* Old versions of Firefox */
+        -ms-user-select: none !important; /* Internet Explorer/Edge */
+            user-select: none !important; /* Non-prefixed version, currently
+                                  supported by Chrome, Opera and Firefox */
+}
+
+/* .mdc-text-field--outlined:not(.mdc-text-field--disabled):not(.mdc-text-field--focused):hover .mdc-notched-outline .mdc-notched-outline__trailing > i.mdc-text-field__icon--trailing:hover {
+    color: black !important;
+} */
+
+.mdc-text-field__icon.mdc-text-field__icon--off {
+    display: none;
+}
+  
+.mdc-text-field__icon {
+    display: inline-block;
+}
+
+.mdc-text-field__input {
+    font-size: 14px !important;
+}
+
+.label-sm a, .label-sm a:hover {
     margin: 0;
     font-size: 14px;
     font-weight: bold;
     color: #1594C4;
+    text-decoration: none;
 }
 
-.pt-14 {
-    padding-top: 14px;
+.loginInfo a, .loginInfo a:hover {
+    color: #232323;
+    font-weight: bold;
+    text-decoration: none;
+}
+
+.loginInfo {
+    padding-top: 18px;
+    font-size: 14px;
+    text-align: center;
+    width: 100%;
+}
+
+i:focus {
+    outline: none;
 }

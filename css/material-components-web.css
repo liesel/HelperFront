@@ -953,12 +953,12 @@ svg.mdc-button__icon {
 .mdc-checkbox .mdc-checkbox__native-control:indeterminate ~ .mdc-checkbox__background::before {
   background-color: #018786;
   /* @alternate */
-  background-color: var(--mdc-theme-secondary, #018786);
+  background-color: var(--mdc-theme-primary, #018786);
 }
 .mdc-checkbox.mdc-checkbox--selected .mdc-checkbox__ripple::before, .mdc-checkbox.mdc-checkbox--selected .mdc-checkbox__ripple::after {
   background-color: #018786;
   /* @alternate */
-  background-color: var(--mdc-theme-secondary, #018786);
+  background-color: var(--mdc-theme-primary, #018786);
 }
 .mdc-checkbox.mdc-checkbox--selected:hover .mdc-checkbox__ripple::before {
   opacity: 0.04;
@@ -981,7 +981,7 @@ svg.mdc-button__icon {
 .mdc-checkbox.mdc-ripple-upgraded--background-focused.mdc-checkbox--selected .mdc-checkbox__ripple::after {
   background-color: #018786;
   /* @alternate */
-  background-color: var(--mdc-theme-secondary, #018786);
+  background-color: var(--mdc-theme-primary, #018786);
 }
 .mdc-checkbox .mdc-checkbox__background {
   top: 11px;
@@ -1010,10 +1010,10 @@ svg.mdc-button__icon {
 .mdc-checkbox__native-control:enabled:indeterminate ~ .mdc-checkbox__background {
   border-color: #018786;
   /* @alternate */
-  border-color: var(--mdc-theme-secondary, #018786);
+  border-color: var(--mdc-theme-primary, #018786);
   background-color: #018786;
   /* @alternate */
-  background-color: var(--mdc-theme-secondary, #018786);
+  background-color: var(--mdc-theme-primary, #018786);
 }
 
 @-webkit-keyframes mdc-checkbox-fade-in-background-8A000000secondary00000000secondary {
@@ -1024,10 +1024,10 @@ svg.mdc-button__icon {
   50% {
     border-color: #018786;
     /* @alternate */
-    border-color: var(--mdc-theme-secondary, #018786);
+    border-color: var(--mdc-theme-primary, #018786);
     background-color: #018786;
     /* @alternate */
-    background-color: var(--mdc-theme-secondary, #018786);
+    background-color: var(--mdc-theme-primary, #018786);
   }
 }
 
@@ -1039,20 +1039,20 @@ svg.mdc-button__icon {
   50% {
     border-color: #018786;
     /* @alternate */
-    border-color: var(--mdc-theme-secondary, #018786);
+    border-color: var(--mdc-theme-primary, #018786);
     background-color: #018786;
     /* @alternate */
-    background-color: var(--mdc-theme-secondary, #018786);
+    background-color: var(--mdc-theme-primary, #018786);
   }
 }
 @-webkit-keyframes mdc-checkbox-fade-out-background-8A000000secondary00000000secondary {
   0%, 80% {
     border-color: #018786;
     /* @alternate */
-    border-color: var(--mdc-theme-secondary, #018786);
+    border-color: var(--mdc-theme-primary, #018786);
     background-color: #018786;
     /* @alternate */
-    background-color: var(--mdc-theme-secondary, #018786);
+    background-color: var(--mdc-theme-primary, #018786);
   }
   100% {
     border-color: rgba(0, 0, 0, 0.54);
@@ -1063,10 +1063,10 @@ svg.mdc-button__icon {
   0%, 80% {
     border-color: #018786;
     /* @alternate */
-    border-color: var(--mdc-theme-secondary, #018786);
+    border-color: var(--mdc-theme-primary, #018786);
     background-color: #018786;
     /* @alternate */
-    background-color: var(--mdc-theme-secondary, #018786);
+    background-color: var(--mdc-theme-primary, #018786);
   }
   100% {
     border-color: rgba(0, 0, 0, 0.54);
@@ -9129,7 +9129,8 @@ a.mdc-list-item {
 }
 
 .mdc-text-field--focused:not(.mdc-text-field--disabled) .mdc-floating-label {
-  color: rgba(98, 0, 238, 0.87);
+  color: var(--mdc-theme-primary, #6200ee);
+  font-weight: bold;
 }
 .mdc-text-field--focused + .mdc-text-field-helper-line .mdc-text-field-helper-text:not(.mdc-text-field-helper-text--validation-msg) {
   opacity: 1;
@@ -9698,7 +9699,7 @@ a.mdc-list-item {
   }
 }
 :root {
-  --mdc-theme-primary: #6200ee;
+  --mdc-theme-primary: #1594C4;
   --mdc-theme-secondary: #018786;
   --mdc-theme-background: #fff;
   --mdc-theme-surface: #fff;
