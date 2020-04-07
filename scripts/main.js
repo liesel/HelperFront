@@ -18,6 +18,9 @@ $(document).ready(() => {
     const loginDiv = $('[data-form=login]')
     const itemStatus = $('div.row.side-status-item')
     $('[data-toggle="tooltip"]').tooltip()
+    $('#datepicker').datepicker({
+        uiLibrary: 'bootstrap4'
+    });
     
     //
     // CONFIG
