@@ -146,6 +146,11 @@ div.side-status-item.clicked > span, div.side-status-item.clicked > p {
     display: none !important;
 }
 
+.mdc-text-field:not(.mdc-text-field--disabled):not(.mdc-text-field--invalid).mdc-text-field--focused .mdc-text-field__icon--trailing {
+    color: #1594C4;
+    color: var(--theme-secondary-main, #1594C4);
+}
+
 /* Bootstrap customizing css */
 
 .navbar {
