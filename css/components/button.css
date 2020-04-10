@@ -1,0 +1,47 @@
+.btn {
+    font-family: Raleway,Roboto,Helvetica,Arial,sans-serif !important;
+    text-transform: lowercase !important;
+    font-weight: bold !important;
+}
+
+.btn.login {
+    color: var(--theme-secondary-main,#1594C4) !important;
+    background-color: #ffffff !important;
+}
+
+.btn.fill {
+    color: #ffffff !important;
+    background-color: var(--theme-secondary-main,#1594C4) !important;
+}
+
+.btn-outline-cancel {
+    color: var(--theme-primary-main, #173863) !important;
+    background-color: #ffffff !important;
+    border-color: var(--theme-primary-main, #173863) !important;
+}
+
+.mdc-button.dark, .btn.dark {
+    background-color: var(--theme-primary-main, #173863) !important;
+    letter-spacing: 0 !important;
+    color: #FFFFFF !important;
+    padding-left: 16px !important;
+    padding-right: 24px !important;
+    font-size: 16px !important;
+    font-family: Raleway,Roboto,Helvetica,Arial,sans-serif !important;
+    text-transform: lowercase !important;
+    font-weight: bold !important;
+    border-color: var(--theme-primary-main, #173863) !important;
+}
+
+.mdc-button.light, .btn.light {
+    background-color: var(--theme-secondary-main,#1594C4) !important;
+    letter-spacing: 0 !important;
+    color: #FFFFFF !important;
+    padding-left: 16px !important;
+    padding-right: 24px !important;
+    font-size: 16px !important;
+    font-family: Raleway,Roboto,Helvetica,Arial,sans-serif !important;
+    text-transform: lowercase !important;
+    font-weight: bold !important;
+    border-color: var(--theme-secondary-main,#1594C4) !important;
+}

@@ -8342,7 +8342,7 @@ a.mdc-list-item {
   border-bottom-color: var(--mdc-theme-primary, #6200ee);
 }
 .mdc-text-field:not(.mdc-text-field--disabled) + .mdc-text-field-helper-line .mdc-text-field-helper-text {
-  color: rgba(0, 0, 0, 0.6);
+  color: #232323;
 }
 .mdc-text-field:not(.mdc-text-field--disabled) .mdc-text-field-character-counter,
 .mdc-text-field:not(.mdc-text-field--disabled) + .mdc-text-field-helper-line .mdc-text-field-character-counter {

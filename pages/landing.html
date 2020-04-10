@@ -11,7 +11,13 @@
 
   <!-- Custom CSS -->
   <link rel="stylesheet" href="../css/main.css">
-  <link rel="stylesheet" href="../css/sideModal.css">
+  <link rel="stylesheet" href="../css/side-modal.css">
+  <link rel="stylesheet" href="../css/components/alerts.css">
+  <link rel="stylesheet" href="../css/components/button.css">
+  <link rel="stylesheet" href="../css/components/modal.css">
+  <link rel="stylesheet" href="../css/components/navbar.css">
+  <link rel="stylesheet" href="../css/components/searchbar.css">
+  <link rel="stylesheet" href="../css/components/textfield.css">
 
   <!-- Required styles for MDC Web -->
   <link rel="stylesheet" href="../css/material-components-web.css">
@@ -29,7 +35,7 @@
 <body>
 
   <!-- NAVBAR -->
-  <nav class="navbar navbar-expand-sm bg-primary navbar-dark px-4 py-24">
+  <nav class="navbar navbar-expand-sm bg-primary navbar-dark px-4 py-24 fixed-top">
     <a class="navbar-brand text-white ml-4 bold" href="#">Helper</a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
       aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -45,7 +51,7 @@
 
   <!-- Side Modal -->
   <div class="backdrop">
-    <div class="sideModal shadow-lg">
+    <div class="side-modal shadow-lg">
       <div data-form="login">
         <h2 class="modal-title">Login</h2>
         <form>
@@ -100,15 +106,15 @@
             </div>
           </div>
           <button type="submit" class="btn btn-primary btn-block btn-raised register">entrar</button>
-          <div class="loginInfo">Ainda não tem cadastro? <a href="#">Crie uma conta</a></div>
+          <div class="login-info">Ainda não tem cadastro? <a href="#">Crie uma conta</a></div>
         </form>
       </div>
-      <div data-form="register" class="invisible" >
+      <div data-form="register" class="invisible">
         <h2 class="modal-title">Crie sua conta</h2>
         <form>
           <div class="pt-4">
             <label class="mdc-text-field mdc-text-field--outlined" style="width: 100%;">
-              <input type="email" class="mdc-text-field__input" placeholder="Insira seu nome e sobrenome"
+              <input type="text" class="mdc-text-field__input" placeholder="Insira seu nome e sobrenome"
                 aria-labelledby="user" required>
               <span class="mdc-notched-outline">
                 <span class="mdc-notched-outline__leading"></span>
@@ -153,7 +159,7 @@
           <button type="submit" class="btn btn-primary btn-block btn-raised register">entrar</button>
           <div class="mdc-form-field pt-3" style="margin-left: -12px !important;">
             <div class="mdc-checkbox">
-              <input type="checkbox" class="mdc-checkbox__native-control" id="checkbox-1" />
+              <input type="checkbox" class="mdc-checkbox__native-control" id="checkbox-termos" required/>
               <div class="mdc-checkbox__background">
                 <svg class="mdc-checkbox__checkmark" viewBox="0 0 24 24">
                   <path class="mdc-checkbox__checkmark-path" fill="none" d="M1.73,12.91 8.1,19.28 22.79,4.59" />
@@ -162,7 +168,7 @@
               </div>
               <div class="mdc-checkbox__ripple"></div>
             </div>
-            <label for="checkbox-1" style="margin-bottom: 0; text-align: start;">Ao se registar, você concorda com os <strong>termos de uso</strong> e a <strong>politica de privacidade</strong></label>
+            <label for="checkbox-termos" style="margin-bottom: 0; text-align: start;">Ao se registar, você concorda com os <strong>termos de uso</strong> e a <strong>politica de privacidade</strong></label>
           </div>
         </form>
       </div>

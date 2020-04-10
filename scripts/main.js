@@ -7,7 +7,7 @@ $(document).ready(() => {
     const btnLogin = $("#login")
     const btnRegister = $("#register")
     const modal = $("div.backdrop")
-    const content = $("div.sideModal")
+    const content = $("div.side-modal")
     const textFieldPassword1 =  $("input[aria-labelledby='password1']")
     const textFieldPassword2 =  $("input[aria-labelledby='password2']")
     const passwordIcon1 = $("#secretPassword1")
@@ -18,10 +18,10 @@ $(document).ready(() => {
     const loginDiv = $('[data-form=login]')
     const itemStatus = $('div.row.side-status-item')
     $('[data-toggle="tooltip"]').tooltip()
-    $('#datepicker').datepicker({
-        uiLibrary: 'bootstrap4'
-    });
-    
+    const calendar = $('#calendar')
+    const divQuantityTextField = $("#div-persons")
+    const scheduleds = $(".schedule")
+
     //
     // CONFIG
     //
@@ -40,9 +40,63 @@ $(document).ready(() => {
 
     formField.input = checkbox
 
+    const menu = $('.mdc-menu');
+    menu.open = true;
+
+    if(calendar.length != 0) {
+        console.log(calendar)
+        calendar.datepicker({
+            language: 'pt-BR',
+            todayHighlight: true
+        })    
+    }
+
+    if($('#myselect').length != 0) {
+        $('#myselect').selectpicker();
+    }
+    
+    if($('.input-append.date').length != 0) {
+        $('.input-append.date').datepicker({
+            language: 'pt-BR',
+            pickTime: true
+        });
+    }
+
     //
-    // HANDLERSs
+    // HANDLERS
     //
+
+    $('input[name="person-radios"]').on("click", () => {
+        var radio = $('input[name="person-radios"]:checked').val()
+        if(radio == 'grupo') {
+            $("#div-persons").removeClass('invisible')
+        } else {
+            $("#div-persons").removeClass('invisible').addClass('invisible')
+        }
+    })
+
+    $('.numberonly').keypress( (e) => {    
+    
+        var charCode = (e.which) ? e.which : e.keyCode    
+
+        if (String.fromCharCode(charCode).match(/[^0-9]/g)){
+            return false;
+        } 
+
+    });
+
+    scheduleds.on("click", (event) => {
+        var button = $(event.currentTarget)
+        var span = $(button.children()[1])
+
+        if(span.text() == "agendado") {
+            span.text("agendar")
+            button.removeClass("light").addClass("dark")
+        } else {
+            span.text("agendado")
+            button.removeClass("dark").addClass("light")
+        }
+    })
 
     itemStatus.on("click", (event) => {
         for (const item of itemStatus) {

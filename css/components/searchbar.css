@@ -1,0 +1,15 @@
+.div-search {
+    color: #ffffff;
+    background-color: var(--theme-primary-main, #173863) !important;
+}
+
+.text-search > .mdc-text-field__input {
+    font-size: 0.875rem !important;
+    background-color: #455F82B3 !important;
+    color: #EBECEE !important;
+    border-radius: 4px !important;
+}
+
+.text-search > .mdc-text-field__input::placeholder {
+    color: #EBECEE !important;
+}
