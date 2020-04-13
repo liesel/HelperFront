@@ -48,10 +48,6 @@
     width: 100%;
 }
 
-.mdc-text-field--focused:not(.mdc-text-field--disabled):not(.mdc-text-field--invalid).dark .mdc-floating-label {
-    color: var(--theme-primary-main, #173863) !important;
-}
-
 .mdc-select--outlined:not(.mdc-select--disabled).mdc-select--focused .mdc-notched-outline .mdc-notched-outline__leading,
 .mdc-select--outlined:not(.mdc-select--disabled).mdc-select--focused .mdc-notched-outline .mdc-notched-outline__notch,
 .mdc-select--outlined:not(.mdc-select--disabled).mdc-select--focused .mdc-notched-outline .mdc-notched-outline__trailing {
