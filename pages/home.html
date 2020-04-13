@@ -18,6 +18,7 @@
   <link rel="stylesheet" href="../css/components/searchbar.css">
   <link rel="stylesheet" href="../css/components/textfield.css">
   <link rel="stylesheet" href="../css/components/radio.css">
+  <link rel="stylesheet" href="../css/components/dropdown.css">
 
   <!-- Required styles for MDC Web -->
   <link rel="stylesheet" href="../css/material-components-web.css">
@@ -408,11 +409,73 @@
                   Ex: Aula de dança, Curso de programa, Consulta de psicológica e etc.</div>
               </div>
               <div class="row header">
-                <select id="myselect" class="selectpicker" multiple data-live-search="true">
-                  <option>Mustard</option>
-                  <option>Ketchup</option>
-                  <option>Barbecue</option>
-                </select>
+                <div class="mdc-select mdc-select--outlined dropdown demo-width-class dark" data-control="checkbox-dropdown">
+                  <div class="mdc-select__anchor demo-width-class">
+                    <i class="mdc-select__dropdown-icon"></i>
+                    <div id="demo-selected-text" class="mdc-select__selected-text" aria-labelledby="outlined-select-label"></div>
+                    <div class="mdc-notched-outline">
+                      <div class="mdc-notched-outline__leading"></div>
+                      <div class="mdc-notched-outline__notch">
+                        <label id="outlined-select-label" class="mdc-floating-label">Categoria</label>
+                      </div>
+                      <div class="mdc-notched-outline__trailing"></div>
+                    </div>
+                  </div>
+                  <div class="dropdown-list demo-width-class">
+                    <label class="dropdown-option">
+                        <div class="mdc-checkbox">
+                            <input type="checkbox" name="dropdown-group" value="selection 1" class="mdc-checkbox__native-control dark" />
+                            <div class="mdc-checkbox__background">
+                            <svg class="mdc-checkbox__checkmark" viewBox="0 0 24 24">
+                                <path class="mdc-checkbox__checkmark-path" fill="none" d="M1.73,12.91 8.1,19.28 22.79,4.59" />
+                            </svg>
+                            <div class="mdc-checkbox__mixedmark"></div>
+                            </div>
+                            <div class="mdc-checkbox__ripple"></div>
+                        </div>
+                        <label class="dropdown-option-label ">Administração</label>
+                    </label>
+                    <label class="dropdown-option">
+                        <div class="mdc-checkbox">
+                            <input type="checkbox" name="dropdown-group" value="selection 2" class="mdc-checkbox__native-control dark" />
+                            <div class="mdc-checkbox__background">
+                            <svg class="mdc-checkbox__checkmark" viewBox="0 0 24 24">
+                                <path class="mdc-checkbox__checkmark-path" fill="none" d="M1.73,12.91 8.1,19.28 22.79,4.59" />
+                            </svg>
+                            <div class="mdc-checkbox__mixedmark"></div>
+                            </div>
+                            <div class="mdc-checkbox__ripple"></div>
+                        </div>
+                        <label class="dropdown-option-label">Bem estar</label>
+                    </label>
+                    <label class="dropdown-option">
+                      <div class="mdc-checkbox">
+                          <input type="checkbox" name="dropdown-group" value="selection 2" class="mdc-checkbox__native-control dark" />
+                          <div class="mdc-checkbox__background">
+                          <svg class="mdc-checkbox__checkmark" viewBox="0 0 24 24">
+                              <path class="mdc-checkbox__checkmark-path" fill="none" d="M1.73,12.91 8.1,19.28 22.79,4.59" />
+                          </svg>
+                          <div class="mdc-checkbox__mixedmark"></div>
+                          </div>
+                          <div class="mdc-checkbox__ripple"></div>
+                      </div>
+                      <label class="dropdown-option-label">Esporte</label>
+                    </label>
+                    <label class="dropdown-option">
+                      <div class="mdc-checkbox">
+                          <input type="checkbox" name="dropdown-group" value="selection 2" class="mdc-checkbox__native-control dark" />
+                          <div class="mdc-checkbox__background">
+                          <svg class="mdc-checkbox__checkmark" viewBox="0 0 24 24">
+                              <path class="mdc-checkbox__checkmark-path" fill="none" d="M1.73,12.91 8.1,19.28 22.79,4.59" />
+                          </svg>
+                          <div class="mdc-checkbox__mixedmark"></div>
+                          </div>
+                          <div class="mdc-checkbox__ripple"></div>
+                      </div>
+                      <label class="dropdown-option-label">Lazer</label>
+                    </label>
+                  </div>
+                </div>
               </div>
               <div class="pt-2">
                 <h4 style="color: #505050;">Escolha o modelo de agendamento</h4>
@@ -633,6 +696,8 @@
 
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.bundle.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.13.1/js/bootstrap-select.min.js"></script>
+
+    <script src="../scripts/dropdown.js"></script>
 
 </body>
 
