@@ -85,6 +85,8 @@ $(document).ready(() => {
 
     });
 
+    $('.time').mask('00:00');
+
     scheduleds.on("click", (event) => {
         var button = $(event.currentTarget)
         var span = $(button.children()[1])

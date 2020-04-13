@@ -24,6 +24,7 @@ label, .mdc-text-field__input {
 body {
     font-family: Raleway,Roboto,Helvetica,Arial,sans-serif !important;
     background-color: #EBECEE !important;
+    font-size: 0.889rem !important;
 }
 
 p {
