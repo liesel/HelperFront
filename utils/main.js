@@ -1,25 +1,22 @@
 $(() => {
     // Initialize Material Design Components
     window.initializeComponents()
-    console.log(window.endpoints)
     fetchSchedules()
+    // fetchServices()
     fetchNextSchedules()
 })
 
 async function fetchSchedules(){
+    const container = $($('feed-container')[0].shadow);
+    const fragment = $(document.createDocumentFragment())
 
-    // var scheduleUrl = window.endpoints.schedules;
-
-    // const res = await fetch(scheduleUrl);
-    // const json = await res.json();
-    const container = $('#feed');
-    
-    [{}, {}, {}, {}].forEach(schedule => {
+    for(let i = 0; i < 5; i++){
         const el = document.createElement('helper-schedule')
-        el.schedule = schedule;
-        container.append(el)
-    });
+        el.schedule = {};
+        fragment.append(el)
+    } 
     
+    container.append(fragment)
 }
 
 async function fetchNextSchedules(){
@@ -28,6 +25,19 @@ async function fetchNextSchedules(){
     [{}, {}].forEach(schedule => {
         const el = document.createElement('helper-schedule-next')
         el.schedule = schedule;
-        container.append(el)
+        container.append(el);
     });
+}
+
+async function fetchServices() {
+    const container = $($('feed-container')[0].shadow);
+    const fragment = $(document.createDocumentFragment())
+
+    for(let i = 0; i < 5; i++) {
+        const el = document.createElement('helper-service')
+        el.service = {};
+        fragment.append(el)
+    } 
+    
+    container.append(fragment)
 }

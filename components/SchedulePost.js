@@ -1,7 +1,10 @@
 class SchedulePost extends HTMLElement {
     constructor() {
         super();
-        this.root = this.attachShadow({mode: 'open'})
+    }
+
+    connectedCallback(){
+        console.log('schedule connected')
     }
 
     set schedule(schedule) {
@@ -14,20 +17,19 @@ class SchedulePost extends HTMLElement {
         this.model = schedule.model || "Group";
         this.title = schedule.title || "Consultoria de Carreira";
         this.text = schedule.text || "Aprenda ser reconhecido, muito bem remunerado para crescer como um(a) profissional de sucesso!";
-
+        this.isScheduled = schedule.isScheduled || true;
+        this.favoriteIcon = schedule.isfavorited ? 'favorite' : 'favorite_border';
         this.render();
     }
 
     like() {
-        let icons = $(this.root).find("#add-to-favorites").find(".mdc-icon-button__icon")
+        let icons = $(this).find("#add-to-favorites").find(".mdc-icon-button__icon")
         if(icons.length != 0) {
-            if($(icons[0]).hasClass("mdc-icon-button__icon--on")){
-                $(icons[0]).removeClass("mdc-icon-button__icon--on")
-                $(icons[1]).addClass("mdc-icon-button__icon--on")
+            if($(icons[0]).text() == "favorite"){
+                $(icons[0]).text("favorite_border")
                 // request
             } else {
-                $(icons[1]).removeClass("mdc-icon-button__icon--on")
-                $(icons[0]).addClass("mdc-icon-button__icon--on")
+                $(icons[0]).text("favorite")
                 // request
             }
         }
@@ -38,13 +40,7 @@ class SchedulePost extends HTMLElement {
     }
 
     render() {
-        this.root.innerHTML = `
-                <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" />
-                <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
-                <link rel="stylesheet" href="../assets/css/material-components-web.css" />
-                <link rel="stylesheet" href="../assets/css/main.css">
-                <link rel="stylesheet" href="../assets/css/components/button.css">
-
+        this.innerHTML = `
                 <div class="card mt-4" style="padding: 32px;">
                     <div class="row header">
                         <div class="user-icon">
@@ -60,8 +56,7 @@ class SchedulePost extends HTMLElement {
                             aria-label="Add to favorites"
                             aria-pressed="false"
                             style="outline: none;">
-                            <i class="material-icons mdc-icon-button__icon mdc-icon-button__icon--on">favorite</i>
-                            <i class="material-icons mdc-icon-button__icon">favorite_border</i>
+                            <i id="favorite-icon" class="material-icons mdc-icon-button__icon">${this.favoriteIcon}</i>
                             </button>
                         </div>
                     </div>
@@ -92,6 +87,7 @@ class SchedulePost extends HTMLElement {
                     </div>
                     <div class="row footer">
                         <div class="ml-auto">
+                            <button type="button" class="btn btn-outline-cancel" data-dismiss="modal">cancelar</button>
                             <button id="agendar" class="mdc-button dark">
                             <div class="mdc-button__ripple"></div>
                             <i class="material-icons mdc-button__icon" aria-hidden="true">event</i>
@@ -102,11 +98,10 @@ class SchedulePost extends HTMLElement {
                 </div>
         `
 
-        let btnLike = $(this.root).find("#add-to-favorites")
-        let btnSchedule = $(this.root).find("#agendar")
-        
-        $(btnLike).on("click", this.like.bind(this))
-        $(btnSchedule).on("click", this.toSchedule.bind(this))
+        let btnLike = $(this).find('#add-to-favorites')
+        let btnSchedule = $(this).find('#agendar')
+        btnLike.on('click', this.like.bind(this))
+        btnSchedule.on("click", this.toSchedule.bind(this))
     }
 }
 
