@@ -83,6 +83,10 @@
     cursor: text !important;
 }
 
+.mdc-text-field--focused:not(.mdc-text-field--disabled):not(.mdc-text-field--invalid).dark .mdc-floating-label {
+    color: var(--theme-primary-main, #173863) !important;
+}
+
 .mdc-select:not(.mdc-select--disabled).mdc-select--focused.dark .mdc-floating-label {
     color: var(--theme-primary-main, #173863) !important;
     font-weight: bold !important;

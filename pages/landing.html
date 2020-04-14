@@ -10,17 +10,19 @@
   <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@400;500;700;800&display=swap" rel="stylesheet">
 
   <!-- Custom CSS -->
-  <link rel="stylesheet" href="../css/main.css">
-  <link rel="stylesheet" href="../css/side-modal.css">
-  <link rel="stylesheet" href="../css/components/alerts.css">
-  <link rel="stylesheet" href="../css/components/button.css">
-  <link rel="stylesheet" href="../css/components/modal.css">
-  <link rel="stylesheet" href="../css/components/navbar.css">
-  <link rel="stylesheet" href="../css/components/searchbar.css">
-  <link rel="stylesheet" href="../css/components/textfield.css">
+  <link rel="stylesheet" href="../assets/css/main.css">
+  <link rel="stylesheet" href="../assets/css/components/alerts.css">
+  <link rel="stylesheet" href="../assets/css/components/button.css">
+  <link rel="stylesheet" href="../assets/css/components/modal.css">
+  <link rel="stylesheet" href="../assets/css/components/navbar.css">
+  <link rel="stylesheet" href="../assets/css/components/searchbar.css">
+  <link rel="stylesheet" href="../assets/css/components/textfield.css">
+  <link rel="stylesheet" href="../assets/css/components/radio.css">
+  <link rel="stylesheet" href="../assets/css/components/dropdown.css">
+  <link rel="stylesheet" href="../assets/css/side-modal.css"
 
   <!-- Required styles for MDC Web -->
-  <link rel="stylesheet" href="../css/material-components-web.css">
+  <link rel="stylesheet" href="../assets/css/material-components-web.css">
 
   <!-- Bootstrap CSS -->
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
@@ -36,7 +38,7 @@
 
   <!-- NAVBAR -->
   <nav class="navbar navbar-expand-sm bg-primary navbar-dark px-4 py-24 fixed-top">
-    <a class="navbar-brand text-white ml-4 bold" href="#"><img src="../images/logo.svg" alt="Helper"></a>
+    <a class="navbar-brand text-white ml-4 bold" href="#"><img src="../assets/images/logo.svg" alt="Helper"></a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
       aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
@@ -175,19 +177,37 @@
     </div>
   </div>
 
-  <!-- Required MDC Web JavaScript library -->
-  <script src="https://unpkg.com/material-components-web@latest/dist/material-components-web.min.js"></script>
-  <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-  <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
-    integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"
-    crossorigin="anonymous"></script>
-  <script src="../scripts/main.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
-    integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
-    crossorigin="anonymous"></script>
-  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
-    integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
-    crossorigin="anonymous"></script>
+<!-- jQuery first, then Material Design, then DatePicker, then Main.js, then Popper.js, then Bootstrap JS -->
+<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
+integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"
+crossorigin="anonymous"></script>
+
+<script src="https://unpkg.com/material-components-web@latest/dist/material-components-web.min.js"></script>
+
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+crossorigin="anonymous"></script>
+
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
+integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
+crossorigin="anonymous"></script>
+
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.bundle.min.js"></script>
+<!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.13.1/js/bootstrap-select.min.js"></script> -->
+
+<!-- ASSETS -->
+<script src="../assets/scripts/bootstrap-datepicker.js"></script>
+<script src="../assets/scripts/bootstrap-datepicker.pt-BR.min.js"></script>
+<script src="../assets/scripts/dropdown.js"></script>
+
+<!-- UTILS -->
+<script src="../utils/endṕoints.js"></script>
+<script src="../utils/mask.js"></script>
+<script src="../utils/initialize-components.js"></script>
+<script src="../components/SchedulePost.js"></script>
+<script src="../components/SchedulePostNext.js"></script>
+<script src="../utils/main.js"></script>
+
 </body>
 
 </html>

@@ -79,6 +79,13 @@ h4 {
     font-weight: bold !important;
 }
 
+.showAll{
+    font-size: 16px;
+    font-weight: bold;
+    color: var(--theme-primary-main,#042189);
+    cursor: pointer;
+}
+
 .divisor {
     background-color: #EAEAEA;
     height: 1px;
@@ -142,6 +149,9 @@ div.side-status-item.clicked > span, div.side-status-item.clicked > p {
     padding-top: 17px !important;
     padding-bottom: 23px !important;
     padding-right: 24px !important;
+}
+
+.user-content {
     background-color: var(--theme-complementar-light, #F5F9FF);
 }
 
@@ -173,7 +183,7 @@ div.side-status-item.clicked > span, div.side-status-item.clicked > p {
 
 .content-text {
     padding-top: 10px !important;
-    max-width: 456px !important;
+    max-width: 800px !important;
     color: #232323 !important;
     word-wrap: break-word !important;
 }

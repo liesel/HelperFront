@@ -10,25 +10,25 @@
   <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@400;500;700;800&display=swap" rel="stylesheet">
 
   <!-- Custom CSS -->
-  <link rel="stylesheet" href="../css/main.css">
-  <link rel="stylesheet" href="../css/components/alerts.css">
-  <link rel="stylesheet" href="../css/components/button.css">
-  <link rel="stylesheet" href="../css/components/modal.css">
-  <link rel="stylesheet" href="../css/components/navbar.css">
-  <link rel="stylesheet" href="../css/components/searchbar.css">
-  <link rel="stylesheet" href="../css/components/textfield.css">
-  <link rel="stylesheet" href="../css/components/radio.css">
-  <link rel="stylesheet" href="../css/components/dropdown.css">
+  <link rel="stylesheet" href="../assets/css/main.css">
+  <link rel="stylesheet" href="../assets/css/components/alerts.css">
+  <link rel="stylesheet" href="../assets/css/components/button.css">
+  <link rel="stylesheet" href="../assets/css/components/modal.css">
+  <link rel="stylesheet" href="../assets/css/components/navbar.css">
+  <link rel="stylesheet" href="../assets/css/components/searchbar.css">
+  <link rel="stylesheet" href="../assets/css/components/textfield.css">
+  <link rel="stylesheet" href="../assets/css/components/radio.css">
+  <link rel="stylesheet" href="../assets/css/components/dropdown.css">
 
   <!-- Required styles for MDC Web -->
-  <link rel="stylesheet" href="../css/material-components-web.css">
+  <link rel="stylesheet" href="../assets/css/material-components-web.css">
     
   <!-- Bootstrap CSS -->
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
     integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
 
     <!-- OLD DATEPICKER -->
-  <link href="../css/bootstrap-datepicker.standalone.css" rel="stylesheet"/>
+  <link href="../assets/css/bootstrap-datepicker.standalone.css" rel="stylesheet"/>
 
   <!-- MULTIPLE SELECT -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.13.1/css/bootstrap-select.css" />
@@ -45,7 +45,7 @@
 
   <!-- NAVBAR -->
   <nav class="navbar navbar-expand-sm bg-primary navbar-dark py-24 sticky-top">
-    <a class="navbar-brand text-white bold" href="#"><img src="../images/logo.svg" alt="Helper"></a>
+    <a class="navbar-brand text-white bold" href="#"><img src="../assets/images/logo.svg" alt="Helper"></a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
       aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
@@ -98,7 +98,7 @@
       <div class="col-md-3 col-sm-4 no-padding-margin" style="min-width: fit-content;">
         <div class="card">
           <div class="d-flex justify-content-center px-4 pt-40">
-            <img src="../images/user.png" class="card-img-top" alt="...">
+            <img src="../assets/images/user.png" class="card-img-top" alt="...">
           </div>
           <div class="card-body text-center">
             <h2 class="card-title"><strong>Karem Carvalho</strong></h2>
@@ -156,7 +156,7 @@
       </div>
 
       <!-- MIDDLE -->
-      <div class="col-lg-7 col-md-4 col-sm-6 px-32">
+      <div id="feed" class="col-lg-7 col-md-4 col-sm-6 px-32">
         <!-- ADD SERVICE -->
         <div class="card">
           <div class="row justify-content-between no-padding-margin column-service">
@@ -182,68 +182,13 @@
           </div>
         </div>
         <!-- CONTENT -->
-        <div class="card mt-4" style="padding: 32px;">
-          <div class="row header">
-            <div class="user-icon">
-              <img src="../images/user.png" class="card-img-top" alt="...">
-            </div>
-            <div class="user-info pl-2">
-              <div class="pt-2"><strong>Marilene Alves</strong></div>
-              <div>Psicóloga, Mentora e Coach de Carreira</div>
-            </div>
-            <div class="ml-auto" style="margin-right: -15px !important;">
-              <button id="add-to-favorites"
-              class="mdc-icon-button"
-              aria-label="Add to favorites"
-              aria-pressed="false"
-              style="outline: none;">
-                <i class="material-icons mdc-icon-button__icon mdc-icon-button__icon--on">favorite</i>
-                <i class="material-icons mdc-icon-button__icon">favorite_border</i>
-              </button>
-            </div>
-          </div>
-          <div class="row content pt-3 pb-3">
-            <div class="user-content col-12">
-              <div class="d-flex content-info">
-                <div data-content="date">Seg, 03 de abril - 19:00 às 21:00</div>
-                <div class="ml-auto content-icon d-flex">
-                  <span class="material-icons">
-                    group
-                  </span>
-                  <span class="content-icon-text">
-                    Grupo
-                  </span>
-                </div>
-              </div>
-              <div class="pt-1" style="padding-right: 56px !important;">
-                <div style="max-width: 500px !important">
-                  <span class="bold" style="font-size: 1.125rem !important;">Consultoria de Carreira</span>
-                  <p class="content-text" >
-                    Aprenda ser reconhecido, muito bem remunerado para crescer como um(a) profissional de sucesso!
-                  </p>
-                  <ul class="list-group list-group-horizontal hashtag-list">
-                    <li class="list-group-item">#categorias</li>
-                    <li class="list-group-item">#categorias</li>
-                  </ul>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="row footer">
-            <div class="ml-auto">
-              <button class="mdc-button dark">
-                <div class="mdc-button__ripple"></div>
-                <i class="material-icons mdc-button__icon" aria-hidden="true">event</i>
-                <span class="mdc-button__label">agendar</span>
-              </button>
-            </div>
-          </div>
-        </div>
+
         <!-- EDITAR -->
-        <div class="card mt-4" style="padding: 32px;">
+
+        <!-- <div class="card mt-4" style="padding: 32px;">
           <div class="row header">
             <div class="user-icon">
-              <img src="../images/user.png" class="card-img-top" alt="...">
+              <img src="../assets/images/user.png" class="card-img-top" alt="...">
             </div>
             <div class="user-info pl-2">
               <div class="pt-2"><strong>Marilene Alves</strong></div>
@@ -305,13 +250,13 @@
               </button>
             </div>
           </div>
-        </div>
+        </div> -->
           
         <!-- AGENDADO -->
-        <div class="card mt-4" style="padding: 32px;">
+        <!-- <div class="card mt-4" style="padding: 32px;">
           <div class="row header">
             <div class="user-icon">
-              <img src="../images/user.png" class="card-img-top" alt="...">
+              <img src="../assets/images/user.png" class="card-img-top" alt="...">
             </div>
             <div class="user-info pl-2">
               <div class="pt-2"><strong>Marilene Alves</strong></div>
@@ -364,12 +309,29 @@
               </button>
             </div>
           </div>
-        </div>
+        </div>  -->
 
       </div>
       <!-- CALENDAR -->
       <div class="col-md-2 col-sm-1 no-padding-margin">
-          <div id="calendar">
+          <div id="calendar" width="100% important;">
+          </div>
+          <div class="mt-4">
+            <div class="card col-12" style="padding: 18px;">
+              <div>
+                <div class="row">
+                  <div class="col-8">
+                    <h4>Seus próximos agendamentos</h4>
+                  </div>
+                  <div class="col-4">
+                    <div class="pl-auto showAll" style="margin-top: -4px !important;">ver tudo</div>
+                  </div>
+                </div>
+
+                <div id="side-feed" class="pt-3">
+                </div>
+              </div>
+            </div>
           </div>
       </div>
     </div>
@@ -677,32 +639,34 @@
 
   <!-- jQuery first, then Material Design, then DatePicker, then Main.js, then Popper.js, then Bootstrap JS -->
   <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
-    integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"
-    crossorigin="anonymous"></script>
+          integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"
+          crossorigin="anonymous"></script>
 
   <script src="https://unpkg.com/material-components-web@latest/dist/material-components-web.min.js"></script>
 
-  <!-- OLD DATEPICKER -->
-  <script src="../scripts/bootstrap-datepicker.js" type="text/javascript"></script>
-  <script src="../scripts/bootstrap-datepicker.pt-BR.min.js" type="text/javascript"></script>
-
-  <script src="../scripts/jquery.mask.js"></script>
-
-  <script src="../scripts/dropdown.js"></script>
-
-  <script src="../scripts/main.js"></script>
-
   <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
-    integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
-    crossorigin="anonymous"></script>
+          integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+          crossorigin="anonymous"></script>
+
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
-    integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
-    crossorigin="anonymous"></script>
+          integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
+          crossorigin="anonymous"></script>
 
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.bundle.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.13.1/js/bootstrap-select.min.js"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.bundle.min.js"></script>
+  <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.13.1/js/bootstrap-select.min.js"></script> -->
 
+  <!-- ASSETS -->
+  <script src="../assets/scripts/bootstrap-datepicker.js"></script>
+  <script src="../assets/scripts/bootstrap-datepicker.pt-BR.min.js"></script>
+  <script src="../assets/scripts/dropdown.js"></script>
 
+  <!-- UTILS -->
+  <script src="../utils/endṕoints.js"></script>
+  <script src="../utils/mask.js"></script>
+  <script src="../utils/initialize-components.js"></script>
+  <script src="../components/SchedulePost.js"></script>
+  <script src="../components/SchedulePostNext.js"></script>
+  <script src="../utils/main.js"></script>
 
 </body>
 
