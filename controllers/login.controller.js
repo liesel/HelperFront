@@ -15,6 +15,7 @@ $(document).ready(() => {
                     localStorage.setItem("token",data.token);
                     localStorage.setItem("name",data.user.name);
                     localStorage.setItem("surname",data.user.surname);
+                    window.location = "home.html";
                 },
                 error: function (data) {
                     alert(data.responseJSON.status);
