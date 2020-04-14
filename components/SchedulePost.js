@@ -8,14 +8,14 @@ class SchedulePost extends HTMLElement {
         this.id = schedule.id || '1';
         this.photo = schedule.photo || "../assets/images/user.png";
         this.name = schedule.name || "Marilene Alves";
-        this.profession = schedule.profession || "Psicóloga, Mentora e Coach de Carreira"
+        this.profession = schedule.profession || "Psicóloga, Mentora e Coach de Carreira";
         this.createdDate = schedule.created || "Seg, 03 de abril - 19:00 às 21:00";
         this.modelIcon = schedule.modelIcon || "group";
         this.model = schedule.model || "Group";
         this.title = schedule.title || "Consultoria de Carreira";
-        this.text = schedule.text || "Aprenda ser reconhecido, muito bem remunerado para crescer como um(a) profissional de sucesso!"
+        this.text = schedule.text || "Aprenda ser reconhecido, muito bem remunerado para crescer como um(a) profissional de sucesso!";
 
-        this.render()
+        this.render();
     }
 
     like() {
