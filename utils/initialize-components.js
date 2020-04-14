@@ -134,11 +134,18 @@
             registerDiv.addClass("invisible")
         })
 
-        btnRegister.on("click", () => {
-            modal.removeClass("active").addClass("active")
+        $('#redirect-signup').on("click", ()=> {
+            redirectToSignup()
+        })
 
+        btnRegister.on("click", () => {
+           redirectToSignup()
+        })
+
+        var redirectToSignup =() => {
+            modal.removeClass("active").addClass("active")
             registerDiv.removeClass("invisible")
             loginDiv.addClass("invisible")
-        })
+        }
     }
 })()
