@@ -16,7 +16,6 @@
         const formField = $('.mdc-form-field')
         const registerDiv = $('[data-form=register]')
         const loginDiv = $('[data-form=login]')
-        const itemStatus = $('div.row.side-status-item')
         $('[data-toggle="tooltip"]').tooltip()
         const calendar = $('#calendar')
         const scheduleds = $(".schedule")
@@ -99,14 +98,6 @@
             }
         })
 
-        itemStatus.on("click", (event) => {
-            for (const item of itemStatus) {
-                $(item).removeClass("clicked")
-            }
-            $(event.target).addClass("clicked")
-            
-        })
-
         passwordIcon1.on("click", (event) => {
             if(passwordIcon1.text() == "visibility") {
                 passwordIcon1.text("visibility_off")
@@ -130,7 +121,7 @@
         btnLogin.on("click", () => {
             modal.removeClass("active").addClass("active")
 
-            loginDiv.removeClass("invisible")
+            loginDiv.removeClass("invisible") 
             registerDiv.addClass("invisible")
         })
 
