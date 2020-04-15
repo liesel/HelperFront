@@ -1,0 +1,548 @@
+<!doctype html>
+<html lang="pt-br">
+
+<head>
+  <!-- Required meta tags -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+  <!-- Font -->
+  <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@400;500;700;800&display=swap" rel="stylesheet">
+
+  <!-- Custom CSS -->
+  <link rel="stylesheet" href="/css/main.css">
+  <link rel="stylesheet" href="/css/components/alerts.css">
+  <link rel="stylesheet" href="/css/components/button.css">
+  <link rel="stylesheet" href="/css/components/modal.css">
+  <link rel="stylesheet" href="/css/components/navbar.css">
+  <link rel="stylesheet" href="/css/components/searchbar.css">
+  <link rel="stylesheet" href="/css/components/textfield.css">
+  <link rel="stylesheet" href="/css/components/radio.css">
+  <link rel="stylesheet" href="/css/components/dropdown.css">
+
+  <!-- Required styles for MDC Web -->
+  <link rel="stylesheet" href="/css/material-components-web.css">
+    
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+    integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+
+    <!-- OLD DATEPICKER -->
+  <link href="/css/bootstrap-datepicker.standalone.css" rel="stylesheet"/>
+
+  <!-- MULTIPLE SELECT -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.13.1/css/bootstrap-select.css" />
+
+  <!-- MDC Material Icons -->
+  <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+
+  <link href="https://unpkg.com/gijgo@1.9.13/css/gijgo.min.css" rel="stylesheet" type="text/css" />
+
+  <title>Helper</title>
+</head>
+
+<body>
+
+  <!-- NAVBAR -->
+  <nav class="navbar navbar-expand-sm bg-primary navbar-dark py-24 sticky-top">
+    <a class="navbar-brand text-white bold" href="#"><img src="/images/logo.svg" alt="Helper"></a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+      aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse justify-content-end" id="navbarSupportedContent">
+        <div class="material-nav-items" data-toggle="tooltip" data-placement="bottom" title="Notificações">
+            <span class="material-icons">
+                notifications
+                <div class="circle">
+                </div>
+            </span>
+        </div>
+        <div class="material-nav-items" data-toggle="tooltip" data-placement="bottom" title="Agenda">
+            <span class="material-icons">
+                event
+            </span>
+        </div>
+        <div class="material-nav-items user-profile" data-toggle="tooltip" data-placement="bottom" title="Dados do usuário">
+        </div>
+    </div>
+  </nav>
+
+  <!-- CONTAINER -->
+  <div class="container-fluid">
+    <div class="row main">
+      <!-- ALERT -->
+      <div class="alert alert-warning alert-dismissible fade show col-12 pt-2 mb-4" role="alert" style="min-width: fit-content;">
+        <div class="d-flex">
+          <div class="pt-1">
+            <span class="material-icons pr-3" style="font-size: 32px; color: #FAAB3F; padding-left: 13px; padding-top: 5px;">
+              error
+            </span>
+          </div>
+          <div style="padding-top: 6px;">
+            <div><strong>Confirmação de e-email</strong></div>
+            <div>Confira seu e-mail <strong>Karem.car....@fcamara.com.br</strong> e siga as instrução para confirmar sua conta</div>
+          </div>
+          <div class="ml-auto p-2">
+            <button type="button" class="btn btn-outline-warning">
+              reenviar
+            </button>
+          </div>
+          <button type="button" class="close warning" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true" >&times;</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- SIDE NAV -->
+      <div class="col-md-3 col-sm-4 no-padding-margin" style="min-width: fit-content;">
+        <div class="card">
+          <div class="d-flex justify-content-center px-4 pt-40">
+            <img src="/images/user.png" class="card-img-top" alt="...">
+          </div>
+          <div class="card-body text-center">
+            <h2 class="card-title"><strong>Karem Carvalho</strong></h2>
+            <div>
+              <p class="card-text">karem.carvalho@fcamara.com.br</p>
+              <p class="card-text">UX Designer I Lorem psilum</p>
+            </div>
+            <div class="divisor"></div>
+            <div>
+              <div data-link="home" class="row justify-content-between side-status-item clicked">
+                <span class="material-icons pb-1">
+                    home
+                </span>
+                <p class="mr-auto pl-3" style="padding-top: 2px !important;">Home</p>
+              </div>
+              <div data-link="servicos" class="row justify-content-between side-status-item">
+                <span class="material-icons pb-1">
+                    videocam
+                </span>
+                <p class="mr-auto pl-3" style="padding-top: 2px !important;">Serviços adicionados</p>
+                <p class="side-index">10</p>
+              </div>
+              <div data-link="agendamentos" class="row justify-content-between side-status-item">
+                <span class="material-icons pb-1">
+                    event
+                </span>
+                <p class="mr-auto pl-3" style="padding-top: 2px !important;">Meus agendamentos</p>
+                <p class="side-index">4</p>
+              </div>
+              <div data-link="favoritos" class="row justify-content-between side-status-item">
+                <span class="material-icons pb-1">
+                    favorite
+                </span>
+                <p class="mr-auto pl-3" style="padding-top: 2px !important;">Favoritos</p>
+                <p class="side-index">05</p>
+              </div>
+            </div>
+            <div class="divisor"></div>
+            <div class="row justify-content-between side-info-item">
+              <span class="material-icons pb-1">
+                  videocam
+              </span>
+              <p class="mr-auto pl-3" style="padding-top: 2px !important;">Minhas colaborações</p>
+              <p class="side-index">150</p>
+            </div>
+            <div class="row justify-content-between side-info-item">
+              <span class="material-icons pb-1">
+                  event
+              </span>
+              <p class="mr-auto pl-3" style="padding-top: 2px !important;">Agendamentos obtidos</p>
+              <p class="side-index">25</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- MIDDLE -->
+      <div class="col-lg-7 col-md-4 col-sm-6 px-32">
+        <!-- ADD SERVICE -->
+        <div class="card">
+          <div class="row justify-content-between no-padding-margin column-service">
+              <span class="bold col-md-8" style="font-size: 1.125rem !important;">Olá, Karem inicie sua colaboração</span>
+              <button type="button" class="btn col-md-3 fill ml-auto" data-toggle="modal" data-target="#modalAddService">
+                adicionar serviço
+              </button>
+          </div>
+        </div>
+        <!-- SEARCH BAR -->
+        <div class="card pt-4 mt-4 div-search">
+          <h2 class="card-title text-center"><strong>Comece sua busca por colaborações aqui</strong></h2>
+          <div style="padding: 24px 32px 32px 32px;">
+            <label class="mdc-text-field mdc-text-field--fullwidth mdc-text-field--with-leading-icon text-search">
+              <i class="material-icons mdc-text-field__icon mdc-text-field__icon--leading" style="color: #EBECEE;" tabindex="0" role="button">search</i>
+              <input class="mdc-text-field__input"
+                     type="text"
+                     placeholder="Pesquise por aulas, consultas e cursos"
+                     aria-label="Pesquise por aulas, consultas e cursos"
+                     style="padding-left: 48px !important; padding-right: 48px !important;">
+              <div class="mdc-line-ripple" style="display: none;"></div>
+            </label>
+          </div>
+        </div>
+        <!-- CONTENT -->
+        <feed-container></feed-container>
+      </div>
+      <!-- CALENDAR -->
+      <div class="col-md-2 col-sm-1 no-padding-margin">
+          <div id="calendar" width="100% important;">
+          </div>
+          <div class="mt-4">
+            <div class="card col-12" style="padding: 18px;">
+              <div>
+                <div class="row">
+                  <div class="col-8">
+                    <h4>Seus próximos agendamentos</h4>
+                  </div>
+                  <div class="col-4">
+                    <div class="pl-auto showAll" style="margin-top: -4px !important;">ver tudo</div>
+                  </div>
+                </div>
+
+                <div id="side-feed" class="pt-3">
+                </div>
+              </div>
+            </div>
+          </div>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- Modal -->
+  <div class="modal fade" id="modalAddService" tabindex="-1" role="dialog" aria-labelledby="modalAddServiceTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-scrollable modal-dialog-centered" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="modalAddServiceTitle">Cadastrar serviço</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <div class="row">
+            <div class="col-md-7">
+              <label class="mdc-text-field mdc-text-field--outlined dark" style="width: 100%;">
+                <input type="text" class="mdc-text-field__input" placeholder="Descreva o titulo do serviço"
+                  aria-labelledby="service"
+                  aria-controls="service-name"
+                  aria-describedby="service-name"
+                  required>
+                <span class="mdc-notched-outline">
+                  <span class="mdc-notched-outline__leading"></span>
+                  <span class="mdc-notched-outline__notch">
+                    <span class="mdc-floating-label" id="service">Nome do serviço</span>
+                  </span>
+                  <span class="mdc-notched-outline__trailing">
+                  </span>
+                </span>
+              </label>
+              <div class="mdc-text-field-helper-line" style="margin-top: -8px; margin-bottom: 15px;">
+                <div class="mdc-text-field-helper-text" id="service-name" aria-hidden="true">
+                  Ex: Aula de dança, Curso de programa, Consulta de psicológica e etc.</div>
+              </div>
+              <div class="row header">
+                <div class="mdc-select mdc-select--outlined dropdown demo-width-class dark" data-control="checkbox-dropdown">
+                  <div class="mdc-select__anchor demo-width-class">
+                    <i class="mdc-select__dropdown-icon"></i>
+                    <div id="demo-selected-text" class="mdc-select__selected-text" aria-labelledby="outlined-select-label"></div>
+                    <div class="mdc-notched-outline">
+                      <div class="mdc-notched-outline__leading"></div>
+                      <div class="mdc-notched-outline__notch">
+                        <label id="outlined-select-label" class="mdc-floating-label">Categoria</label>
+                      </div>
+                      <div class="mdc-notched-outline__trailing"></div>
+                    </div>
+                  </div>
+                  <div class="dropdown-list demo-width-class">
+                    <label class="dropdown-option">
+                        <div class="mdc-checkbox">
+                            <input type="checkbox" name="dropdown-group" value="selection 1" class="mdc-checkbox__native-control dark" />
+                            <div class="mdc-checkbox__background">
+                            <svg class="mdc-checkbox__checkmark" viewBox="0 0 24 24">
+                                <path class="mdc-checkbox__checkmark-path" fill="none" d="M1.73,12.91 8.1,19.28 22.79,4.59" />
+                            </svg>
+                            <div class="mdc-checkbox__mixedmark"></div>
+                            </div>
+                            <div class="mdc-checkbox__ripple"></div>
+                        </div>
+                        <label class="dropdown-option-label ">Administração</label>
+                    </label>
+                    <label class="dropdown-option">
+                        <div class="mdc-checkbox">
+                            <input type="checkbox" name="dropdown-group" value="selection 2" class="mdc-checkbox__native-control dark" />
+                            <div class="mdc-checkbox__background">
+                            <svg class="mdc-checkbox__checkmark" viewBox="0 0 24 24">
+                                <path class="mdc-checkbox__checkmark-path" fill="none" d="M1.73,12.91 8.1,19.28 22.79,4.59" />
+                            </svg>
+                            <div class="mdc-checkbox__mixedmark"></div>
+                            </div>
+                            <div class="mdc-checkbox__ripple"></div>
+                        </div>
+                        <label class="dropdown-option-label">Bem estar</label>
+                    </label>
+                    <label class="dropdown-option">
+                      <div class="mdc-checkbox">
+                          <input type="checkbox" name="dropdown-group" value="selection 2" class="mdc-checkbox__native-control dark" />
+                          <div class="mdc-checkbox__background">
+                          <svg class="mdc-checkbox__checkmark" viewBox="0 0 24 24">
+                              <path class="mdc-checkbox__checkmark-path" fill="none" d="M1.73,12.91 8.1,19.28 22.79,4.59" />
+                          </svg>
+                          <div class="mdc-checkbox__mixedmark"></div>
+                          </div>
+                          <div class="mdc-checkbox__ripple"></div>
+                      </div>
+                      <label class="dropdown-option-label">Esporte</label>
+                    </label>
+                    <label class="dropdown-option">
+                      <div class="mdc-checkbox">
+                          <input type="checkbox" name="dropdown-group" value="selection 2" class="mdc-checkbox__native-control dark" />
+                          <div class="mdc-checkbox__background">
+                          <svg class="mdc-checkbox__checkmark" viewBox="0 0 24 24">
+                              <path class="mdc-checkbox__checkmark-path" fill="none" d="M1.73,12.91 8.1,19.28 22.79,4.59" />
+                          </svg>
+                          <div class="mdc-checkbox__mixedmark"></div>
+                          </div>
+                          <div class="mdc-checkbox__ripple"></div>
+                      </div>
+                      <label class="dropdown-option-label">Lazer</label>
+                    </label>
+                  </div>
+                </div>
+              </div>
+              <div class="pt-2">
+                <h4 style="color: #505050;">Escolha o modelo de agendamento</h4>
+                <div class="mdc-form-field">
+                  <div class="mdc-radio">
+                    <input class="mdc-radio__native-control" type="radio" value="individual" id="radio-individual" name="person-radios" checked>
+                    <div class="mdc-radio__background">
+                      <div class="mdc-radio__outer-circle"></div>
+                      <div class="mdc-radio__inner-circle"></div>
+                    </div>
+                    <div class="mdc-radio__ripple"></div>
+                  </div>
+                  <label for="radio-individual" style="margin-bottom: 0 !important;">Individual</label>
+                  <div class="mdc-radio ml-3">
+                    <input class="mdc-radio__native-control" type="radio" value="grupo" id="radio-grupo" name="person-radios">
+                    <div class="mdc-radio__background">
+                      <div class="mdc-radio__outer-circle"></div>
+                      <div class="mdc-radio__inner-circle"></div>
+                    </div>
+                    <div class="mdc-radio__ripple"></div>
+                  </div>
+                  <label for="radio-grupo" style="margin-bottom: 0 !important;">Grupo</label>
+                </div>
+                <div id="div-persons" class="pt-4 row header invisible">
+                  <label class="col-md-6 mdc-text-field mdc-text-field--outlined dark" style="width: 100%;">
+                    <input type="text" class="mdc-text-field__input numberonly" placeholder="100"
+                      aria-labelledby="persons"
+                      aria-controls="persons-name"
+                      required>
+                    <span class="mdc-notched-outline">
+                      <span class="mdc-notched-outline__leading"></span>
+                      <span class="mdc-notched-outline__notch">
+                        <span class="mdc-floating-label" id="persons">Quantidade de pessoas</span>
+                      </span>
+                      <span class="mdc-notched-outline__trailing">
+                      </span>
+                    </span>
+                  </label>
+                </div>
+                <div class="d-flex pt-4">
+                  <div class="px-1">
+                    <h4 style="font-size: 14px !important;">Data do serviço</h4>
+                    <label class="input-append date dark mdc-text-field mdc-text-field--outlined mdc-text-field--with-trailing-icon">
+                      <input type="text" class="mdc-text-field__input"
+                      aria-labelledby="my-label-id"
+                      placeholder="DD MM AAAA">
+                      <div class="mdc-notched-outline">
+                        <div class="mdc-notched-outline__leading"></div>
+                        <div class="mdc-notched-outline__notch">
+                        </div>
+                        <div class="mdc-notched-outline__trailing">
+                          <i class="material-icons mdc-text-field__icon  mdc-text-field__icon--trailing"
+                          tabindex="0" role="button">event</i>
+                        </div>
+                      </div>
+                    </label>
+                  </div>
+                  <div class="px-1" style="max-width: 128px !important;">
+                    <h4 style="font-size: 14px !important;">Horário inicial</h4>
+                    <label class="dark mdc-text-field mdc-text-field--outlined mdc-text-field--with-trailing-icon">
+                      <input type="text" class="mdc-text-field__input time"
+                      aria-labelledby="my-label-id"
+                      placeholder="00:00">
+                      <div class="mdc-notched-outline">
+                        <div class="mdc-notched-outline__leading"></div>
+                        <div class="mdc-notched-outline__notch">
+                        </div>
+                        <div class="mdc-notched-outline__trailing">
+                          <i class="material-icons mdc-text-field__icon  mdc-text-field__icon--trailing"
+                          tabindex="0" role="button">schedule</i>
+                        </div>
+                      </div>
+                    </label>
+                  </div>
+                  <div style="max-width: 128px !important;">
+                    <h4 style="font-size: 14px !important;" >Horário final</h4>
+                    <label class="dark mdc-text-field mdc-text-field--outlined mdc-text-field--with-trailing-icon">
+                      <input type="text" class="mdc-text-field__input time"
+                      aria-labelledby="my-label-id"
+                      placeholder="00:00">
+                      <div class="mdc-notched-outline">
+                        <div class="mdc-notched-outline__leading"></div>
+                        <div class="mdc-notched-outline__notch">
+                        </div>
+                        <div class="mdc-notched-outline__trailing">
+                          <i class="material-icons mdc-text-field__icon  mdc-text-field__icon--trailing"
+                          tabindex="0" role="button">schedule</i>
+                        </div>
+                      </div>
+                    </label>
+                  </div>
+                </div>
+              </div>
+              <div class="pt-4">
+                <div>
+                  <label class="mdc-text-field mdc-text-field--outlined mdc-text-field--with-trailing-icon dark"
+                  style="width: 100%;">
+                    <input type="text" class="mdc-text-field__input"
+                    aria-labelledby="linkwhere"
+                    placeholder="Ex: whereby.com/nomedasala"
+                    required>
+                    <span class="mdc-notched-outline">
+                      <span class="mdc-notched-outline__leading"></span>
+                      <span class="mdc-notched-outline__notch">
+                        <span class="mdc-floating-label" id="linkwhere">Link do Whereby</span>
+                      </span>
+                      <span class="mdc-notched-outline__trailing">
+                        <i class="material-icons mdc-text-field__icon  mdc-text-field__icon--trailing"
+                          tabindex="0" role="button">videocam</i>
+                      </span>
+                    </span>
+                  </label>
+                </div>
+                <div class="pt-4">
+                  <label class="mdc-text-field mdc-text-field--outlined mdc-text-field--with-trailing-icon dark"
+                  style="width: 100%;">
+                    <input type="text" class="mdc-text-field__input"
+                    aria-labelledby="linkpic"
+                    placeholder="Ex: picpay.me/seunome"
+                    required>
+                    <span class="mdc-notched-outline">
+                      <span class="mdc-notched-outline__leading"></span>
+                      <span class="mdc-notched-outline__notch">
+                        <span class="mdc-floating-label" id="linkpic">Link do Picpay</span>
+                      </span>
+                      <span class="mdc-notched-outline__trailing">
+                        <i class="material-icons mdc-text-field__icon  mdc-text-field__icon--trailing"
+                          tabindex="0" role="button">monetization_on</i>
+                      </span>
+                    </span>
+                  </label>
+                </div>
+                <div class="pt-4">
+                  <label class="mdc-text-field mdc-text-field--textarea dark">
+                    <textarea class="mdc-text-field__input" aria-labelledby="my-label-id"
+                    placeholder="Descreva informações sobre o serviço" rows="8" cols="50" required></textarea>
+                    <div class="mdc-notched-outline">
+                      <div class="mdc-notched-outline__leading"></div>
+                      <div class="mdc-notched-outline__notch">
+                        <label class="mdc-floating-label" id="my-label-id">Descrição do serviço</label>
+                      </div>
+                      <div class="mdc-notched-outline__trailing"></div>
+                    </div>
+                  </label>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-5">
+              <div class="modal-content-info">
+                <h3>Ainda não tem os links?</h3>
+                <p>tudo bem, é só acessar os links e seguir as instruções passo a passo.</p>
+                <div class="pt-2 pb-3">
+                  <div class="d-flex header">
+                    <div class="circular-icon mr-2">
+                      <span class="material-icons pb-1">
+                        videocam
+                      </span>
+                    </div>
+                    <div>
+                      <div style="font-size: 14px; font-weight: 600;">Criar sala de videoconferencia</div>
+                      <div style="font-size: 16px; margin-top: -4px !important;">Whereby</div>
+                    </div>
+                  </div>
+                  <div style="padding-left: 48px; padding-top: 16px;">
+                    <span style="font-size: 14px;">acesse</span>
+                    <a style="font-size: 14px; color: #43AFD8;" href="https://whereby.com/user/signup" target="_blank" >
+                      https://whereby.com/user/signup</a>
+                  </div>
+                </div>
+                <div class="pt-2">
+                  <div class="d-flex header">
+                    <div class="circular-icon mr-2">
+                      <span class="material-icons pb-1">
+                        monetization_on
+                      </span>
+                    </div>
+                    <div>
+                      <div style="font-size: 14px; font-weight: 600;">Baixe o app e criar conta</div>
+                      <div style="font-size: 16px; margin-top: -4px !important;">Picpay</div>
+                    </div>
+                  </div>
+                  <div style="padding-left: 48px; padding-top: 16px;">
+                    <span style="font-size: 14px;">acesse</span>
+                    <a style="font-size: 14px; color: #43AFD8;" href="https://picpay.com/site/download" target="_blank" >
+                      https://picpay.com/site/download</a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-outline-cancel" data-dismiss="modal">cancelar</button>
+          <button type="button" class="btn btn-primary dark">salvar serviço</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- jQuery first, then Material Design, then DatePicker, then Main.js, then Popper.js, then Bootstrap JS -->
+  <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
+          integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"
+          crossorigin="anonymous"></script>
+
+  <script src="https://unpkg.com/material-components-web@latest/dist/material-components-web.min.js"></script>
+
+  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+          integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+          crossorigin="anonymous"></script>
+
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
+          integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
+          crossorigin="anonymous"></script>
+
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.bundle.min.js"></script>
+  <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.13.1/js/bootstrap-select.min.js"></script> -->
+
+  <!-- ASSETS -->
+  <script src="/scripts/bootstrap-datepicker.js"></script>
+  <script src="/scripts/bootstrap-datepicker.pt-BR.min.js"></script>
+  <script src="/scripts/dropdown.js"></script>
+
+  <!-- UTILS -->
+  <script src="/utils/endṕoints.js"></script>
+  <script src="/utils/mask.js"></script>
+  <script src="/utils/initialize-components.js"></script>
+  <script src="/components/FeedContainer.js"></script>
+  <script src="/components/SchedulePost.js"></script>
+  <script src="/components/SchedulePostNext.js"></script>
+  <script src="/components/ServicePost.js"></script>
+  <script src="/utils/main.js"></script>
+  <script src="/controllers/home.controller.js"></script>
+
+</body>
+
+</html>

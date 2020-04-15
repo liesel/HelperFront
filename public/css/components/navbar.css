@@ -1,0 +1,69 @@
+.navbar {
+    z-index: 9999;
+    padding-right: 48px !important;
+    padding-left: 48px !important;
+    box-shadow: 0px 2px 4px rgba(235, 232, 232, 0.302);
+}
+
+.circle {
+    width: 7px;
+    height: 7px;
+    background-color: var(--theme-secondary-light,#43AFD8);
+    border-radius: 50%;
+    display: inline-block;
+    position: absolute;
+    bottom: 20px;
+    right: 0px;
+    cursor: pointer;
+    z-index: 999999;
+    transition: all ease-in .2s;
+}
+
+.navbar.py-24 {
+    padding-top: 12px;
+    padding-bottom: 12px;
+}
+
+
+.material-nav-items {
+    height: 48px;
+    width: 48px;
+    text-align: center;
+    color: white;
+    margin-left: 4px;
+    margin-right: 4px;
+    border-radius: 24px;
+}
+
+.navbar.bg-primary {
+    background-color: var(--theme-primary-main,#173863) !important;
+}
+
+.material-nav-items:hover {
+    background-color: rgba(255, 255, 255, 0.12);
+}
+
+.material-nav-items:hover .material-icons > .circle  {
+    width: 4.5px;
+    height: 4.5px;
+    right: 3px;
+}
+
+.material-nav-items span {
+    position: relative;
+    top: 50%;
+    transform: translateY(-50%);
+    cursor: pointer;
+}
+
+.material-nav-items.user-profile {
+    background-image: url('../../images/user-profile.png');
+    background-repeat: no-repeat;
+    background-size: 40px;
+    background-position: center;
+    margin-right: 0px !important;
+}
+
+.material-nav-items.material-nav-items.user-profile:hover {
+    background-color: transparent;
+}

@@ -1,0 +1,30 @@
+{
+  "name": "helperfront",
+  "version": "1.0.0",
+  "description": "Aapp to help people to offer his services online",
+  "main": "src/app.js",
+  "dependencies": {
+    "express": "^4.17.1",
+    "hbs": "^4.1.1"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node ./src/app.js",
+    "dev": "nodemon --inspect ./src/app.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/liesel/HelperFront.git"
+  },
+  "keywords": [
+    "helper",
+    "front"
+  ],
+  "author": "Joel Backschat",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/liesel/HelperFront/issues"
+  },
+  "homepage": "https://github.com/liesel/HelperFront#readme"
+}

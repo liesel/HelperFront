@@ -1,0 +1,80 @@
+.close.warning {
+    top: 21px !important;
+    right: 10px !important;
+    padding: 0 !important;
+}
+
+.close.warning span {
+    font-size: 48px !important;
+    font-weight: lighter !important;
+    line-height: 1px !important;
+    height: 14px !important;
+    padding: 8px;
+    color: #FAAB3F !important;
+}
+
+.alert-warning {
+    font-size: 14px;
+    color: #232323 !important;
+    background-color: var(--theme-warning-background,#FFF7E0) !important;
+    border-color: var(--theme-warning-border,#FAAB3F4D) !important;
+}
+
+.btn-outline-warning {
+    color: var(--theme-warning-color,#FAAB3F) !important;
+    background-color: #FFFFFF !important;
+    padding-left: 36px !important;
+    padding-right: 36px !important;
+}
+
+.btn-outline-warning:hover {
+    background-color: var(--theme-warning-background,#FFF7E0) !important;
+}
+
+.close.success {
+    top: 21px !important;
+    right: 10px !important;
+    padding: 0 !important;
+}
+
+.alert-success {
+    font-size: 14px;
+    color: #232323 !important;
+    background-color: var(--theme-success-background,#19B98E15) !important;
+    border-color: var(--theme-success-border,#19B98E47) !important;
+}
+
+.btn-outline-success {
+    color: var(--theme-success-color,#19B98E) !important;
+    background-color: #FFFFFF !important;
+    padding-left: 36px !important;
+    padding-right: 36px !important;
+}
+
+.btn-outline-success:hover {
+    background-color: var(--theme-success-background,#19B98E15) !important;
+}
+
+.close.danger {
+    top: 21px !important;
+    right: 10px !important;
+    padding: 0 !important;
+}
+
+.alert-danger {
+    font-size: 14px;
+    color: #232323 !important;
+    background-color: var(--theme-danger-background,#FFEAEA) !important;
+    border-color: var(--theme-danger-border,#FA3F3F48) !important;
+}
+
+.btn-outline-danger {
+    color: var(--theme-danger-color,#FA3F3F) !important;
+    background-color: #FFFFFF !important;
+    padding-left: 36px !important;
+    padding-right: 36px !important;
+}
+
+.btn-outline-danger:hover {
+    background-color: var(--theme-danger-background,#FFEAEA) !important;
+}
