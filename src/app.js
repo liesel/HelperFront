@@ -1,9 +1,10 @@
-const path = require('path')
-const express = require('express')
-const hbs = require('hbs')
-
-const app = express()
-
+const path          = require('path')
+const express       = require('express')
+const hbs           = require('hbs')
+const bodyParser    = require('body-parser')
+const axios         = require('axios').default;
+const app           = express()
+const port          = 8080;
 // Define paths for Express config
 const publicDirectoryPath = path.join(__dirname, '../public')
 // const viewsPath = path.join(__dirname, '../templates/views')
@@ -16,6 +17,7 @@ app.set('view engine', 'hbs')
 
 // Setup static directory to serve
 app.use(express.static(publicDirectoryPath))
+app.use( bodyParser.json() );
 
 app.get('', (req, res) => {
     res.render('index', {
@@ -24,20 +26,10 @@ app.get('', (req, res) => {
     })
 })
 
-app.get('/about', (req, res) => {
-    res.render('about', {
-        title: 'About Me',
-        name: 'Andrew Mead'
-    })
+app.get('/home', (req, res) => {
+    res.render('home', {})
 })
 
-app.get('/help', (req, res) => {
-    res.render('help', {
-        helpText: 'This is some helpful text.',
-        title: 'Help',
-        name: 'Andrew Mead'
-    })
-})
 
 app.get('/weather', (req, res) => {
     res.send({
@@ -46,6 +38,6 @@ app.get('/weather', (req, res) => {
     })
 })
 
-app.listen(3000, () => {
-    console.log('Server is up on port 3000.')
+app.listen(port, () => {
+    console.log('Server is up on port '+port)
 })

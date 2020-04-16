@@ -1,5 +1,7 @@
 $(() => {
-
+    if (localStorage.getItem("token") == null) {
+        window.location = "/";
+    }
     //HOME
     fetchSchedules()
     fetchNextSchedules()
