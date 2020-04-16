@@ -19,14 +19,12 @@ app.set('view engine', 'hbs')
 app.use(express.static(publicDirectoryPath))
 app.use( bodyParser.json() );
 
-app.get('', (req, res) => {
-    res.render('index', {
-        title: 'Weather',
-        name: 'Andrew Mead'
-    })
+app.get('/', (req, res) => {
+    res.render('index')
 })
 
 app.get('/home', (req, res) => {
+<<<<<<< HEAD
     res.render('home', {})
 })
 
@@ -36,6 +34,9 @@ app.get('/weather', (req, res) => {
         forecast: 'It is snowing',
         location: 'Philadelphia'
     })
+=======
+    res.render('home')
+>>>>>>> 7a27629ba5642c32fffc15c20526d36aaa70fd90
 })
 
 app.listen(port, () => {

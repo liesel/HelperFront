@@ -17,9 +17,9 @@ class FeedContainer extends HTMLElement {
         var fragment = $(document.createDocumentFragment())
         var styles = ["https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css",
                       "https://fonts.googleapis.com/icon?family=Material+Icons",
-                      "../assets/css/material-components-web.css",
-                      "../assets/css/main.css",
-                      "../assets/css/components/button.css"]
+                      "/css/material-components-web.css",
+                      "/css/main.css",
+                      "/css/components/button.css"]
     
         styles.forEach(style => {
             var link = $(document.createElement('link'))

@@ -9,7 +9,7 @@ class SchedulePost extends HTMLElement {
 
     set schedule(schedule) {
         this.id = schedule.id || '1';
-        this.photo = schedule.photo || "../assets/images/user.png";
+        this.photo = schedule.photo || "/images/user.png";
         this.name = schedule.name || "Marilene Alves";
         this.profession = schedule.profession || "Psicóloga, Mentora e Coach de Carreira";
         this.createdDate = schedule.created || "Seg, 03 de abril - 19:00 às 21:00";

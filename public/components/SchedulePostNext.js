@@ -18,9 +18,9 @@ class SchedulePostNext extends HTMLElement {
         this.root.innerHTML = `
                 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" />
                 <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
-                <link rel="stylesheet" href="../assets/css/material-components-web.css" />
-                <link rel="stylesheet" href="../assets/css/main.css">
-                <link rel="stylesheet" href="../assets/css/components/button.css">
+                <link rel="stylesheet" href="/css/material-components-web.css" />
+                <link rel="stylesheet" href="/css/main.css">
+                <link rel="stylesheet" href="/css/components/button.css">
         
                 <div class="user-content p-2 mt-3">
                     <div class="d-flex content-info">
