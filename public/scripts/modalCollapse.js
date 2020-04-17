@@ -8,6 +8,11 @@ $(()=>{
         modalStacks.push('edit-profile')
     })
 
+    $('#modalEditProfile').on('hide.bs.modal', function (event) {
+        var modal = $(this)
+        modalStacks.pop()
+    })
+
     // Editar Avatar
     $('#modalEditAvatar').on('show.bs.modal', function (event) {
         var modal = $(this)
@@ -21,11 +26,16 @@ $(()=>{
         if(modalStacks.length > 0 && modalStacks[0] == 'edit-profile'){
             modalStacks.pop()
             $('#modalEditProfile').modal('show')
+        } else if (modalStacks.length > 0) {
+            modalStacks.pop()
         }
     })
 
     $('#modalNavuser').on("click", (e) => {
-        e.stopPropagation()
+        if(!($(e.target).attr("data-target") == "#modalEditProfile" || 
+           $(e.target).attr("id") == "btnSair'")){
+            e.stopPropagation();
+        }
     })
 
     $('#navuser').on("click", () => {
@@ -36,8 +46,9 @@ $(()=>{
         }
     })
 
-    $('.backdropUser').on("click", () => {
+    $('.backdropUser').on("click", (e) => {
         $('.backdropUser').removeClass("active")
+        modalStacks.pop()
     })
 
     $('.profileCircleIcon').on("click", ()=> {
