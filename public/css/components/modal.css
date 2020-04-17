@@ -13,6 +13,10 @@
     max-width: 888px !important;
 }
 
+.modal-dialog.modal-size-md {
+    max-width: 736px !important;
+}
+
 .modal-dialog .modal-content .modal-header .modal-title {
     font-size: 1.5625rem;
     font-weight: 800 !important;
@@ -30,4 +34,62 @@
 
 .modal-footer {
     border-top: none !important;
+}
+
+.circleEdit {
+    width: 48px;
+    height: 48px;
+    background-color: #fff;
+    border-radius: 50%;
+    display: inline-block;
+    position: absolute;
+    top: 105px;
+    right: 24px;
+    cursor: pointer;
+    z-index: 999999;
+    border: 1px solid #BCBCBC;
+}
+
+.circleEdit span {
+    position: relative;
+    top: 50%;
+    transform: translateX(47%) translateY(-50%);
+    color: #232323;
+    cursor: pointer;
+}
+
+.profileCircleIcon {
+    width: 32px;
+    height: 32px;
+    background-color: #fff;
+    border-radius: 50%;
+    position: absolute;
+    top: 82px;
+    left: 50%;
+    transform: translateX(50%);
+    cursor: pointer;
+    z-index: 999999;
+    border: 1px solid #BCBCBC;
+}
+
+.profileCircleIcon span {
+    position: relative;
+    top: 50%;
+    transform: translateX(38%) translateY(-50%);
+    color: #232323;
+    cursor: pointer;
+    font-size: 18px;
+}
+
+.modal-user {
+    position: fixed;
+    top: 72px;
+    right: 48px;
+    border-radius: 8px;
+    background-color: #fff;
+    transition: all ease-in-out .7s;
+}
+
+.user-photo img {
+    width: 89px !important;
 }

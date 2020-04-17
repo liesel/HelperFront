@@ -9,7 +9,7 @@ class ServicePost extends HTMLElement {
 
     set service(service) {
         this.id = service.id || '1';
-        this.photo = service.photo || "/images/user.png";
+        this.photo = service.photo || "/images/avatar-1.svg";
         this.name = service.name || "Marilene Alves";
         this.profession = service.profession || "Psicóloga, Mentora e Coach de Carreira";
         this.createdDate = service.created || "Seg, 03 de abril - 19:00 às 21:00";

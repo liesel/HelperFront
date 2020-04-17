@@ -63,7 +63,8 @@
                 event
             </span>
         </div>
-        <div class="material-nav-items user-profile" data-toggle="tooltip" data-placement="bottom" title="Dados do usuário">
+        <div id="navuser" class="material-nav-items user-profile" data-toggle="tooltip" data-placement="bottom" title="Dados do usuário">
+          <img src="/images/avatar-1.svg" class="card-img-top" alt="...">
         </div>
     </div>
   </nav>
@@ -98,7 +99,7 @@
       <div class="col-md-3 col-sm-4 no-padding-margin" style="min-width: fit-content;">
         <div class="card">
           <div class="d-flex justify-content-center px-4 pt-40">
-            <img src="/images/user.png" class="card-img-top" alt="...">
+            <img src="/images/avatar-1.svg" class="card-img-top" alt="...">
           </div>
           <div class="card-body text-center">
             <h2 class="card-title"><strong>Karem Carvalho</strong></h2>
@@ -209,8 +210,7 @@
     </div>
   </div>
 
-
-  <!-- Modal -->
+  <!-- Adicionar Serviço Modal -->
   <div class="modal fade" id="modalAddService" tabindex="-1" role="dialog" aria-labelledby="modalAddServiceTitle" aria-hidden="true">
     <div class="modal-dialog modal-dialog-scrollable modal-dialog-centered" role="document">
       <div class="modal-content">
@@ -509,6 +509,158 @@
     </div>
   </div>
 
+  <div class="modal fade" id="modalEditProfile"  tabindex="-1" role="dialog" aria-labelledby="modalEditProfileTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="modalEditProfileTitle">Editar perfil</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <div class="row header">
+            <div class="col-md-3" style="padding-right: 35px; paddin-left: 10px; position:relative;">
+              <img src="/images/avatar-1.svg" class="card-img-top" alt="...">
+                <div data-toggle="modal" data-target="#modalEditAvatar" class="circleEdit">
+                   <span class="material-icons">
+                      create
+                    </span>
+                </div>
+            </div>
+            <div class="col-md-9">
+              <div>
+                <label class="mdc-text-field mdc-text-field--outlined dark" style="width: 100%;">
+                  <input type="text" id="txtEditFullName" name="txtEditFullName" class="mdc-text-field__input" placeholder="Insira seu nome e sobrenome"
+                    aria-labelledby="username" required>
+                  <span class="mdc-notched-outline">
+                    <span class="mdc-notched-outline__leading"></span>
+                    <span class="mdc-notched-outline__notch">
+                      <span class="mdc-floating-label" id="username">Nome Completo</span>
+                    </span>
+                    <span class="mdc-notched-outline__trailing">
+                    </span>
+                  </span>
+                </label>
+              </div>
+              <div class="pt-4">
+                <label class="mdc-text-field mdc-text-field--outlined dark" style="width: 100%;">
+                  <input type="email" id="txtEditEspecializacao" name="txtEditEspecializacao" class="mdc-text-field__input" placeholder="Insira as áreas de conhecimentos"
+                    aria-labelledby="especializacao" required>
+                  <span class="mdc-notched-outline">
+                    <span class="mdc-notched-outline__leading"></span>
+                    <span class="mdc-notched-outline__notch">
+                      <span class="mdc-floating-label" id="especializacao">Especialização</span>
+                    </span>
+                    <span class="mdc-notched-outline__trailing">
+                    </span>
+                  </span>
+                </label>
+              </div>
+              <div class="pt-4">
+                <label class="mdc-text-field mdc-text-field--textarea dark">
+                  <textarea class="mdc-text-field__input" aria-labelledby="my-label-id"
+                  placeholder="Fale um pouco sobre você" rows="8" cols="50" required></textarea>
+                  <div class="mdc-notched-outline">
+                    <div class="mdc-notched-outline__leading"></div>
+                    <div class="mdc-notched-outline__notch">
+                      <label class="mdc-floating-label" id="my-label-id">Descrição do serviço</label>
+                    </div>
+                    <div class="mdc-notched-outline__trailing"></div>
+                  </div>
+                </label>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-outline-cancel" data-dismiss="modal">cancelar</button>
+          <button type="button" class="btn btn-primary dark">salvar edição</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+   <div class="modal fade" id="modalEditAvatar" tabindex="-1" role="dialog" aria-labelledby="modalEditAvatarTitle" aria-hidden="true">
+    <div class="modal-dialog modal-size-md modal-dialog-centered" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="modalAvatarTitle">Escolha seu avatar</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <div class="row header">
+            <div class="col-md-3 col-sm-3" style="padding-right: 10px; paddin-left: 10px;">
+              <img src="/images/avatar-1.svg" class="card-img-top" alt="...">
+            </div>
+            <div class="col-md-3 col-sm-3" style="padding-right: 10px; paddin-left: 10px;">
+              <img src="/images/avatar-2.svg" class="card-img-top" alt="...">
+            </div>
+            <div class="col-md-3 col-sm-3" style="padding-right: 10px; paddin-left: 10px;">
+              <img src="/images/avatar-3.svg" class="card-img-top" alt="...">
+            </div>
+            <div class="col-md-3 col-sm-3" style="padding-right: 10px; paddin-left: 10px;">
+              <img src="/images/avatar-4.svg" class="card-img-top" alt="...">
+            </div>
+          </div>
+           <div class="row header pt-4">
+            <div class="col-md-3 col-sm-3" style="padding-right: 10px; paddin-left: 10px;">
+              <img src="/images/avatar-1.svg" class="card-img-top" alt="...">
+            </div>
+            <div class="col-md-3 col-sm-3" style="padding-right: 10px; paddin-left: 10px;">
+              <img src="/images/avatar-2.svg" class="card-img-top" alt="...">
+            </div>
+            <div class="col-md-3 col-sm-3" style="padding-right: 10px; paddin-left: 10px;">
+              <img src="/images/avatar-3.svg" class="card-img-top" alt="...">
+            </div>
+            <div class="col-md-3 col-sm-3" style="padding-right: 10px; paddin-left: 10px;">
+              <img src="/images/avatar-4.svg" class="card-img-top" alt="...">
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-outline-cancel" data-dismiss="modal">cancelar</button>
+          <button type="button" class="btn btn-primary dark">salvar edição</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="backdropUser">
+    <div id="modalNavuser" class="modal-user shadow-sm">
+      <div style="padding-left: 48px; padding-right: 48px; padding-top: 24px;">
+        <div class="d-flex justify-content-center px-4 pt-40 pb-3 user-photo">
+          <img src="/images/avatar-1.svg" class="card-img-top" alt="...">
+            <div class="profileCircleIcon">
+              <span class="material-icons">
+                create
+              </span>
+            </div>
+        </div>
+        <div class="text-center">
+          <h2 class="card-title" style="font-size: 1rem !important;"><strong>Karem Carvalho</strong></h2>
+          <p class="card-text">karem.carvalho@fcamara.com.br</p>
+        </div>
+        <div class="pt-3">
+          <div class="d-flex justify-content-center">
+            <button type="button" class="btn fill" data-toggle="modal" data-target="#modalEditProfile">
+              editar perfil
+            </button>
+          </div>
+          <div class="d-flex justify-content-center pt-3">
+            <span id="btnSair">sair</span>
+          </div>
+        </div>
+      </div>
+      <hr/>
+      <div style="text-align: center;">
+        <p>política de privacidade</p>
+      </div>
+    </div>
+  </div>
+
   <!-- jQuery first, then Material Design, then DatePicker, then Main.js, then Popper.js, then Bootstrap JS -->
   <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
           integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"
@@ -531,6 +683,7 @@
   <script src="/scripts/bootstrap-datepicker.js"></script>
   <script src="/scripts/bootstrap-datepicker.pt-BR.min.js"></script>
   <script src="/scripts/dropdown.js"></script>
+  <script src="/scripts/modalCollapse.js"></script>
 
   <!-- UTILS -->
   <script src="/utils/endṕoints.js"></script>

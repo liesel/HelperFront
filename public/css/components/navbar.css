@@ -57,10 +57,7 @@
 }
 
 .material-nav-items.user-profile {
-    background-image: url('../../images/user-profile.png');
-    background-repeat: no-repeat;
-    background-size: 40px;
-    background-position: center;
+    cursor: pointer;
     margin-right: 0px !important;
 }
 

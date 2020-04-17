@@ -225,9 +225,30 @@ div.side-status-item.clicked > span, div.side-status-item.clicked > p {
     transform: translateY(28%) !important;
 }
 
+.active {
+    display: block !important;
+}
+
 .no-padding-margin {
     padding: 0 !important;
     margin: 0 !important;
+}
+
+.backdropUser {
+    display: none;
+    position: fixed;
+    top: 64px;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: transparent;
+}
+
+#btnSair {
+    cursor: pointer;
+    font-size: 0.889rem;
+    color:#232323;
+    font-weight: bold;
 }
 
 .card > div > img {
