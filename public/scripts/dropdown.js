@@ -1,5 +1,4 @@
-$(function ($) {
-
+$( document ).ready(function() {
     var CheckboxDropdown = function (el) {
         var _this = this;
 
@@ -57,6 +56,7 @@ $(function ($) {
             }
 
             this.$label.html(values);
+            $( "#selectCategories").trigger( "valueHasCHnaged", [ values] );
         }
     }
 
@@ -89,5 +89,8 @@ $(function ($) {
     for (var i = 0, length = checkboxesDropdowns.length; i < length; i++) {
         new CheckboxDropdown(checkboxesDropdowns[i])
     }
+
+        
+   
 
 })

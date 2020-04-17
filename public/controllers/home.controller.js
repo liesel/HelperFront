@@ -1,5 +1,6 @@
-$(() => {
+$( document ).ready(function() {
     //HOME
+    var categories = [];
     fetchSchedules()
     fetchNextSchedules()
 
@@ -29,7 +30,18 @@ $(() => {
         }
         item.addClass("clicked")       
     })
+
+    $("#btnSaveService").click(function (e) { 
+        var serviceName = $("#txtServiceName").val();
+        
+    });
+
 })
+
+$("#selectCategories").on("valueHasCHnaged", function ( event, param1) {
+    console.log('foi caaraiao');
+});
+
 
 async function fetchSchedules(){
     $.ajax({
@@ -38,9 +50,10 @@ async function fetchSchedules(){
         dataType:       'json',
         contentType:    'application/json',
         success: function (data) {
-            var html = "";
+            categories  = data;
+            var html    = "";
             for(var i = 0; i < data.length; i++){
-                html = html+'<label class="dropdown-option"><div class="mdc-checkbox"><input type="checkbox" name="dropdown-group" value="selection 2" class="mdc-checkbox__native-control dark" /><div class="mdc-checkbox__background"><svg class="mdc-checkbox__checkmark" viewBox="0 0 24 24"><path class="mdc-checkbox__checkmark-path" fill="none" d="M1.73,12.91 8.1,19.28 22.79,4.59" /></svg><div class="mdc-checkbox__mixedmark"></div></div><div class="mdc-checkbox__ripple"></div></div><label class="dropdown-option-label">'+data[i].name+'</label></label>';
+                html = html+'<label class="dropdown-option"><div class="mdc-checkbox"><input type="checkbox" name="dropdown-group" value="selection 2" class="mdc-checkbox__native-control dark" /><div class="mdc-checkbox__background"><svg class="mdc-checkbox__checkmark" viewBox="0 0 24 24"><path class="mdc-checkbox__checkmark-path" fill="none" d="M1.73,12.91 8.1,19.28 22.79,4.59" /></svg><div class="mdc-checkbox__mixedmark"></div></div><div class="mdc-checkbox__ripple"></div></div><label class="dropdown-option-label" >'+data[i].name+'</label></label>';
             }
             $("#selectCategories").html(html);
         },
@@ -89,3 +102,4 @@ function clear(){
     container.find('helper-schedule').remove()
     container.find('helper-service').remove()
 }
+

@@ -224,7 +224,7 @@
           <div class="row">
             <div class="col-md-7">
               <label class="mdc-text-field mdc-text-field--outlined dark" style="width: 100%;">
-                <input type="text" class="mdc-text-field__input" placeholder="Descreva o titulo do serviço"
+                <input id="txtServiceName" name="txtServiceName" type="text" class="mdc-text-field__input" placeholder="Descreva o titulo do serviço"
                   aria-labelledby="service"
                   aria-controls="service-name"
                   aria-describedby="service-name"
@@ -452,7 +452,7 @@
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-outline-cancel" data-dismiss="modal">cancelar</button>
-          <button type="button" class="btn btn-primary dark">salvar serviço</button>
+          <button id="btnSaveService" name="btnSaveService" type="button" class="btn btn-primary dark">salvar serviço</button>
         </div>
       </div>
     </div>
@@ -479,6 +479,9 @@
   <script src="/scripts/bootstrap-datepicker.pt-BR.min.js"></script>
   <script src="/scripts/dropdown.js"></script>
 
+  <!-- CONTROLLERS -->
+  <script src="/controllers/home.controller.js"></script>
+
   <!-- UTILS -->
   <script src="/utils/endṕoints.js"></script>
   <script src="/utils/mask.js"></script>
@@ -488,7 +491,7 @@
   <script src="/components/SchedulePostNext.js"></script>
   <script src="/components/ServicePost.js"></script>
   <script src="/utils/main.js"></script>
-  <script src="/controllers/home.controller.js"></script>
+  
 
 </body>
 
