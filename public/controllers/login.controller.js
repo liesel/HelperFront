@@ -1,5 +1,4 @@
 $(document).ready(() => {
-    const url_back      = "http://localhost:3000/";
     const btnDoLogin    = $("#btnLogin");
     
     btnDoLogin.on("click", () => {
@@ -7,15 +6,14 @@ $(document).ready(() => {
         var password    = $("#txtPasswordLogin").val();
         if (email != undefined && email != "" && password != undefined && password != "") {
             $.ajax({
-                url:            url_back+"v1/user/login",
+                url:            "/doLogin",
                 type:           'post',
                 dataType:       'json',
                 contentType:    'application/json',
                 success: function (data) {
-                    localStorage.setItem("token",data.token);
-                    localStorage.setItem("name",data.user.name);
-                    localStorage.setItem("surname",data.user.surname);
-                    window.location = "home";
+                    if (data.status == "ok") {
+                        window.location = "/home";
+                    }
                 },
                 error: function (data) {
                     alert(data.responseJSON.status);

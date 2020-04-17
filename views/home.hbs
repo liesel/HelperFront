@@ -101,10 +101,10 @@
             <img src="/images/user.png" class="card-img-top" alt="...">
           </div>
           <div class="card-body text-center">
-            <h2 class="card-title"><strong>Karem Carvalho</strong></h2>
+            <h2 class="card-title"><strong>{{session.userFullname}}</strong></h2>
             <div>
-              <p class="card-text">karem.carvalho@fcamara.com.br</p>
-              <p class="card-text">UX Designer I Lorem psilum</p>
+              <p class="card-text">{{session.email}}</p>
+              {{!-- <p class="card-text">UX Designer I Lorem psilum</p> --}}
             </div>
             <div class="divisor"></div>
             <div>
@@ -160,7 +160,7 @@
         <!-- ADD SERVICE -->
         <div class="card">
           <div class="row justify-content-between no-padding-margin column-service">
-              <span class="bold col-md-8" style="font-size: 1.125rem !important;">Olá, Karem inicie sua colaboração</span>
+              <span class="bold col-md-8" style="font-size: 1.125rem !important;">Olá, {{session.username}} inicie sua colaboração</span>
               <button type="button" class="btn col-md-3 fill ml-auto" data-toggle="modal" data-target="#modalAddService">
                 adicionar serviço
               </button>
@@ -510,9 +510,7 @@
   </div>
 
   <!-- jQuery first, then Material Design, then DatePicker, then Main.js, then Popper.js, then Bootstrap JS -->
-  <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
-          integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"
-          crossorigin="anonymous"></script>
+  <script src="https://code.jquery.com/jquery-3.5.0.min.js"></script>
 
   <script src="https://unpkg.com/material-components-web@latest/dist/material-components-web.min.js"></script>
 

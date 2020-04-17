@@ -1,7 +1,4 @@
 $(() => {
-    if (localStorage.getItem("token") == null) {
-        window.location = "/";
-    }
     //HOME
     fetchSchedules()
     fetchNextSchedules()
@@ -35,6 +32,20 @@ $(() => {
 })
 
 async function fetchSchedules(){
+    $.ajax({
+        url:            "/getAllCategories",
+        type:           'post',
+        dataType:       'json',
+        contentType:    'application/json',
+        success: function (data) {
+            if (data.status == "ok") {
+                window.location = "/home";
+            }
+        },
+        error: function (data) {
+            alert(data.responseJSON.status);
+        }
+    });
     const container = $($('feed-container')[0].shadow);
     const fragment = $(document.createDocumentFragment())
 
