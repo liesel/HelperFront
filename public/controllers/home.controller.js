@@ -4,6 +4,17 @@ $(() => {
     fetchSchedules()
     fetchNextSchedules()
 
+    var serviceModal = $("helper-service-modal")[0]
+    serviceModal.config(2, confirm)
+
+    $("#btntest").on("click", function(){
+        serviceModal.open()
+    })
+
+    function confirm (){
+        alert("confirmar")
+    }
+
     const itemStatus = $('div.row.side-status-item')
     itemStatus.on("click", (event) => {
         for (const item of itemStatus) {
@@ -30,6 +41,7 @@ $(() => {
         }
         item.addClass("clicked")       
     })
+
 })
 
 async function fetchSchedules(){
