@@ -56,7 +56,8 @@
         if($('.input-append.date').length != 0) {
             $('.input-append.date').datepicker({
                 language: 'pt-BR',
-                pickTime: true
+                pickTime: true,
+                startDate: '0d'
             });
         }
 
