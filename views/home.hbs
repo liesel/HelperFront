@@ -193,7 +193,7 @@
             <div class="card col-12" style="padding: 18px;">
               <div>
                 <div class="row">
-                  <div class="col-8">
+                  <div class="col-8" style="padding-right: 0 !important;">
                     <h4>Seus próximos agendamentos</h4>
                   </div>
                   <div class="col-4">
@@ -283,10 +283,10 @@
                 </div>
                 <div id="div-persons" class="pt-4 row header invisible">
                   <label class="col-md-6 mdc-text-field mdc-text-field--outlined dark" style="width: 100%;">
-                    <input type="text" class="mdc-text-field__input numberonly" placeholder="100"
+                    <input id="qtdPersons" type="text" class="mdc-text-field__input numberonly" placeholder="100"
                       aria-labelledby="persons"
                       aria-controls="persons-name"
-                      required>
+                      required=false>
                     <span class="mdc-notched-outline">
                       <span class="mdc-notched-outline__leading"></span>
                       <span class="mdc-notched-outline__notch">
@@ -317,10 +317,14 @@
                   </div>
                   <div class="px-1" style="max-width: 128px !important;">
                     <h4 style="font-size: 14px !important;">Horário inicial</h4>
-                    <label class="dark mdc-text-field mdc-text-field--outlined mdc-text-field--with-trailing-icon">
-                      <input type="text" class="mdc-text-field__input time"
+                    <label id="labelHorarioInicial" class="dark mdc-text-field mdc-text-field--outlined mdc-text-field--with-trailing-icon">
+                      <input type="text" class="mdc-text-field__input time24"
                       aria-labelledby="my-label-id"
-                      placeholder="00:00">
+                      id="txtInitialTime"
+                      name="initialTime"
+                      data-inputmask-alias="datetime"
+                      data-inputmask-inputformat="HH:MM"
+                      data-inputmask-placeholder="00:00" required>
                       <div class="mdc-notched-outline">
                         <div class="mdc-notched-outline__leading"></div>
                         <div class="mdc-notched-outline__notch">
@@ -334,10 +338,14 @@
                   </div>
                   <div style="max-width: 128px !important;">
                     <h4 style="font-size: 14px !important;" >Horário final</h4>
-                    <label class="dark mdc-text-field mdc-text-field--outlined mdc-text-field--with-trailing-icon">
-                      <input type="text" class="mdc-text-field__input time"
+                    <label id="labelHorarioFinal" class="dark mdc-text-field mdc-text-field--outlined mdc-text-field--with-trailing-icon">
+                      <input type="text" class="mdc-text-field__input time24"
                       aria-labelledby="my-label-id"
-                      placeholder="00:00">
+                      id="txtFinalTime"
+                      name="finalTime" 
+                      data-inputmask-alias="datetime"
+                      data-inputmask-inputformat="HH:MM"
+                      data-inputmask-placeholder="00:00" required>
                       <div class="mdc-notched-outline">
                         <div class="mdc-notched-outline__leading"></div>
                         <div class="mdc-notched-outline__notch">
@@ -523,7 +531,7 @@
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-outline-cancel" data-dismiss="modal">cancelar</button>
-          <button type="button" class="btn btn-primary dark">salvar edição</button>
+          <button type="button" class="btn btn-primary dark ">salvar edição</button>
         </div>
       </div>
     </div>
@@ -612,6 +620,7 @@
   <helper-service-modal>
   </helper-service-modal>
 
+
   <!-- jQuery first, then Material Design, then DatePicker, then Main.js, then Popper.js, then Bootstrap JS -->
   <script src="https://code.jquery.com/jquery-3.5.0.min.js"></script>
 
@@ -632,13 +641,13 @@
   <script src="/scripts/bootstrap-datepicker.js"></script>
   <script src="/scripts/bootstrap-datepicker.pt-BR.min.js"></script>
   <script src="/scripts/modalCollapse.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/inputmask/4.0.9/jquery.inputmask.bundle.min.js"></script>
 
   <!-- CONTROLLERS -->
   <script src="/controllers/home.controller.js"></script>
 
   <!-- UTILS -->
   <script src="/utils/endṕoints.js"></script>
-  <script src="/utils/mask.js"></script>
   <script src="/utils/initialize-components.js"></script>
   <script src="/components/FeedContainer.js"></script>
   <script src="/components/SchedulePost.js"></script>

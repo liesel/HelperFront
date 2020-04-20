@@ -8,7 +8,8 @@ class ServiceModal extends HTMLElement {
         console.log("modal connected");
     }
 
-    config(type, next) {
+    config(data, next) {
+        var {type, title, subtitle} = data;
         this.type = type || 3;
 
         switch(this.type){
@@ -18,8 +19,8 @@ class ServiceModal extends HTMLElement {
                     error
                     </span>
                 `;
-                this.modalTitle = "Opa!";
-                this.subtitle = "tem certeza que deseja cancelar esse serviço?";
+                this.modalTitle = title || "Opa!";
+                this.subtitle = subtitle || "tem certeza que deseja cancelar esse serviço?";
                 break;
             case 2:
                 this.icon = `
@@ -27,8 +28,8 @@ class ServiceModal extends HTMLElement {
                     check
                     </span>
                 `;
-                this.modalTitle = "Sucesso !";
-                this.subtitle = "serviços adicionado..";
+                this.modalTitle = title || "Sucesso !";
+                this.subtitle = subtitle || "serviços adicionado..";
                 break;
             default:
                 this.icon = `
@@ -36,8 +37,8 @@ class ServiceModal extends HTMLElement {
                     cancel
                     </span>
                 `;
-                this.modalTitle = "Ops, algo deu errado !";
-                this.subtitle = "O agendamento que você está solicitando tem conflito de horário com outro agendamento.";
+                this.modalTitle = title || "Ops, algo deu errado !";
+                this.subtitle = subtitle || "O agendamento que você está solicitando tem conflito de horário com outro agendamento.";
                 break;
         }
 

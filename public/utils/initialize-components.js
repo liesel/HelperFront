@@ -61,6 +61,8 @@
             });
         }
 
+        $(".time24").inputmask();
+
         //
         // HANDLERS
         //
@@ -69,8 +71,10 @@
             var radio = $('input[name="person-radios"]:checked').val()
             if(radio == 'grupo') {
                 $("#div-persons").removeClass('invisible')
+                $('#qtdPersons').attr("required", true)
             } else {
                 $("#div-persons").removeClass('invisible').addClass('invisible')
+                $('#qtdPersons').attr("required", false)
             }
         })
 
@@ -83,8 +87,6 @@
             } 
 
         });
-
-        $('.time').mask('00:00');
 
         scheduleds.on("click", (event) => {
             var button = $(event.currentTarget)

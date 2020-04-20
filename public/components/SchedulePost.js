@@ -19,6 +19,7 @@ class SchedulePost extends HTMLElement {
         this.text = schedule.text || "Aprenda ser reconhecido, muito bem remunerado para crescer como um(a) profissional de sucesso!";
         this.isScheduled = schedule.isScheduled || true;
         this.favoriteIcon = schedule.isfavorited ? 'favorite' : 'favorite_border';
+        this.categories = schedule.categories || ["Tech", "Psycho", "Science"]
         this.render();
     }
 
@@ -40,7 +41,24 @@ class SchedulePost extends HTMLElement {
     }
 
     render() {
+        var listOfCategories = ""
+
+        this.categories.forEach((item) => {
+          listOfCategories += "#"+item + "  ";
+        })
+
         this.innerHTML = `
+                <style>
+                    .hashtags {
+                        color: #0E6D90;
+                        line-height: 2 !important;
+                        word-spacing: 12px;
+                    }
+
+                    .justify-text {
+                        text-align: justify;
+                    }
+                </style>
                 <div class="card mt-4" style="padding: 32px;">
                     <div class="row header">
                         <div class="user-icon">
@@ -77,10 +95,7 @@ class SchedulePost extends HTMLElement {
                                 <div style="max-width: 800px !important">
                                     <span class="bold" style="font-size: 1.125rem !important;">${this.title}</span>
                                     <p class="content-text">${this.text}</p>
-                                    <ul class="list-group list-group-horizontal hashtag-list">
-                                        <li class="list-group-item">#categorias</li>
-                                        <li class="list-group-item">#categorias</li>
-                                    </ul>
+                                    <p class="hashtags">${listOfCategories}<p>
                                 </div>
                             </div>
                         </div>

@@ -4,17 +4,6 @@ $( document ).ready(function() {
     fetchSchedules()
     fetchNextSchedules()
 
-    var serviceModal = $("helper-service-modal")[0]
-    serviceModal.config(2, confirm)
-
-    $("#btntest").on("click", function(){
-        serviceModal.open()
-    })
-
-    function confirm (){
-        alert("confirmar")
-    }
-
     const itemStatus = $('div.row.side-status-item')
     itemStatus.on("click", (event) => {
         for (const item of itemStatus) {
@@ -42,12 +31,38 @@ $( document ).ready(function() {
         item.addClass("clicked")       
     })
 
-    $("#btnSaveService").click(function (e) { 
+    $("#btnSaveService").click(function (e) {
         var serviceName = $("#txtServiceName").val();
+        var initialTime = $("#txtInitialTime").val().replace(':','');
+        var finalTime = $("#txtFinalTime").val().replace(':','');
+
+        if(isBiggerThan(initialTime, finalTime)){
+            var serviceModal = $("helper-service-modal")[0]
+            serviceModal.config({
+                type: 3,
+                title: 'Campo Inválido!',
+                subtitle: 'O Horário final precisa ser menor que o horário inicial.'
+            }, dateRangeError)
+            serviceModal.open()
+        }
         
     });
 
+
+    function confirm (){
+        alert('confirmar')
+    }
+
 })
+
+function isBiggerThan(x, y){
+    return x > y
+}
+
+function dateRangeError(){
+    $('#labelHorarioFinal').addClass('mdc-text-field--invalid').focus()
+    $("helper-service-modal")[0].close()
+}
 
 $("#selectCategories").on("valueHasCHnaged", function ( event, param1) {
     console.log("values:", param1)
@@ -102,12 +117,16 @@ async function fetchSchedules(){
 
 async function fetchNextSchedules(){
     const container = $('#side-feed');
+    const fragment = $(document.createDocumentFragment())
     
-    [{}, {}].forEach(schedule => {
+    for(let i = 0; i < 2; i++) {
         const el = document.createElement('helper-schedule-next')
-        el.schedule = schedule;
-        container.append(el);
-    });
+        el.schedule = {};
+        fragment.append(el);
+        // el.countLines()
+    }
+
+    container.append(fragment)
 }
 
 async function fetchServices() {
