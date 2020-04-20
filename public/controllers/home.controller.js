@@ -140,15 +140,6 @@ function dateRangeError(){
     $("helper-service-modal")[0].close()
 }
 
-$("#selectCategories").on("valueHasCHnaged", function ( event, param1) {
-    console.log("values:", param1)
-    console.log('foi caaraiao');
-});
-
-
-
-
-
 async function fetchSchedules(){
     var categories = [];
     if (localStorage.getItem('categories') == undefined) {

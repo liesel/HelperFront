@@ -31,18 +31,25 @@ $( document ).ready(function() {
         var checked = this.$el.find(":checked");
 
         var values = "";
+        var categories = [];
 
         if (checked.length === 1) {
-
             var checkbox = checked.parent().parent("label").find("[type='checkbox']");
             values = checkbox.attr('value');
-            $( "#selectCategories").trigger( "valueHasCHnaged", [ values] );
+
+            categories.push(checkbox.attr('value'));
+            $( "#selectCategories").trigger( "valueHasCHnaged", {categories: categories} );
+
             $(this.$label).css("color", "#232323");
 
         } else if(checked.length > 1) {
 
             for(let i = 0; i < checked.length; i++){
+                
                 var checkbox = $(checked[i]).parent().parent("label").find("[type='checkbox']");
+
+                categories.push(checkbox.attr('value'));
+
                 if(i == checked.length - 1) {
                     values += checkbox.attr('value');
                 } else {
@@ -50,7 +57,7 @@ $( document ).ready(function() {
                 }
             }
 
-            $( "#selectCategories").trigger( "valueHasCHnaged", [ values] );
+            $( "#selectCategories").trigger( "valueHasCHnaged", {categories: categories} );
             $(this.$label).css("color", "#232323");
         }
 
