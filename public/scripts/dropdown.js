@@ -1,15 +1,13 @@
 $( document ).ready(function() {
     var CheckboxDropdown = function (el) {
-        var _this = this;
-
-        this.isOpen = false;
-        this.areAllChecked = false;
-        this.$el = $(el);
-        this.$label = this.$el.find(".mdc-select__selected-text");
-        this.$inputs = this.$el.find("[type='checkbox']");
-        this.$dropdown = this.$el.find(".mdc-select__anchor")
+        var _this           = this;
+        this.isOpen         = false;
+        this.areAllChecked  = false;
+        this.$el            = $(el);
+        this.$label         = this.$el.find(".mdc-select__selected-text");
+        this.$inputs        = this.$el.find("[type='checkbox']");
+        this.$dropdown      = this.$el.find(".mdc-select__anchor")
         this.$floatinglabel = this.$el.find(".mdc-floating-label")
-
         this.onCheckBox();
 
         // Add Event Handlers
@@ -45,18 +43,22 @@ $( document ).ready(function() {
             this.$label.html(checked.parent().parent("label").find(".dropdown-option-label").text());
         } else {
             $(this.$label).css("color", "#232323")
+            var categories = [];
             var values = "";
 
             for(let i = 0; i < checked.length; i++){
+                categories.push($(checked[i]).parent().parent("label").find(".dropdown-option-label").text());
                 if(i == checked.length - 1) {
-                    values += $(checked[i]).parent().parent("label").find(".dropdown-option-label").text();
+                    var val = $(checked[i]).parent().parent("label").find(".dropdown-option-label").text();
+                    values += val;
                 } else {
-                    values += $(checked[i]).parent().parent("label").find(".dropdown-option-label").text() + ", ";
+                    var val = $(checked[i]).parent().parent("label").find(".dropdown-option-label").text()+", ";
+                    values += val;
                 }
             }
 
             this.$label.html(values);
-            $( "#selectCategories").trigger( "valueHasCHnaged", [ values] );
+            $( "#selectCategories").trigger( "valueHasChanged", {categories: categories} );
         }
     }
 

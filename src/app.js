@@ -5,6 +5,7 @@ const bodyParser    = require('body-parser')
 const axios         = require('axios').default;
 const session       = require("express-session")
 const app           = express()
+const moment = require('moment');
 const TWO_HOURS     = 1000 * 60 * 60 *2
 var categories      = []; 
 
@@ -14,7 +15,7 @@ const  {
     SESS_LIFETIME   = TWO_HOURS,
     SESS_NAME       = 'sid',
     SESS_SECRET     = 'IT`S A SECRET!!__\o/',
-    BACK_END_URL    = 'http://localhost:3000'
+    BACK_END_URL    = 'http://localhost.charlesproxy.com:3000'
 } = process.env
 
 
@@ -23,6 +24,14 @@ const  {
 const redirectLogin = (req, res, next) => {
     if (!req.session.userId) {
         res.redirect('/');
+    }else{
+        next();
+    }
+}
+
+const userIsAuthenticated = (req, res, next) => {
+    if (!req.session.userId) {
+        res.status(401).send({error: "not Authenticated"});
     }else{
         next();
     }
@@ -74,6 +83,41 @@ app.get('/',redirectHome, (req, res) => {
     res.render('index')
 })
 
+app.post("/doSaveService", (req, res) => {
+    console.log(req.body);
+    var categories = []
+    for (let index = 0; index < req.body.categories.length; index++) {
+        categories.push({
+            category: req.body.categories[index]._id
+        });
+    }
+    axios.post(`${BACK_END_URL}/v1/schedule/Save`, 
+    {
+        serviceName: 	    req.body.serviceName,
+        whereby: 			req.body.whereBy,
+        ScheduleType: 		1,
+        ScheduleDate: 		moment(`${req.body.serviceDate} ${req.body.startTime}`, "DD/MM/YYYY HH:mm").toDate(),
+        ScheduleDateEnd: 	moment(`${req.body.serviceDate} ${req.body.endTime}`, "DD/MM/YYYY HH:mm").toDate(),
+        description:        req.body.description,
+        categories: 		categories,
+        CreatorId: 			req.session.userId
+    },
+    {
+        headers: {
+            'accept': 'application/json',
+            'HelperAutorization': `Bearer ${req.session.token}`
+        }
+    })
+    .then(function (response) {
+        console.log(response);
+        res.send({status:"okss"});
+    })
+    .catch(function (error) {
+        console.log(error);
+        res.status(401).send('Não autorizado');
+    })
+})
+
 app.post("/getAllCategories", (req, res) => {
     axios.get(`${BACK_END_URL}/v1/category/findAllActive`, {
         headers: {
@@ -110,7 +154,7 @@ app.post('/doLogin', redirectHome, (req, res) => {
     })
     .catch(function (error) {
         console.log(error);
-        res.send({})
+        res.status(401).send('Não autorizado');
     })
 })
 

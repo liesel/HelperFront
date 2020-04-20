@@ -302,9 +302,7 @@
                   <div class="px-1">
                     <h4 style="font-size: 14px !important;">Data do serviço</h4>
                     <label class="input-append date dark mdc-text-field mdc-text-field--outlined mdc-text-field--with-trailing-icon">
-                      <input type="text" class="mdc-text-field__input"
-                      aria-labelledby="my-label-id"
-                      placeholder="DD MM AAAA">
+                      <input type="text" id="txtServiceDate" name="txtServiceDate" class="mdc-text-field__input" aria-labelledby="my-label-id" placeholder="DD MM AAAA">
                       <div class="mdc-notched-outline">
                         <div class="mdc-notched-outline__leading"></div>
                         <div class="mdc-notched-outline__notch">
@@ -319,9 +317,7 @@
                   <div class="px-1" style="max-width: 128px !important;">
                     <h4 style="font-size: 14px !important;">Horário inicial</h4>
                     <label class="dark mdc-text-field mdc-text-field--outlined mdc-text-field--with-trailing-icon">
-                      <input type="text" class="mdc-text-field__input time"
-                      aria-labelledby="my-label-id"
-                      placeholder="00:00">
+                      <input type="text" id="txtStartTime" name="txtStartTime" class="mdc-text-field__input time" aria-labelledby="my-label-id" placeholder="00:00">
                       <div class="mdc-notched-outline">
                         <div class="mdc-notched-outline__leading"></div>
                         <div class="mdc-notched-outline__notch">
@@ -336,9 +332,7 @@
                   <div style="max-width: 128px !important;">
                     <h4 style="font-size: 14px !important;" >Horário final</h4>
                     <label class="dark mdc-text-field mdc-text-field--outlined mdc-text-field--with-trailing-icon">
-                      <input type="text" class="mdc-text-field__input time"
-                      aria-labelledby="my-label-id"
-                      placeholder="00:00">
+                      <input type="text" id="txtEndTime" name="txtEndTime" class="mdc-text-field__input time" aria-labelledby="my-label-id" placeholder="00:00">
                       <div class="mdc-notched-outline">
                         <div class="mdc-notched-outline__leading"></div>
                         <div class="mdc-notched-outline__notch">
@@ -356,10 +350,7 @@
                 <div>
                   <label class="mdc-text-field mdc-text-field--outlined mdc-text-field--with-trailing-icon dark"
                   style="width: 100%;">
-                    <input type="text" class="mdc-text-field__input"
-                    aria-labelledby="linkwhere"
-                    placeholder="Ex: whereby.com/nomedasala"
-                    required>
+                    <input type="text" id="txtWhereby" name="txtWhereby" class="mdc-text-field__input" aria-labelledby="linkwhere" placeholder="Ex: whereby.com/nomedasala" required>
                     <span class="mdc-notched-outline">
                       <span class="mdc-notched-outline__leading"></span>
                       <span class="mdc-notched-outline__notch">
@@ -375,10 +366,7 @@
                 <div class="pt-4">
                   <label class="mdc-text-field mdc-text-field--outlined mdc-text-field--with-trailing-icon dark"
                   style="width: 100%;">
-                    <input type="text" class="mdc-text-field__input"
-                    aria-labelledby="linkpic"
-                    placeholder="Ex: picpay.me/seunome"
-                    required>
+                    <input type="text" id="txtPicpay" name="txtPicpay" class="mdc-text-field__input" aria-labelledby="linkpic" placeholder="Ex: picpay.me/seunome" required>
                     <span class="mdc-notched-outline">
                       <span class="mdc-notched-outline__leading"></span>
                       <span class="mdc-notched-outline__notch">
@@ -393,8 +381,7 @@
                 </div>
                 <div class="pt-4">
                   <label class="mdc-text-field mdc-text-field--textarea dark">
-                    <textarea class="mdc-text-field__input" aria-labelledby="my-label-id"
-                    placeholder="Descreva informações sobre o serviço" rows="8" cols="50" required></textarea>
+                    <textarea class="mdc-text-field__input" id="txtDescription" name="txtDescription" aria-labelledby="my-label-id" placeholder="Descreva informações sobre o serviço" rows="8" cols="50" required></textarea>
                     <div class="mdc-notched-outline">
                       <div class="mdc-notched-outline__leading"></div>
                       <div class="mdc-notched-outline__notch">
