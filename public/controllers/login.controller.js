@@ -16,7 +16,14 @@ $(document).ready(() => {
                     }
                 },
                 error: function (data) {
-                    alert(data.responseJSON.status);
+                    var serviceModal = $("helper-service-modal")[0]
+                    serviceModal.config({
+                        type: 3,
+                        title: 'Login Inválido!',
+                        subtitle: 'Por favor, verifique as credenciais.'
+                    }, ()=>{ serviceModal.close() })
+                    serviceModal.open()
+                    // alert(data.responseJSON.status);
                 },
                 data: JSON.stringify({email: email, password: password})
             });

@@ -48,14 +48,21 @@ $( document ).ready(function() {
         
     });
 
-
-    function confirm (){
-        alert('confirmar')
-    }
+    callAlert({})
 
 })
 
-function isBiggerThan(x, y){
+function callAlert(data) {
+    const container = $('#alert-container');
+    container.find('alert-component').remove();
+
+    var el = document.createElement('alert-component');
+    el.config(data, ()=>{alert('ok!')})
+
+    container.append(el)
+}
+
+function isBiggerThan(x, y) {
     return x > y
 }
 

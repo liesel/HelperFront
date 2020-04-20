@@ -13,6 +13,11 @@
     color: #FAAB3F !important;
 }
 
+#alert-container {
+    padding-left: 0px !important;
+    padding-right: 0px !important;
+}
+
 .alert-warning {
     font-size: 14px;
     color: #232323 !important;
