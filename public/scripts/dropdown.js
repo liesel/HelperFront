@@ -1,5 +1,6 @@
 $( document ).ready(function() {
     var CheckboxDropdown = function (el) {
+
         var _this = this;
 
         this.isOpen = false;
