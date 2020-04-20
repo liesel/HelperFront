@@ -7,11 +7,9 @@ $( document ).ready(function() {
         this.$el = $(el);
         this.$label = this.$el.find(".mdc-select__selected-text");
         this.$inputs = this.$el.find("[type='checkbox']");
-        this.$dropdown = this.$el.find(".mdc-select__anchor")
-        this.$floatinglabel = this.$el.find(".mdc-floating-label")
-
-        this.onCheckBox();
-
+        this.$dropdown = this.$el.find(".mdc-select__anchor");
+        this.$floatinglabel = this.$el.find(".mdc-floating-label");
+        
         // Add Event Handlers
         
         this.$label.on("click", function(e) {
@@ -31,33 +29,32 @@ $( document ).ready(function() {
     CheckboxDropdown.prototype.updateStatus = function() {
         var checked = this.$el.find(":checked");
 
-        this.areAllChecked = false;
+        var values = "";
 
-        if(checked.length <= 0) {
-            if(this.isOpen){
-                $(this.$label).css("color", "#BCBCBC")
-                this.$label.html("Selecione um ou mais");
-            } else {
-                this.$label.html("");
-            }
-        } else if (checked.length === 1) {
-            $(this.$label).css("color", "#232323")
-            this.$label.html(checked.parent().parent("label").find(".dropdown-option-label").text());
-        } else {
-            $(this.$label).css("color", "#232323")
-            var values = "";
+        if (checked.length === 1) {
+
+            var checkbox = checked.parent().parent("label").find("[type='checkbox']");
+            values = checkbox.attr('value');
+            $( "#selectCategories").trigger( "valueHasCHnaged", [ values] );
+            $(this.$label).css("color", "#232323");
+
+        } else if(checked.length > 1) {
 
             for(let i = 0; i < checked.length; i++){
+                var checkbox = $(checked[i]).parent().parent("label").find("[type='checkbox']");
                 if(i == checked.length - 1) {
-                    values += $(checked[i]).parent().parent("label").find(".dropdown-option-label").text();
+                    values += checkbox.attr('value');
                 } else {
-                    values += $(checked[i]).parent().parent("label").find(".dropdown-option-label").text() + ", ";
+                    values += checkbox.attr('value') + ", ";
                 }
             }
 
-            this.$label.html(values);
             $( "#selectCategories").trigger( "valueHasCHnaged", [ values] );
+            $(this.$label).css("color", "#232323");
         }
+
+        this.$label.html(values);
+        this.reset();
     }
 
     CheckboxDropdown.prototype.toggleOpen = function (forceOpen) {
@@ -69,7 +66,6 @@ $( document ).ready(function() {
             $(this.$floatinglabel).css("background","#FFFFFF")
             $(this.$floatinglabel).css("padding-left","5px")
             $(this.$floatinglabel).css("padding-right","5px")
-            this.updateStatus()
         } else {
             this.isOpen = false;
             this.$el.removeClass("on").removeClass("mdc-select--focused").removeClass("mdc-select--activated");
@@ -78,7 +74,20 @@ $( document ).ready(function() {
             }
             $(this.$floatinglabel).css("padding-left","0px")
             $(this.$floatinglabel).css("padding-right","0px")
-            this.updateStatus()
+        }
+        this.reset()
+    }
+
+    CheckboxDropdown.prototype.reset = function(){
+        var checked = this.$el.find(":checked");
+
+        if(checked.length <= 0) {
+            if(this.isOpen){
+                $(this.$label).css("color", "#BCBCBC")
+                this.$label.html("Selecione um ou mais");
+            } else {
+                this.$label.html("");
+            }
         }
     }
 
@@ -89,8 +98,5 @@ $( document ).ready(function() {
     for (var i = 0, length = checkboxesDropdowns.length; i < length; i++) {
         new CheckboxDropdown(checkboxesDropdowns[i])
     }
-
-        
-   
 
 })

@@ -1,7 +1,7 @@
 $( document ).ready(function() {
     //HOME
     var categories = [];
-    fetchSchedules()
+    // fetchSchedules()
     fetchNextSchedules()
 
     var serviceModal = $("helper-service-modal")[0]
@@ -47,9 +47,12 @@ $( document ).ready(function() {
         
     });
 
+    mockCategories()
+
 })
 
 $("#selectCategories").on("valueHasCHnaged", function ( event, param1) {
+    console.log("values:", param1)
     console.log('foi caaraiao');
 });
 
@@ -83,6 +86,29 @@ async function fetchSchedules(){
     } 
     
     container.append(fragment)
+}
+
+async function mockCategories(){
+    var data = [{name: 'Administração', value: 'Administração'}, {name: 'vento', value: 'vento'}];
+    var html    = "";
+    for(var i = 0; i < data.length; i++){
+        html += `
+            <label class="dropdown-option">
+                <div class="mdc-checkbox">
+                    <input type="checkbox" name="dropdown-group" value="${data[i].value}" class="mdc-checkbox__native-control dark" />
+                    <div class="mdc-checkbox__background">
+                        <svg class="mdc-checkbox__checkmark" viewBox="0 0 24 24">
+                        <path class="mdc-checkbox__checkmark-path" fill="none" d="M1.73,12.91 8.1,19.28 22.79,4.59" />
+                        </svg>
+                        <div class="mdc-checkbox__mixedmark"></div>
+                    </div>
+                    <div class="mdc-checkbox__ripple"></div>
+                    </div>
+                <label class="dropdown-option-label">${data[i].name}</label>
+            </label>
+        `
+    }
+    $("#selectCategories").html(html);
 }
 
 async function fetchNextSchedules(){

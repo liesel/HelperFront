@@ -89,7 +89,11 @@ app.post("/getAllCategories", (req, res) => {
     })
 })
 
-app.get('/home',redirectLogin, (req, res) => {
+// app.get('/home',redirectLogin, (req, res) => {
+//     res.render('home', {})
+// })
+
+app.get('/home', (req, res) => {
     res.render('home', {})
 })
 
