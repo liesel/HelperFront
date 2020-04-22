@@ -177,11 +177,9 @@ class ServiceModal extends HTMLElement {
         `
 
         var btnCancel = $(this.root).find("#btnCancel")
-        console.log('cancel')
-        console.log(btnCancel)
-        var btnConfirm = $(this.root).find("#btnConfirm")
-
-        $(btnCancel).on("click", this.close.bind(this))
+        if($(btnCancel).length != 0){
+            $(btnCancel).on("click", this.close.bind(this))
+        }
 
     }
 
