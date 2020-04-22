@@ -38,7 +38,7 @@ $( document ).ready(function() {
             values = checkbox.attr('value');
 
             categories.push(checkbox.attr('value'));
-            $( "#selectCategories").trigger( "valueHasCHnaged", {categories: categories} );
+            $( "#selectCategories").trigger( "valueHasChanged", {categories: categories} );
 
             $(this.$label).css("color", "#232323");
 
@@ -57,7 +57,7 @@ $( document ).ready(function() {
                 }
             }
 
-            $( "#selectCategories").trigger( "valueHasCHnaged", {categories: categories} );
+            $( "#selectCategories").trigger( "valueHasChanged", {categories: categories} );
             $(this.$label).css("color", "#232323");
         }
 

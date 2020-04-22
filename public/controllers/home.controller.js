@@ -44,43 +44,46 @@ $( document ).ready(function() {
         return realCategories;
     };
 
+    var openServiceModal = function (title, subtittle, modalType) {
+        var serviceModal = $("helper-service-modal")[0]
+        serviceModal.config({
+            type: modalType,
+            title: title,
+            subtitle: subtittle
+        }, dateRangeError)
+        serviceModal.open()
+    }
+
     $("#btnSaveService").click(function (e) { 
-        var serviceName = $("#txtServiceName").val();
-        var serviceDate = $("#txtServiceDate").val();
-        var startTime   = $("#txtInitialTime").val();
-        var endTime     = $("#txtFinalTime").val();
-        var whereBy     = $("#txtWhereby").val();
-        var picpay      = $("#txtPicpay").val();
-        var description = $("#txtDescription").val();
-        var type        = $('input[name=person-radios]:checked').val();
-        
+        var serviceName     = $("#txtServiceName").val();
+        var serviceDate     = $("#txtServiceDate").val();
+        var startTime       = $("#txtInitialTime").val();
+        var endTime         = $("#txtFinalTime").val();
+        var whereBy         = $("#txtWhereby").val();
+        var picpay          = $("#txtPicpay").val();
+        var description     = $("#txtDescription").val();
+        var type            = $('input[name=person-radios]:checked').val();
         var numberStartTime = startTime.replace(':','');
-        var numberEndTime = endTime.replace(':','');
+        var numberEndTime   = endTime.replace(':','');
 
         if(selectedCategories.length < 1){
-            alert("Selecione pelo menos uma categoria");
+            openServiceModal('Campo Obrigatório', 'Selecione pelo menos uma categoria', 3);
         }else if (serviceName == "" || serviceName == undefined) {
-            alert("Informe o nome do serviço");
+            openServiceModal('Campo Obrigatório', "Informe o nome do serviço", 3);
         }else if (serviceDate == "" || serviceDate == undefined) {
-            alert("Informe a data do serviço");
+            openServiceModal('Campo Obrigatório', "Informe a data do serviço", 3);
         }else if (startTime == "" || startTime == undefined) {
-            alert("Informe a hora do início");
+            openServiceModal('Campo Obrigatório', "Informe a hora do início", 3);
         }else if (endTime == "" || endTime == undefined) {
-            alert("Informe a hora do fim");
+            openServiceModal('Campo Obrigatório', "Informe a hora do fim", 3);
         }else if (whereBy == "" || whereBy == undefined) {
-            alert("Informe o link do WhereBy");
+            openServiceModal('Campo Obrigatório', "Informe o link do WhereBy", 3);
         }else if (description == "" || description == undefined) {
-            alert("Informe a descrição do serviço");
+            openServiceModal('Campo Obrigatório', "Informe a descrição do serviço", 3);
         }else if (type == "" || type == undefined) {
-            alert("Informe o modelo do agendamento");
+            openServiceModal('Campo Obrigatório', "Informe o modelo do agendamento", 3);
         }else if(isBiggerThan(numberStartTime, numberEndTime)) {
-            var serviceModal = $("helper-service-modal")[0]
-            serviceModal.config({
-                type: 3,
-                title: 'Campo Inválido!',
-                subtitle: 'O Horário final precisa ser menor que o horário inicial.'
-            }, dateRangeError)
-            serviceModal.open()
+            openServiceModal('Campo Inválido', 'O Horário final precisa ser maior que o horário inicial.', 3);
         }else{
             $.ajax({
                 url:            "/doSaveService",
@@ -94,7 +97,9 @@ $( document ).ready(function() {
                 },
                 error: function (data) {
                     if (data.status == 401) {
-                        windows.location = "/";
+                        window.location = "/";
+                    }else if (data.status == 500) {
+                        openServiceModal('Atenção', data.responseText, 3);
                     }
                 },
                 data: JSON.stringify(

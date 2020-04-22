@@ -95,6 +95,7 @@ app.post("/doSaveService", (req, res) => {
     {
         serviceName: 	    req.body.serviceName,
         whereby: 			req.body.whereBy,
+        picpay: 			req.body.picpay,
         ScheduleType: 		1,
         ScheduleDate: 		moment(`${req.body.serviceDate} ${req.body.startTime}`, "DD/MM/YYYY HH:mm").toDate(),
         ScheduleDateEnd: 	moment(`${req.body.serviceDate} ${req.body.endTime}`, "DD/MM/YYYY HH:mm").toDate(),
@@ -110,11 +111,11 @@ app.post("/doSaveService", (req, res) => {
     })
     .then(function (response) {
         console.log(response);
-        res.send({status:"okss"});
+        res.send({status:"ok"});
     })
     .catch(function (error) {
         console.log(error);
-        res.status(401).send('Não autorizado');
+        res.status(500).send(error.response.data);
     })
 })
 
