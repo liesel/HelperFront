@@ -42,6 +42,15 @@
     padding: 0 !important;
 }
 
+.close.success span {
+    font-size: 48px !important;
+    font-weight: lighter !important;
+    line-height: 1px !important;
+    height: 14px !important;
+    padding: 8px;
+    color: #19B98E !important;
+}
+
 .alert-success {
     font-size: 14px;
     color: #232323 !important;
@@ -64,6 +73,15 @@
     top: 21px !important;
     right: 10px !important;
     padding: 0 !important;
+}
+
+.close.danger span {
+    font-size: 48px !important;
+    font-weight: lighter !important;
+    line-height: 1px !important;
+    height: 14px !important;
+    padding: 8px;
+    color: #EA4D2A !important;
 }
 
 .alert-danger {

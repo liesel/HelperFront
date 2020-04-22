@@ -9,8 +9,9 @@ class ServiceModal extends HTMLElement {
     }
 
     config(data, next) {
-        var {type, title, subtitle} = data;
+        var {type, title, subtitle, btnText} = data;
         this.type = type || 3;
+        this.btnText = btnText || 'fechar';
 
         switch(this.type){
             case 1:
@@ -43,8 +44,15 @@ class ServiceModal extends HTMLElement {
         }
 
         this.render()
+
+        // ADD event handlers
         var btnConfirm = $(this.root).find("#btnConfirm")
-        $(btnConfirm).on("click", next)
+        var btnCustom = $(this.root).find("#btnCustom")
+        if($(btnConfirm).length != 0){
+            $(btnConfirm).on("click", next)
+        } else if ($(btnCustom).length != 0) {
+            $(btnCustom).on("click", next)
+        }
 
     }
 
@@ -60,19 +68,26 @@ class ServiceModal extends HTMLElement {
 
     render(){
 
+
         var footerButtons = `
             <div class="row footer justify-content-center">
-                <button id="btnCancel" type="button" class="btn btn-outline-cancel">fechar</button>
+                <button id="btnCancel" type="button" class="btn btn-outline-cancel">${this.btnText}</button>
             </div>
         `
 
-        if(this.type != 2){
+        if(this.type != 2 && this.btnText == 'fechar'){
             footerButtons = `
                 <div class="d-flex">
                     <button type="button" id="btnCancel" class="btn btn-outline-cancel ml-auto mr-2">cancelar</button>
                     <button style="padding-right: 12px !important; padding-left: 12px !important;" type="button" id="btnConfirm" class="btn btn-primary dark mr-auto ml-2">confirmar</button>
                 </div>
             `
+        } else if(this.btnText != 'fechar'){
+            footerButtons = `
+            <div class="row footer justify-content-center">
+                <button id="btnCustom" type="button" class="btn btn-outline-cancel dark" style="padding-right: 36px !important; padding-left: 36px !important; text-transform: uppercase !important;">${this.btnText}</button>
+            </div>
+        `
         }
 
         this.root.innerHTML = `

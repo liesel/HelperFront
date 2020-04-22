@@ -44,12 +44,13 @@ $( document ).ready(function() {
         return realCategories;
     };
 
-    var openServiceModal = function (title, subtittle, modalType) {
+    var openServiceModal = function (title, subtittle, modalType, btnText) {
         var serviceModal = $("helper-service-modal")[0]
         serviceModal.config({
             type: modalType,
             title: title,
-            subtitle: subtittle
+            subtitle: subtittle,
+            btnText: btnText
         }, dateRangeError)
         serviceModal.open()
     }
@@ -67,7 +68,7 @@ $( document ).ready(function() {
         var numberEndTime   = endTime.replace(':','');
 
         if(selectedCategories.length < 1){
-            openServiceModal('Campo Obrigatório', 'Selecione pelo menos uma categoria', 3);
+            openServiceModal('Campo Obrigatório', 'Selecione pelo menos uma categoria', 3, 'ok');
         }else if (serviceName == "" || serviceName == undefined) {
             openServiceModal('Campo Obrigatório', "Informe o nome do serviço", 3);
         }else if (serviceDate == "" || serviceDate == undefined) {
