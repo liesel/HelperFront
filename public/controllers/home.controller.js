@@ -44,6 +44,7 @@ $( document ).ready(function() {
         return realCategories;
     };
 
+<<<<<<< HEAD
     var openServiceModal = function (title, subtittle, modalType, text) {
         var serviceModal = $("helper-service-modal")[0]
         serviceModal.config(
@@ -69,7 +70,11 @@ $( document ).ready(function() {
         var numberEndTime   = endTime.replace(':','');
 
         if(selectedCategories.length < 1){
+<<<<<<< HEAD
             openServiceModal('Campo Obrigatório', 'Selecione pelo menos uma categoria', 3, 'OK');
+=======
+            openServiceModal('Campo Obrigatório', 'Selecione pelo menos uma categoria', 3, 'ok');
+>>>>>>> 3226eb7982a21a078c2ee003b76d38361de14c64
         }else if (serviceName == "" || serviceName == undefined) {
             openServiceModal('Campo Obrigatório', "Informe o nome do serviço", 3, 'OK');
         }else if (serviceDate == "" || serviceDate == undefined) {

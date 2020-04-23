@@ -5,10 +5,74 @@ class AlertComponent extends HTMLElement {
     }
 
     config(data, next){
-        this.title = data.title || 'Confirmação de e-mail';
+        this.title = data.title || 'Title';
+        this.type = data.type || 2;
+        this.subtitle = data.subtitle || 'Subtitle';
+        this.email = data.email || '';
+        this.btnText = data.btnText || '';
+        this.btn = '';
+
+        switch(this.type){
+            case 1:
+                this.alertStyle = 'alert-warning';
+                this.closeStyle = 'warning';
+                this.icon = `
+                    <span class="material-icons pr-3" style="font-size: 32px; color: #FAAB3F; padding-left: 13px; padding-top: 5px;">
+                    error
+                    </span>
+                `
+                if(this.email != ''){
+                    this.subtitleTemplate = `
+                        <div>Confira seu e-mail <strong>${this.email}</strong> e siga as instrução para confirmar sua conta</div>
+                    `
+                    this.btn = `
+                        <div class="ml-auto p-2">
+                            <button id="send" type="button" class="btn btn-outline-warning">
+                            reenviar
+                            </button>
+                        </div>
+                    `
+                } else {
+                    this.subtitleTemplate = `
+                        <div>${this.subtitle}</div>
+                    `
+                }
+
+                break;
+            case 2:
+                this.alertStyle = 'alert-success';
+                this.closeStyle = 'success';
+                this.icon = `
+                    <span class="material-icons pr-3 IconSuccess">
+                    check
+                    </span>
+                `
+                this.subtitleTemplate = `
+                    <div>${this.subtitle}</div>
+                `
+                break;
+            break;
+            default:
+                this.alertStyle = 'alert-danger';
+                this.closeStyle = 'danger';
+                this.icon = `
+                    <span class="material-icons pr-3" style="font-size: 32px; color: #fa3f3f; padding-left: 13px; padding-top: 5px;">
+                    cancel
+                    </span>
+                `
+                this.subtitleTemplate = `
+                    <div>${this.subtitle}</div>
+                `
+                break;
+        }
+
         this.render()
+
         const btnSend = $($(this.root).find("#send"));
-        btnSend.on("click", next)
+        if(btnSend.length != 0){
+            btnSend.on("click", next)
+        }
+
     }
 
     // open(){
@@ -34,25 +98,35 @@ class AlertComponent extends HTMLElement {
                 .alert{
                     margin-bottom: 2rem !important;
                 }
+
+                .IconSuccess {
+                    color: #fff;
+                    background: #19b98e;
+                    border-radius: 50%;
+                    width: 28px;
+                    height: 28px;
+                    font-size: 20px !important;
+                    text-align: center;
+                    line-height: 1;
+                    padding-top: 4px;
+                    padding-left: 4px;
+                    margin-top: 5px;
+                    margin-left: 13px;
+                    margin-right: 20px;
+                }
             </style>
 
-            <div id="divAlert" class="alert alert-warning alert-dismissible fade show" role="alert" style="min-width: fit-content;">
+            <div id="divAlert" class="alert ${this.alertStyle} alert-dismissible fade show" role="alert" style="min-width: fit-content;">
                 <div class="d-flex">
                     <div class="pt-1">
-                        <span class="material-icons pr-3" style="font-size: 32px; color: #FAAB3F; padding-left: 13px; padding-top: 5px;">
-                        error
-                        </span>
+                        ${this.icon}
                     </div>
                     <div style="padding-top: 6px;">
                         <div><strong>${this.title}</strong></div>
-                        <div>Confira seu e-mail <strong>Karem.car....@fcamara.com.br</strong> e siga as instrução para confirmar sua conta</div>
+                        ${this.subtitleTemplate}
                     </div>
-                    <div class="ml-auto p-2">
-                        <button id="send" type="button" class="btn btn-outline-warning">
-                        reenviar
-                        </button>
-                    </div>
-                    <button type="button" id="close" class="close warning" data-dismiss="alert" aria-label="Close">
+                    ${this.btn}
+                    <button type="button" id="close" class="close ${this.closeStyle}" data-dismiss="alert" aria-label="Close">
                         <span aria-hidden="true" >&times;</span>
                     </button>
                 </div>
