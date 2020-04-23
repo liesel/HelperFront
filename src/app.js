@@ -83,7 +83,7 @@ app.get('/',redirectHome, (req, res) => {
     res.render('index')
 })
 
-app.post("/doSaveService", (req, res) => {
+app.post("/doSaveService", userIsAuthenticated, (req, res) => {
     console.log(req.body);
     var categories = []
     for (let index = 0; index < req.body.categories.length; index++) {

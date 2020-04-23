@@ -44,12 +44,14 @@ $( document ).ready(function() {
         return realCategories;
     };
 
-    var openServiceModal = function (title, subtittle, modalType) {
+    var openServiceModal = function (title, subtittle, modalType, text) {
         var serviceModal = $("helper-service-modal")[0]
-        serviceModal.config({
-            type: modalType,
-            title: title,
-            subtitle: subtittle
+        serviceModal.config(
+        {
+            type:       modalType,
+            title:      title,
+            subtitle:   subtittle,
+            btnText:    text
         }, dateRangeError)
         serviceModal.open()
     }
@@ -67,23 +69,23 @@ $( document ).ready(function() {
         var numberEndTime   = endTime.replace(':','');
 
         if(selectedCategories.length < 1){
-            openServiceModal('Campo Obrigatório', 'Selecione pelo menos uma categoria', 3);
+            openServiceModal('Campo Obrigatório', 'Selecione pelo menos uma categoria', 3, 'OK');
         }else if (serviceName == "" || serviceName == undefined) {
-            openServiceModal('Campo Obrigatório', "Informe o nome do serviço", 3);
+            openServiceModal('Campo Obrigatório', "Informe o nome do serviço", 3, 'OK');
         }else if (serviceDate == "" || serviceDate == undefined) {
-            openServiceModal('Campo Obrigatório', "Informe a data do serviço", 3);
+            openServiceModal('Campo Obrigatório', "Informe a data do serviço", 3, 'OK');
         }else if (startTime == "" || startTime == undefined) {
-            openServiceModal('Campo Obrigatório', "Informe a hora do início", 3);
+            openServiceModal('Campo Obrigatório', "Informe a hora do início", 3, 'OK');
         }else if (endTime == "" || endTime == undefined) {
-            openServiceModal('Campo Obrigatório', "Informe a hora do fim", 3);
+            openServiceModal('Campo Obrigatório', "Informe a hora do fim", 3, 'OK');
         }else if (whereBy == "" || whereBy == undefined) {
-            openServiceModal('Campo Obrigatório', "Informe o link do WhereBy", 3);
+            openServiceModal('Campo Obrigatório', "Informe o link do WhereBy", 3, 'OK');
         }else if (description == "" || description == undefined) {
-            openServiceModal('Campo Obrigatório', "Informe a descrição do serviço", 3);
+            openServiceModal('Campo Obrigatório', "Informe a descrição do serviço", 3, 'OK');
         }else if (type == "" || type == undefined) {
-            openServiceModal('Campo Obrigatório', "Informe o modelo do agendamento", 3);
+            openServiceModal('Campo Obrigatório', "Informe o modelo do agendamento", 3, 'OK');
         }else if(isBiggerThan(numberStartTime, numberEndTime)) {
-            openServiceModal('Campo Inválido', 'O Horário final precisa ser maior que o horário inicial.', 3);
+            openServiceModal('Campo Inválido', 'O Horário final precisa ser maior que o horário inicial.', 3, 'ok');
         }else{
             $.ajax({
                 url:            "/doSaveService",
