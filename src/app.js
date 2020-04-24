@@ -132,7 +132,7 @@ app.get("/getMyEvents", userIsAuthenticated, (req, res) => {
     })
     .then(function (response) {
         console.log(response.data.schedules);
-        res.send({status:"ok"});
+        res.send(response.data.schedules);
     })
     .catch(function (error) {
         console.log(error);

@@ -20,7 +20,8 @@ $(document).ready(() => {
                     serviceModal.config({
                         type: 3,
                         title: 'Login Inválido!',
-                        subtitle: 'Por favor, verifique as credenciais.'
+                        subtitle: 'Por favor, verifique as credenciais.',
+                        btnText:    "OK"
                     }, ()=>{ serviceModal.close() })
                     serviceModal.open()
                     // alert(data.responseJSON.status);

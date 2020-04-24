@@ -6,6 +6,8 @@ $( document ).ready(function() {
         dataType:       'json',
         contentType:    'application/json',
         success: function (data) {
+            $('#schedulesGiven').text(data.schedulesGiven)
+            $('#schedulesRecivied').text(data.schedulesRecevied)
             
         },
         error: function (data) {
