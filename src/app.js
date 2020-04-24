@@ -83,6 +83,63 @@ app.get('/',redirectHome, (req, res) => {
     res.render('index')
 })
 
+app.post("/saveUser", (req, res) => {
+    
+    axios.post(`${BACK_END_URL}/v1/user/createUser`, 
+    {
+        email:     	req.body.email,
+        name:      	req.body.name,
+        surname:   	req.body.surname,
+        password:  	req.body.password,
+    },
+    {
+        headers: {
+            'accept': 'application/json'
+        }
+    }
+   )
+    .then(function (response) {
+        console.log(response.data);
+        if(response.data.status == "already"){
+            res.send({status:"Usuário já cadastrado"});
+            return;
+        }
+        req.session.token           = response.data.token
+        req.session.userId          = response.data.user._id
+        req.session.email           = response.data.user.email
+        req.session.userFullname    = response.data.user.name+" "+response.data.user.surname
+        req.session.username        = response.data.user.name
+        res.locals.session          = req.session;
+        res.send({status:"ok"});
+    })
+    .catch(function (error) {
+        console.log(error);
+        res.status(500).send(error.response.data);
+    })
+})
+
+app.get("/getMyEvents", userIsAuthenticated, (req, res) => {
+    
+    axios.get(`${BACK_END_URL}/v1/schedule/countSchedulesReciviedAndGiven`, 
+    {
+        clientId:  req.session.userId
+    },
+    {
+        headers: {
+            'accept': 'application/json',
+            'HelperAutorization': `Bearer ${req.session.token}`
+        }
+    })
+    .then(function (response) {
+        console.log(response.data.schedules);
+        res.send({status:"ok"});
+    })
+    .catch(function (error) {
+        console.log(error);
+        res.status(500).send(error.response.data);
+    })
+})
+
 app.post("/doSaveService", userIsAuthenticated, (req, res) => {
     console.log(req.body);
     var categories = []
