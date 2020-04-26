@@ -118,18 +118,37 @@ app.post("/saveUser", (req, res) => {
     })
 })
 
-app.get("/getMyEvents", userIsAuthenticated, (req, res) => {
-    
-    axios.get(`${BACK_END_URL}/v1/schedule/countSchedulesReciviedAndGiven`, 
-    {
-        clientId:  req.session.userId
-    },
+
+
+app.post("/doLogout", userIsAuthenticated, (req, res) => {
+    axios.post(`${BACK_END_URL}/v1/user/logOut`, 
+    {},
     {
         headers: {
             'accept': 'application/json',
             'HelperAutorization': `Bearer ${req.session.token}`
         }
     })
+    .then(function (response) {
+        req.session.destroy(function(err) {
+            res.send({status:"ok"});
+        });
+    })
+    .catch(function (error) {
+        console.log(error);
+        res.status(500).send(error.response.data);
+    })
+})
+
+
+app.get("/getMyEvents", userIsAuthenticated, (req, res) => {
+    
+    axios.get(`${BACK_END_URL}/v1/schedule/countSchedulesReciviedAndGiven`, 
+    {
+        headers: {
+            'accept': 'application/json',
+            'HelperAutorization': `Bearer ${req.session.token}`
+        }, body: {}})
     .then(function (response) {
         console.log(response.data.schedules);
         res.send(response.data.schedules);
@@ -202,12 +221,15 @@ app.post('/doLogin', redirectHome, (req, res) => {
     })
     .then(function (response) {
         console.log(response);
-        req.session.token           = response.data.token
-        req.session.userId          = response.data.user._id
-        req.session.email           = response.data.user.email
-        req.session.userFullname    = response.data.user.name+" "+response.data.user.surname
-        req.session.username        = response.data.user.name
-        res.locals.session          = req.session;
+        req.session.token                   = response.data.token
+        req.session.userId                  = response.data.user._id
+        req.session.email                   = response.data.user.email
+        req.session.userFullname            = response.data.user.name+" "+response.data.user.surname
+        req.session.userSurname             = response.data.user.surname
+        req.session.username                = response.data.user.name
+        req.session.userSpecialization      = response.data.user.specialization
+        req.session.userServiceDescription  = response.data.user.serviceDescription
+        res.locals.session                  = req.session;
         res.send({status:"ok"});
     })
     .catch(function (error) {

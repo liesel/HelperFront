@@ -1,24 +1,28 @@
 $( document ).ready(function() {
 
-    $.ajax({
-        url:            "/getMyEvents",
-        type:           'get',
-        dataType:       'json',
-        contentType:    'application/json',
-        success: function (data) {
-            $('#schedulesGiven').text(data.schedulesGiven)
-            $('#schedulesRecivied').text(data.schedulesRecevied)
-            
-        },
-        error: function (data) {
-            if (data.status == 401) {
-                window.location = "/";
-            }else if (data.status == 500) {
-                openServiceModal('Atenção', data.responseText, 3, 'OK');
-            }
-        },
-        data: {}
-    });
+    var getMyEvents = function(){
+        $.ajax({
+            url:            "/getMyEvents",
+            type:           'get',
+            dataType:       'json',
+            contentType:    'application/json',
+            success: function (data) {
+                $('#schedulesGiven').text(data.schedulesGiven)
+                $('#schedulesRecivied').text(data.schedulesRecevied)
+                
+            },
+            error: function (data) {
+                if (data.status == 401) {
+                    window.location = "/";
+                }else if (data.status == 500) {
+                    openServiceModal('Atenção', data.responseText, 3, 'OK');
+                }
+            },
+            data: {}
+        });
+    }
+
+    getMyEvents();
 
     //HOME
     var selectedCategories  = [];
@@ -65,7 +69,7 @@ $( document ).ready(function() {
         return realCategories;
     };
 
-    var openServiceModal = function (title, subtittle, modalType, text) {
+    var openServiceModal = function (title, subtittle, modalType, text, func = dateRangeError) {
         var serviceModal = $("helper-service-modal")[0]
         serviceModal.config(
         {
@@ -73,9 +77,61 @@ $( document ).ready(function() {
             title:      title,
             subtitle:   subtittle,
             btnText:    text
-        }, dateRangeError)
+        }, func)
         serviceModal.open()
     }
+
+    $("#btnSaveEdition").click(function (e) { 
+        e.preventDefault();
+        var name                = $("#txtEditName").val();
+        var surname             = $("#txtEditSurname").val();
+        var specialization      = $("#txtEditEspecializacao").val();
+        var serviceDescription  = $("#txaServiceDescription").val();
+        $.ajax({
+            url:            "/EditUser",
+            type:           'post',
+            dataType:       'json',
+            contentType:    'application/json',
+            success: function (data) {
+                if (data.status == "ok") {
+                    window.location = "/";
+                }
+            },
+            error: function (data) {
+                if (data.status == 401) {
+                    window.location = "/";
+                }else if (data.status == 500) {
+                    openServiceModal('Atenção', data.responseText, 3,"OK");
+                }
+            },
+            data: {name: name, surname: surname, specialization: specialization, serviceDescription: serviceDescription}
+        });
+        
+    });
+
+    $("#btnSair").click(function (e) { 
+        $.ajax({
+            url:            "/doLogout",
+            type:           'post',
+            dataType:       'json',
+            contentType:    'application/json',
+            success: function (data) {
+                if (data.status == "ok") {
+                    window.location = "/";
+                }
+            },
+            error: function (data) {
+                if (data.status == 401) {
+                    window.location = "/";
+                }else if (data.status == 500) {
+                    openServiceModal('Atenção', data.responseText, 3,"OK");
+                }
+            },
+            data: {}
+        });
+        
+        
+    });
 
     $("#btnSaveService").click(function (e) { 
         var serviceName     = $("#txtServiceName").val();
@@ -115,14 +171,14 @@ $( document ).ready(function() {
                 contentType:    'application/json',
                 success: function (data) {
                     if (data.status == "ok") {
-                        window.location = "/home";
+                        openServiceModal('Sucesso', data.responseText, 2, 'OK', closeModalAndBackhome);
                     }
                 },
                 error: function (data) {
                     if (data.status == 401) {
                         window.location = "/";
                     }else if (data.status == 500) {
-                        openServiceModal('Atenção', data.responseText, 3);
+                        openServiceModal('Atenção', data.responseText, 3, "OK");
                     }
                 },
                 data: JSON.stringify(
@@ -166,6 +222,11 @@ function isBiggerThan(x, y) {
 function dateRangeError(){
     $('#labelHorarioFinal').addClass('mdc-text-field--invalid').focus()
     $("helper-service-modal")[0].close()
+}
+
+function closeModalAndBackhome(){
+    $("helper-service-modal")[0].close()
+    window.location = "/home";
 }
 
 async function fetchSchedules(){
