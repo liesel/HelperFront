@@ -214,6 +214,38 @@ app.get('/home',redirectLogin, (req, res) => {
     res.render('home', {})
 })
 
+
+
+app.post('/userEdit', userIsAuthenticated, (req, res) => {
+    var name                = req.body.name; 
+    var surname             = req.body.surname; 
+    var specialization      = req.body.specialization; 
+    var serviceDescription  = req.body.serviceDescription; 
+    axios.patch(`${BACK_END_URL}/v1/user/EditMyUser`, 
+    {
+        name:     	        name,
+        surname:            surname,
+        specialization:   	specialization,
+        serviceDescription: serviceDescription,
+    },
+    {
+        headers: {
+            'accept': 'application/json',
+            'HelperAutorization': `Bearer ${req.session.token}`
+        }
+    }
+   )
+    .then(function (response) {
+        console.log(response.data);
+
+        res.send({status:"ok"});
+    })
+    .catch(function (error) {
+        console.log(error);
+        res.send(error);
+    })
+})
+
 app.post('/doLogin', redirectHome, (req, res) => {
     axios.post(`${BACK_END_URL}/v1/user/login`, {
         email:        req.body.email,

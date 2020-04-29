@@ -87,25 +87,35 @@ $( document ).ready(function() {
         var surname             = $("#txtEditSurname").val();
         var specialization      = $("#txtEditEspecializacao").val();
         var serviceDescription  = $("#txaServiceDescription").val();
-        $.ajax({
-            url:            "/EditUser",
-            type:           'post',
-            dataType:       'json',
-            contentType:    'application/json',
-            success: function (data) {
-                if (data.status == "ok") {
-                    window.location = "/";
-                }
-            },
-            error: function (data) {
-                if (data.status == 401) {
-                    window.location = "/";
-                }else if (data.status == 500) {
-                    openServiceModal('Atenção', data.responseText, 3,"OK");
-                }
-            },
-            data: {name: name, surname: surname, specialization: specialization, serviceDescription: serviceDescription}
-        });
+        if (name == "" || name == undefined) {
+            openServiceModal('Atenção', "Informe seu nome", 3,"OK");
+        }else if (surname == "" || surname == undefined) {
+            openServiceModal('Atenção', "Informe seu sobrenome", 3,"OK");
+        }else if (specialization == "" || specialization == undefined) {
+            openServiceModal('Atenção', "Informe sua especialização", 3,"OK");
+        }else if (serviceDescription == "" || serviceDescription == undefined) {
+            openServiceModal('Atenção', "Informe uma descrição do serviço", 3,"OK");
+        }else{
+            $.ajax({
+                url:            "/userEdit",
+                type:           'post',
+                dataType:       'json',
+                contentType:    'application/json',
+                success: function (data) {
+                    if (data.status == "ok") {
+                        window.location = "/";
+                    }
+                },
+                error: function (data) {
+                    if (data.status == 401) {
+                        window.location = "/";
+                    }else if (data.status == 500) {
+                        openServiceModal('Atenção', data.responseText, 3,"OK");
+                    }
+                },
+                data: JSON.stringify({name: name, surname: surname, specialization: specialization, serviceDescription: serviceDescription})
+            });
+        }
         
     });
 
