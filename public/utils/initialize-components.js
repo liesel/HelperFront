@@ -7,6 +7,7 @@
 
         const btnLogin = $("#login")
         const btnRegister = $("#register")
+        const btnForgot = $("#forgot")
         const modal = $("div.backdrop")
         const textFieldPassword1 =  $("input[aria-labelledby='password1']")
         const textFieldPassword2 =  $("input[aria-labelledby='password2']")
@@ -16,6 +17,7 @@
         const formField = $('.mdc-form-field')
         const registerDiv = $('[data-form=register]')
         const loginDiv = $('[data-form=login]')
+        const forgotDiv = $('[data-form=forgot]')
         $('[data-toggle="tooltip"]').tooltip()
         const calendar = $('#calendar')
         const scheduleds = $(".schedule")
@@ -124,8 +126,9 @@
         btnLogin.on("click", () => {
             modal.removeClass("active").addClass("active")
 
-            loginDiv.removeClass("invisible") 
-            registerDiv.addClass("invisible")
+            loginDiv.removeClass("invisible")
+            registerDiv.removeClass("invisible").addClass("invisible")
+            forgotDiv.removeClass("invisible").addClass("invisible")
         })
 
         $('#redirect-signup').on("click", ()=> {
@@ -136,10 +139,22 @@
            redirectToSignup()
         })
 
+        btnForgot.on("click", () => {
+            redirectToForgot()
+        })
+
         var redirectToSignup =() => {
             modal.removeClass("active").addClass("active")
             registerDiv.removeClass("invisible")
-            loginDiv.addClass("invisible")
+            loginDiv.removeClass("invisible").addClass("invisible")
+            forgotDiv.removeClass("invisible").addClass("invisible")
+        }
+
+        var redirectToForgot = () => {
+            modal.removeClass("active").addClass("active")
+            loginDiv.removeClass("invisible").addClass("invisible")
+            registerDiv.removeClass("invisible").addClass("invisible")
+            forgotDiv.removeClass("invisible")
         }
     }
 })()

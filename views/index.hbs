@@ -102,7 +102,7 @@
               <label for="checkbox-1" style="margin-bottom: 0;">Lembrar senha</label>
             </div>
             <div class="label-sm">
-              <a href="#" class="float-right">
+              <a id="forgot" href="#" class="float-right">
                 Esqueci minha senha
               </a>
             </div>
@@ -187,6 +187,26 @@
             <label for="checkbox-termos" style="margin-bottom: 0; text-align: start;">
               Ao se registar, você concorda com os <strong>termos de uso</strong> e a <strong>politica de privacidade</strong></label>
           </div>
+        </form>
+      </div>
+      <div data-form="forgot" class="invisible">
+        <h2 class="modal-title">Recuperar senha</h2>
+        <form>
+          <div class="pt-4 pb-4">
+            <label class="mdc-text-field mdc-text-field--outlined" style="width: 100%;">
+              <input type="email" id="txEmailForgot" name="txEmailForgot" class="mdc-text-field__input" placeholder="Insira seu email"
+                aria-labelledby="email" required>
+              <span class="mdc-notched-outline">
+                <span class="mdc-notched-outline__leading"></span>
+                <span class="mdc-notched-outline__notch">
+                  <span class="mdc-floating-label" id="email">Email</span>
+                </span>
+                <span class="mdc-notched-outline__trailing">
+                </span>
+              </span>
+            </label>
+          </div>
+          <button type="submit" id="btnSend"  name="btnSend" class="btn btn-primary btn-block btn-raised register">recuperar</button>
         </form>
       </div>
     </div>
