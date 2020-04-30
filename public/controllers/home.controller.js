@@ -26,8 +26,16 @@ $( document ).ready(function() {
 
     //HOME
     var selectedCategories  = [];
-    fetchSchedules()
+    fetchCategories()
     fetchNextSchedules()
+    fetchSchedulesByDateStart({
+        day: "28",
+        month: "04",
+        year: "2020"
+    })
+
+    // $(".day").on("click", (e) => {
+    // })
 
     const itemStatus = $('div.row.side-status-item')
     itemStatus.on("click", (event) => {
@@ -41,16 +49,16 @@ $( document ).ready(function() {
         var item = $(event.target);
         switch(item.attr("data-link")){
             case "home":
-                fetchSchedules()
+                // fetchSchedules()
                 break;
             case "servicos":
-                fetchServices()
+                // fetchServices()
                 break;
             case "agendamentos":
-                fetchSchedules()
+                // fetchSchedules()
                 break;
             case "favoritos":
-                fetchSchedules()
+                // fetchSchedules()
                 break;
         }
         item.addClass("clicked")       
@@ -69,7 +77,7 @@ $( document ).ready(function() {
         return realCategories;
     };
 
-    var openServiceModal = function (title, subtittle, modalType, text, func = dateRangeError) {
+    function openServiceModal(title, subtittle, modalType, text, func = dateRangeError) {
         var serviceModal = $("helper-service-modal")[0]
         serviceModal.config(
         {
@@ -205,6 +213,55 @@ $( document ).ready(function() {
 
 })
 
+$('#searchSchedules').on('keypress', (e)=>{
+    const input = $(e.target)
+    
+    if(input.val().length >= 4) {
+        var text = input.val()
+
+        $.ajax({
+            url:            "/getSchedulesByName",
+            type:           'get',
+            dataType:       'json',
+            contentType:    'application/json',
+            success: function (data) {
+                setSchedules(data)
+            },
+            error: function (data) {
+                if (data.status == 401) {
+                    window.location = "/";
+                }else if (data.status == 500) {
+                    openServiceModal('Atenção', data.responseText, 3, "OK");
+                }
+            },
+            data: {name: text}
+        })
+
+    }
+
+})
+
+function fetchSchedulesByDateStart(date) {
+    console.log(date)
+    $.ajax({
+        url:            "/getSchedulesByDateStart",
+        type:           'get',
+        dataType:       'json',
+        contentType:    'application/json',
+        success: function (data) {
+            setSchedules(data)
+        },
+        error: function (data) {
+            if (data.status == 401) {
+                window.location = "/";
+            }else if (data.status == 500) {
+                openServiceModal('Atenção', data.responseText, 3, "OK");
+            }
+        },
+        data: {date: date}
+    })
+}
+
 function callAlert(data) {
     const container = $('#alert-container');
     container.find('alert-component').remove();
@@ -229,9 +286,29 @@ function closeModalAndBackhome(){
     window.location = "/home";
 }
 
-async function fetchSchedules(){
+async function setSchedules(schedules){
+    const container = $($('feed-container')[0].shadow);
+    container.find('helper-schedule').remove()
+    const fragment = $(document.createDocumentFragment())
+    for(let i = 0; i < schedules.length; i++){
+        var schedule = schedules[i]
+        console.log(schedule)
+        const el = document.createElement('helper-schedule')
+        el.config(schedule._id, schedule.photo, schedule.serviceName,
+                  schedule.profession, schedule.ScheduleDate, schedule.ScheduleDateEnd, schedule.modelIcon, schedule.model,
+                  schedule.title, schedule.text, schedule.isScheduled, schedule.isFavorited, schedule.categoriesObjects)
+        
+        fragment.append(el)
+    } 
+    
+    container.append(fragment)
+    
+}
+
+async function fetchCategories(){
+    console.log(localStorage.getItem('categories'))
     var categories = [];
-    if (localStorage.getItem('categories') == undefined) {
+    if (localStorage.getItem('categories') == undefined || {}) {
         $.ajax({
             url:            "/getAllCategories",
             type:           'post',
@@ -240,6 +317,35 @@ async function fetchSchedules(){
             success: function (data) {
                 localStorage.setItem('categories', JSON.stringify(data));
                 categories = data;
+
+                var html    = "";
+                for(var i = 0; i < categories.length; i++){
+                    console.log(categories[i].name)
+                    html +=  `
+                        <label class="dropdown-option">
+                            <div class="mdc-checkbox">
+                                <input type="checkbox" name="dropdown-group" value="${categories[i].name}" class="mdc-checkbox__native-control dark" />
+                                <div class="mdc-checkbox__background">
+                                    <svg class="mdc-checkbox__checkmark" viewBox="0 0 24 24">
+                                    <path class="mdc-checkbox__checkmark-path" fill="none" d="M1.73,12.91 8.1,19.28 22.79,4.59" />
+                                    </svg>
+                                    <div class="mdc-checkbox__mixedmark"></div>
+                                </div>
+                                <div class="mdc-checkbox__ripple"></div>
+                                </div>
+                            <label class="dropdown-option-label">${categories[i].name}</label>
+                        </label>
+                    `
+                }
+
+                $("#selectCategories").html(html);
+
+                var checkboxesDropdowns = $('[data-control="checkbox-dropdown"]');
+            
+                for (var i = 0, length = checkboxesDropdowns.length; i < length; i++) {
+                    new CheckboxDropdown(checkboxesDropdowns[i])
+                }
+
             },
             error: function (data) {
                 alert(data.responseJSON.status);
@@ -248,37 +354,7 @@ async function fetchSchedules(){
     }else{
         categories = JSON.parse(localStorage.getItem('categories'));
     }
-    var html    = "";
-    for(var i = 0; i < categories.length; i++){
-        html +=  `
-            <label class="dropdown-option">
-                <div class="mdc-checkbox">
-                    <input type="checkbox" name="dropdown-group" value="${categories[i].name}" class="mdc-checkbox__native-control dark" />
-                    <div class="mdc-checkbox__background">
-                        <svg class="mdc-checkbox__checkmark" viewBox="0 0 24 24">
-                        <path class="mdc-checkbox__checkmark-path" fill="none" d="M1.73,12.91 8.1,19.28 22.79,4.59" />
-                        </svg>
-                        <div class="mdc-checkbox__mixedmark"></div>
-                    </div>
-                    <div class="mdc-checkbox__ripple"></div>
-                    </div>
-                <label class="dropdown-option-label">${categories[i].name}</label>
-            </label>
-        `
-    }
-    $("#selectCategories").html(html);
-    
-    const container = $($('feed-container')[0].shadow);
-    const fragment = $(document.createDocumentFragment())
 
-
-    for(let i = 0; i < 2; i++){
-        const el = document.createElement('helper-schedule')
-        el.schedule = {};
-        fragment.append(el)
-    } 
-    
-    container.append(fragment)
 }
 
 async function fetchNextSchedules(){
@@ -314,3 +390,106 @@ function clear(){
     container.find('helper-service').remove()
 }
 
+// 
+// DROPDOWN
+// 
+
+function CheckboxDropdown(el) {
+
+    var _this = this;
+
+    this.isOpen = false;
+    this.areAllChecked = false;
+    this.$el = $(el);
+    this.$label = this.$el.find(".mdc-select__selected-text");
+    this.$inputs = this.$el.find("[type='checkbox']");
+    this.$dropdown = this.$el.find(".mdc-select__anchor");
+    this.$floatinglabel = this.$el.find(".mdc-floating-label");
+
+    // console.log();
+    // Add Event Handlers
+    
+    this.$label.on("click", function(e) {
+        e.preventDefault();
+        _this.toggleOpen();
+    })
+
+    this.$inputs.on("change", function(e) {
+        _this.onCheckBox();
+    })
+}
+
+CheckboxDropdown.prototype.onCheckBox = function() {
+    this.updateStatus();
+}
+
+CheckboxDropdown.prototype.updateStatus = function() {
+    var checked = this.$el.find(":checked");
+    var values = "";
+    var categories = [];
+
+    if (checked.length === 1) {
+        var checkbox = checked.parent().parent("label").find("[type='checkbox']");
+        values = checkbox.attr('value');
+
+        categories.push(checkbox.attr('value'));
+        $( "#selectCategories").trigger( "valueHasChanged", {categories: categories} );
+
+        $(this.$label).css("color", "#232323");
+
+    } else if(checked.length > 1) {
+
+        for(let i = 0; i < checked.length; i++){
+            
+            var checkbox = $(checked[i]).parent().parent("label").find("[type='checkbox']");
+
+            categories.push(checkbox.attr('value'));
+
+            if(i == checked.length - 1) {
+                values += checkbox.attr('value');
+            } else {
+                values += checkbox.attr('value') + ", ";
+            }
+        }
+
+        $( "#selectCategories").trigger( "valueHasChanged", {categories: categories} );
+        $(this.$label).css("color", "#232323");
+    }
+
+    this.$label.html(values);
+    this.reset();
+}
+
+CheckboxDropdown.prototype.toggleOpen = function (forceOpen) {
+    var _this = this;
+    if(!this.isOpen || forceOpen) {
+        this.isOpen = true;
+        this.$el.addClass("on").addClass("mdc-select--focused").addClass("mdc-select--activated");
+        this.$floatinglabel.addClass("mdc-floating-label--float-above")
+        $(this.$floatinglabel).css("background","#FFFFFF")
+        $(this.$floatinglabel).css("padding-left","5px")
+        $(this.$floatinglabel).css("padding-right","5px")
+    } else {
+        this.isOpen = false;
+        this.$el.removeClass("on").removeClass("mdc-select--focused").removeClass("mdc-select--activated");
+        if(this.$el.find(":checked").length == 0 ){
+            this.$floatinglabel.removeClass("mdc-floating-label--float-above")
+        }
+        $(this.$floatinglabel).css("padding-left","0px")
+        $(this.$floatinglabel).css("padding-right","0px")
+    }
+    this.reset()
+}
+
+CheckboxDropdown.prototype.reset = function(){
+    var checked = this.$el.find(":checked");
+
+    if(checked.length <= 0) {
+        if(this.isOpen){
+            $(this.$label).css("color", "#BCBCBC")
+            this.$label.html("Selecione um ou mais");
+        } else {
+            this.$label.html("");
+        }
+    }
+}

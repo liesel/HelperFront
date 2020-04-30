@@ -7,19 +7,20 @@ class SchedulePost extends HTMLElement {
         console.log('schedule connected')
     }
 
-    set schedule(schedule) {
-        this.id = schedule.id || '1';
-        this.photo = schedule.photo || "/images/avatar-1.svg";
-        this.name = schedule.name || "Marilene Alves";
-        this.profession = schedule.profession || "Psicóloga, Mentora e Coach de Carreira";
-        this.createdDate = schedule.created || "Seg, 03 de abril - 19:00 às 21:00";
-        this.modelIcon = schedule.modelIcon || "group";
-        this.model = schedule.model || "Group";
-        this.title = schedule.title || "Consultoria de Carreira";
-        this.text = schedule.text || "Aprenda ser reconhecido, muito bem remunerado para crescer como um(a) profissional de sucesso!";
-        this.isScheduled = schedule.isScheduled || true;
-        this.favoriteIcon = schedule.isfavorited ? 'favorite' : 'favorite_border';
-        this.categories = schedule.categories || ["Tech", "Psycho", "Science"]
+    config(id, photo, name, profession, startDate, endDate, modelIcon, model, title, text, isScheduled, isFavorited, categories) {
+        this.id = id || '1';
+        this.photo = photo || "/images/avatar-1.svg";
+        this.name = name || "Marilene Alves";
+        this.profession = profession || "Psicóloga, Mentora e Coach de Carreira";
+        this.startDate = startDate || "Seg, 03 de abril - 19:00";
+        this.endDate = endDate || "Seg, 03 de abril - 21:00"
+        this.modelIcon = modelIcon || "group";
+        this.model = model || "Group";
+        this.title = title || "Consultoria de Carreira";
+        this.text = text || "Aprenda ser reconhecido, muito bem remunerado para crescer como um(a) profissional de sucesso!";
+        this.isScheduled = isScheduled || true;
+        this.favoriteIcon = isFavorited ? 'favorite' : 'favorite_border';
+        this.categories = categories || ["Tech", "Psycho", "Science"]
         this.render();
     }
 
@@ -37,15 +38,24 @@ class SchedulePost extends HTMLElement {
     }
 
     toSchedule(){
-        alert("agendar")
+        alert("agendar");
     }
 
     render() {
-        var listOfCategories = ""
+        var listOfCategories = "";
 
         this.categories.forEach((item) => {
-          listOfCategories += "#"+item + "  ";
+          listOfCategories += "#"+ item.name + "  ";
         })
+
+        // DATE CONFIG
+        moment.locale('pt-BR');
+        var format = "ddd, D of MMMM - ";
+        var startHour = moment(`${this.startDate}`).format("HH:mm");
+        var endHour = moment(`${this.endDate}`).format("HH:mm");
+        var date = moment(`${this.startDate}`).format(format);
+        date = date.replace("of", "de");
+        date += startHour + " às " + endHour;
 
         this.innerHTML = `
                 <style>
@@ -81,7 +91,7 @@ class SchedulePost extends HTMLElement {
                     <div class="row content pt-3 pb-3">
                         <div class="user-content col-12">
                             <div class="d-flex content-info">
-                                <div data-content="date">${this.createdDate}</div>
+                                <div data-content="date">${date}</div>
                                 <div class="ml-auto content-icon d-flex">
                                     <span class="material-icons">
                                     ${this.modelIcon}

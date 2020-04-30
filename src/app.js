@@ -210,6 +210,48 @@ app.post("/getAllCategories", (req, res) => {
     })
 })
 
+app.get("/getSchedulesByName", userIsAuthenticated, (req, res) => {
+    console.log(req.query.name)
+    axios.get(`${BACK_END_URL}/v1/schedule/SchedulesForName`,
+    {
+        params: {
+            name: req.query.name
+        },
+        headers: {
+            'accept': 'application/json',
+            'HelperAutorization': `Bearer ${req.session.token}`
+        },
+    })
+    .then(function (response) {
+        res.send(response.data.schedules);
+    })
+    .catch(function (error) {
+        console.log(error);
+        res.status(500).send(error.response.data);
+    })
+})
+
+app.get("/getSchedulesByDateStart", userIsAuthenticated, (req, res) => {
+    console.log(req.query.date)
+    axios.get(`${BACK_END_URL}/v1/schedule/SchedulesForDateStart`,
+    {
+        params: {
+            date: req.query.date
+        },
+        headers: {
+            'accept': 'application/json',
+            'HelperAutorization': `Bearer ${req.session.token}`
+        },
+    })
+    .then(function (response) {
+        res.send(response.data.schedules);
+    })
+    .catch(function (error) {
+        console.log(error);
+        res.status(500).send(error.response.data);
+    })
+})
+
 app.get('/home',redirectLogin, (req, res) => {
     res.render('home', {})
 })

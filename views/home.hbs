@@ -153,7 +153,8 @@
           <div style="padding: 24px 32px 32px 32px;">
             <label class="mdc-text-field mdc-text-field--fullwidth mdc-text-field--with-leading-icon text-search">
               <i class="material-icons mdc-text-field__icon mdc-text-field__icon--leading" style="color: #EBECEE;" tabindex="0" role="button">search</i>
-              <input class="mdc-text-field__input"
+              <input id="searchSchedules"
+                     class="mdc-text-field__input"
                      type="text"
                      placeholder="Pesquise por aulas, consultas e cursos"
                      aria-label="Pesquise por aulas, consultas e cursos"
@@ -626,6 +627,8 @@
   <script src="/scripts/bootstrap-datepicker.js"></script>
   <script src="/scripts/bootstrap-datepicker.pt-BR.min.js"></script>
   <script src="/scripts/modalCollapse.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment-with-locales.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/moment-timezone/0.5.28/moment-timezone-with-data.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/inputmask/4.0.9/jquery.inputmask.bundle.min.js"></script>
 
   <!-- CONTROLLERS -->
@@ -640,7 +643,6 @@
   <script src="/components/ServicePost.js"></script>
   <script src="/components/ServiceModal.js"></script>
   <script src="/components/AlertComponent.js"></script>
-  <script src="/scripts/dropdown.js"></script>
   <script src="/utils/main.js"></script>
   
 
