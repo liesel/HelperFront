@@ -3,7 +3,7 @@
     font-size: 0.875rem !important;
 }
 
-.mdc-text-field.dark .mdc-text-field__input {
+.mdc-text-field:not(.mdc-text-field--invalid).dark .mdc-text-field__input {
     caret-color: #173863;
     /* @alternate */
     caret-color: var(--theme-primary-main, #173863) !important;
@@ -33,9 +33,9 @@
     color: var(--theme-primary-main, #173863) !important;
 }
 
-.mdc-text-field--textarea:not(.mdc-text-field--disabled).mdc-text-field--focused.dark .mdc-notched-outline__leading,
-.mdc-text-field--textarea:not(.mdc-text-field--disabled).mdc-text-field--focused.dark .mdc-notched-outline__notch,
-.mdc-text-field--textarea:not(.mdc-text-field--disabled).mdc-text-field--focused.dark .mdc-notched-outline__trailing {
+.mdc-text-field--textarea:not(.mdc-text-field--disabled):not(.mdc-text-field--invalid).mdc-text-field--focused.dark .mdc-notched-outline__leading,
+.mdc-text-field--textarea:not(.mdc-text-field--disabled):not(.mdc-text-field--invalid).mdc-text-field--focused.dark .mdc-notched-outline__notch,
+.mdc-text-field--textarea:not(.mdc-text-field--disabled):not(.mdc-text-field--invalid).mdc-text-field--focused.dark .mdc-notched-outline__trailing {
     border-color: #173863 !important;
     /* @alternate */
     border-color: var(--theme-primary-main, #173863) !important;
