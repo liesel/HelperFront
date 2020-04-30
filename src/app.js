@@ -232,7 +232,6 @@ app.get("/getSchedulesByName", userIsAuthenticated, (req, res) => {
 })
 
 app.get("/getSchedulesByDateStart", userIsAuthenticated, (req, res) => {
-    console.log(req.query.date)
     axios.get(`${BACK_END_URL}/v1/schedule/SchedulesForDateStart`,
     {
         params: {

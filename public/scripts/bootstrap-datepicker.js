@@ -4,7 +4,7 @@
  * Licensed under the Apache License v2.0 (http://www.apache.org/licenses/LICENSE-2.0)
  */
 
-(function(factory){
+$(function(factory){
     if (typeof define === 'function' && define.amd) {
         define(['jquery'], factory);
     } else if (typeof exports === 'object') {
@@ -12,7 +12,7 @@
     } else {
         factory(jQuery);
     }
-}(function($, undefined){
+} (function($, undefined){
 	function UTCDate(){
 		return new Date(Date.UTC.apply(Date, arguments));
 	}
@@ -597,9 +597,36 @@
 		remove: alias('destroy', 'Method `remove` is deprecated and will be removed in version 2.0. Use `destroy` instead'),
 
 		setValue: function(){
-			var formatted = this.getFormattedDate();
+			var formatted = this.getFormattedDate()
+			var date = formatted.split("/")
+			window.fectchSchedulesByDate({
+				day: date[0],
+				month: date[1],
+				year: date[2]
+			})
 			this.inputField.val(formatted);
 			return this;
+		},
+
+		fetchSchedulesByDateStart: function (date) {
+			console.log(date)
+			$.ajax({
+				url:            "/getSchedulesByDateStart",
+				type:           'get',
+				dataType:       'json',
+				contentType:    'application/json',
+				success: function (data) {
+					setSchedules(data)
+				},
+				error: function (data) {
+					if (data.status == 401) {
+						window.location = "/";
+					}else if (data.status == 500) {
+						openServiceModal('Atenção', data.responseText, 3, "OK");
+					}
+				},
+				data: {date: date}
+			})
 		},
 
 		getFormattedDate: function(format){
@@ -1231,7 +1258,6 @@
 			var $target = $(e.currentTarget);
 			var timestamp = $target.data('date');
 			var date = new Date(timestamp);
-
 			if (this.o.updateViewDate) {
 				if (date.getUTCFullYear() !== this.viewDate.getUTCFullYear()) {
 					this._trigger('changeYear', this.viewDate);
@@ -1284,7 +1310,6 @@
 				this._toggle_multidate(date && new Date(date));
 			if ((!which && this.o.updateViewDate) || which === 'view')
 				this.viewDate = date && new Date(date);
-
 			this.fill();
 			this.setValue();
 			if (!which || which !== 'view') {

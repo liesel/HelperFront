@@ -28,12 +28,7 @@ $( document ).ready(function() {
     var selectedCategories  = [];
     fetchCategories()
     fetchNextSchedules()
-    fetchSchedulesByDateStart({
-        day: "28",
-        month: "04",
-        year: "2020"
-    })
-
+    
     // $(".day").on("click", (e) => {
     // })
 
@@ -251,8 +246,7 @@ $('#searchSchedules').on('keypress', (e)=>{
 
 })
 
-function fetchSchedulesByDateStart(date) {
-    console.log(date)
+window.fectchSchedulesByDate = function fetchSchedulesByDateStart(date) {
     $.ajax({
         url:            "/getSchedulesByDateStart",
         type:           'get',
