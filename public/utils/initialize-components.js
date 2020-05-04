@@ -47,7 +47,8 @@
             console.log(calendar)
             calendar.datepicker({
                 language: 'pt-BR',
-                todayHighlight: true
+                todayHighlight: true,
+                rangeSchedules: true
             })    
         }
 
