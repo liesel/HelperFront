@@ -5,7 +5,7 @@ const bodyParser    = require('body-parser')
 const axios         = require('axios').default;
 const session       = require("express-session")
 const app           = express()
-const moment = require('moment');
+const moment        = require('moment');
 const TWO_HOURS     = 1000 * 60 * 60 *2
 var categories      = []; 
 
@@ -17,9 +17,6 @@ const  {
     SESS_SECRET     = 'IT`S A SECRET!!__\o/',
     BACK_END_URL    = 'http://localhost.charlesproxy.com:3000'
 } = process.env
-
-
-
 
 const redirectLogin = (req, res, next) => {
     if (!req.session.userId) {
@@ -87,10 +84,10 @@ app.post("/saveUser", (req, res) => {
     
     axios.post(`${BACK_END_URL}/v1/user/createUser`, 
     {
-        email:     	req.body.email,
-        name:      	req.body.name,
-        surname:   	req.body.surname,
-        password:  	req.body.password,
+        email:     	        req.body.email,
+        name:      	        req.body.name,
+        surname:   	        req.body.surname,
+        password:  	        req.body.password
     },
     {
         headers: {
@@ -118,7 +115,30 @@ app.post("/saveUser", (req, res) => {
     })
 })
 
-
+app.post("/recoverPassword", (req, res) => {
+    let email = req.body.email;
+    if (email != undefined && email != "" ) {
+        axios.post(`${BACK_END_URL}/v1/user/recoverPassword`, 
+    {
+        email: email
+    },
+    {
+        headers: {
+            'accept': 'application/json',
+            'HelperAutorization': `Bearer ${req.session.token}`
+        }
+    })
+    .then(function (response) {
+        res.send(response.data);
+    })
+    .catch(function (error) {
+        res.status(500).send(error);
+    })
+    }else{
+        res.send({status: "Informe seu e-mail"});
+    }
+    
+})
 
 app.post("/doLogout", userIsAuthenticated, (req, res) => {
     axios.post(`${BACK_END_URL}/v1/user/logOut`, 
@@ -154,8 +174,13 @@ app.get("/getMyEvents", userIsAuthenticated, (req, res) => {
         res.send(response.data.schedules);
     })
     .catch(function (error) {
-        console.log(error);
-        res.status(500).send(error.response.data);
+        if (error.response.status == 401) {
+            req.session.destroy(function(err) {
+                res.status(error.response.status).send({status: error.response.data})
+            });    
+        }else{
+            res.status(error.response.status).send({status: error.response.data})
+        }
     })
 })
 
@@ -205,8 +230,13 @@ app.post("/getAllCategories", (req, res) => {
         res.send(response.data.categories)
     })
     .catch(function (error) {
-        console.log(error);
-        res.send({})
+        if (error.response.status == 401) {
+            req.session.destroy(function(err) {
+                res.status(error.response.status).send({status: error.response.data})
+            });    
+        }else{
+            res.status(error.response.status).send({status: error.response.data})
+        }
     })
 })
 
@@ -226,8 +256,13 @@ app.get("/getSchedulesByName", userIsAuthenticated, (req, res) => {
         res.send(response.data.schedules);
     })
     .catch(function (error) {
-        console.log(error);
-        res.status(500).send(error.response.data);
+        if (error.response.status == 401) {
+            req.session.destroy(function(err) {
+                res.status(error.response.status).send({status: error.response.data})
+            });    
+        }else{
+            res.status(error.response.status).send({status: error.response.data})
+        }
     })
 })
 
@@ -277,8 +312,6 @@ app.post('/userEdit', userIsAuthenticated, (req, res) => {
     }
    )
     .then(function (response) {
-        console.log(response.data);
-
         res.send({status:"ok"});
     })
     .catch(function (error) {
