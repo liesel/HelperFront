@@ -298,10 +298,8 @@ async function setSchedules(schedules){
         var schedule = schedules[i]
         console.log(schedule)
         const el = document.createElement('helper-schedule')
-        el.config(schedule._id, schedule.photo, schedule.serviceName,
-                  schedule.profession, schedule.ScheduleDate, schedule.ScheduleDateEnd, schedule.modelIcon, schedule.model,
-                  schedule.title, schedule.text, schedule.isScheduled, schedule.isFavorited, schedule.categoriesObjects)
-        
+        el.config(schedule._id, schedule.photo, schedule.CreatorId, schedule.ScheduleDate, schedule.ScheduleDateEnd,
+                  schedule.serviceName, schedule.description, schedule.isScheduled, schedule.isFavorited, schedule.categories, schedule.ScheduleType)
         fragment.append(el)
     } 
     
@@ -310,7 +308,6 @@ async function setSchedules(schedules){
 }
 
 async function fetchCategories(){
-    console.log(localStorage.getItem('categories'))
     var categories = [];
     if (localStorage.getItem('categories') == undefined || {}) {
         $.ajax({
@@ -324,7 +321,6 @@ async function fetchCategories(){
 
                 var html    = "";
                 for(var i = 0; i < categories.length; i++){
-                    console.log(categories[i].name)
                     html +=  `
                         <label class="dropdown-option">
                             <div class="mdc-checkbox">
@@ -410,7 +406,6 @@ function CheckboxDropdown(el) {
     this.$dropdown = this.$el.find(".mdc-select__anchor");
     this.$floatinglabel = this.$el.find(".mdc-floating-label");
 
-    // console.log();
     // Add Event Handlers
     
     this.$label.on("click", function(e) {

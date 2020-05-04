@@ -19,7 +19,8 @@ class FeedContainer extends HTMLElement {
                       "https://fonts.googleapis.com/icon?family=Material+Icons",
                       "/css/material-components-web.css",
                       "/css/main.css",
-                      "/css/components/button.css"]
+                      "/css/components/button.css",
+                      "/css/components/feed-container.css"]
     
         styles.forEach(style => {
             var link = $(document.createElement('link'))

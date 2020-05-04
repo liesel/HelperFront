@@ -15,17 +15,6 @@ class SchedulePostNext extends HTMLElement {
         this.render()
     }
 
-    // countLines(){
-    //   var el = $(this.root).find('.content-text')[0];
-    //   console.log(el)
-    //   var divHeight = $(el).height($(el).val());
-    //   var lineHeight = parseFloat(el.style.lineHeight)
-    //   console.log(divHeight)
-    //   console.log(lineHeight)
-    //   var lines = divHeight / lineHeight;
-    //   console.log(lines)
-    // }
-
     render (){
 
         var listOfCategories = ""
@@ -51,6 +40,21 @@ class SchedulePostNext extends HTMLElement {
                   .justify-text {
                     text-align: justify;
                   }
+
+                  .limit-text {
+                    overflow: hidden;
+                    text-overflow: ellipsis;
+                    display: -webkit-box;
+                    -webkit-line-clamp: 2; /* number of lines to show */
+                    -webkit-box-orient: vertical;
+
+                    padding-top: 2px;
+                    padding-bottom: 2px;
+                  }
+
+                  .title {
+                    font-size: 1.125rem !important;
+                  }
                 </style>
         
                 <div class="user-content p-2 mt-3">
@@ -59,8 +63,8 @@ class SchedulePostNext extends HTMLElement {
                     </div>
                     <div class="pt-1">
                       <div>
-                        <span class="bold" style="font-size: 1.125rem !important;">${this.title}</span>
-                        <p class="content-text justify-text" style="line-height: 1.5 !important;">${this.text}</p>
+                        <span class="limit-text bold title">${this.title}</span>
+                        <p class="limit-text justify-text" style="line-height: 1.5 !important;">${this.text}</p>
                         <p class="hashtags">${listOfCategories}<p>
                       </div>
                     </div>

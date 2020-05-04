@@ -7,20 +7,21 @@ class SchedulePost extends HTMLElement {
         console.log('schedule connected')
     }
 
-    config(id, photo, name, profession, startDate, endDate, modelIcon, model, title, text, isScheduled, isFavorited, categories) {
-        this.id = id || '1';
+    config(id, photo, creator, startDate, endDate, title, description, isScheduled, isFavorited, categories, type) {
+        this.id = id;
+        this.creator = creator;
         this.photo = photo || "/images/avatar-1.svg";
-        this.name = name || "Marilene Alves";
-        this.profession = profession || "Psicóloga, Mentora e Coach de Carreira";
-        this.startDate = startDate || "Seg, 03 de abril - 19:00";
-        this.endDate = endDate || "Seg, 03 de abril - 21:00"
-        this.modelIcon = modelIcon || "group";
-        this.model = model || "Group";
-        this.title = title || "Consultoria de Carreira";
-        this.text = text || "Aprenda ser reconhecido, muito bem remunerado para crescer como um(a) profissional de sucesso!";
+        this.name = creator.name + " " + creator.surname;
+        this.specialization = creator.specialization;
+        this.startDate = startDate;
+        this.endDate = endDate;
+        this.modelIcon = type == 0 ? "person" : "group";
+        this.model = type == 0 ? "Individual" : "Grupo";
+        this.title = title;
+        this.text = description || "";
         this.isScheduled = isScheduled || true;
         this.favoriteIcon = isFavorited ? 'favorite' : 'favorite_border';
-        this.categories = categories || ["Tech", "Psycho", "Science"]
+        this.categories = categories
         this.render();
     }
 
@@ -41,11 +42,30 @@ class SchedulePost extends HTMLElement {
         alert("agendar");
     }
 
+    multiLineOverflows(){
+        let el = $(this).find("#description")[0]
+        let overflow = el.scrollHeight > el.clientHeight;
+        if(overflow){
+            $(this).find("#scheduleText").append(
+                "<span class='seeMore'>visualizar mais</span>"
+            )
+        }
+        $(this).find(".seeMore").on("click", (e)=>{
+            if($(el).hasClass("limit-text")){
+                $(el).removeClass("limit-text")
+                $(e.target).text("visualizar menos")
+            } else {
+                $(el).removeClass("limit-text").addClass("limit-text")
+                $(e.target).text("visualizar mais")
+            }
+        })
+    }
+
     render() {
         var listOfCategories = "";
 
         this.categories.forEach((item) => {
-          listOfCategories += "#"+ item.name + "  ";
+          listOfCategories += "#"+ item.category.name + "  ";
         })
 
         // DATE CONFIG
@@ -58,17 +78,7 @@ class SchedulePost extends HTMLElement {
         date += startHour + " às " + endHour;
 
         this.innerHTML = `
-                <style>
-                    .hashtags {
-                        color: #0E6D90;
-                        line-height: 2 !important;
-                        word-spacing: 12px;
-                    }
-
-                    .justify-text {
-                        text-align: justify;
-                    }
-                </style>
+                
                 <div class="card mt-4" style="padding: 32px;">
                     <div class="row header">
                         <div class="user-icon">
@@ -76,7 +86,7 @@ class SchedulePost extends HTMLElement {
                         </div>
                         <div class="user-info pl-2">
                             <div class="pt-2"><strong>${this.name}</strong></div>
-                            <div>${this.profession}</div>
+                            <div>${this.specialization}</div>
                         </div>
                         <div class="ml-auto" style="margin-right: -15px !important;">
                             <button id="add-to-favorites"
@@ -103,8 +113,10 @@ class SchedulePost extends HTMLElement {
                             </div>
                             <div class="pt-1" style="padding-right: 16px !important;">
                                 <div style="max-width: 800px !important">
-                                    <span class="bold" style="font-size: 1.125rem !important;">${this.title}</span>
-                                    <p class="content-text">${this.text}</p>
+                                    <span class="limit-text bold" style="font-size: 1.125rem !important;">${this.title}</span>
+                                    <div id="scheduleText">
+                                        <p id="description" class="content-text limit-text">${this.text}</p>
+                                    </div>
                                     <p class="hashtags">${listOfCategories}<p>
                                 </div>
                             </div>
@@ -123,6 +135,7 @@ class SchedulePost extends HTMLElement {
                 </div>
         `
 
+        setTimeout(this.multiLineOverflows.bind(this), 500)
         let btnLike = $(this).find('#add-to-favorites')
         let btnSchedule = $(this).find('#agendar')
         btnLike.on('click', this.like.bind(this))

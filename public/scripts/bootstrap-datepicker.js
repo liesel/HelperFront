@@ -89,8 +89,6 @@ $(function(factory){
 
 	var Datepicker = function(element, options){
 		$.data(element, 'datepicker', this);
-		console.log('raw options')
-		console.log(options)
 		this._events = [];
 		this._secondaryEvents = [];
 
@@ -599,12 +597,11 @@ $(function(factory){
 
 		setValue: function(){
 			var formatted = this.getFormattedDate()
-
+ 
 			// RangeSchedules
-			console.log(this._o.rangeSchedules)
-			console.log("ANIMAL")
 			if(this._o.rangeSchedules){
 				var date = formatted.split("/")
+				// window.fectchSchedulesByDate(formatted)
 				window.fectchSchedulesByDate({
 					day: date[0],
 					month: date[1],
@@ -617,7 +614,6 @@ $(function(factory){
 		},
 
 		fetchSchedulesByDateStart: function (date) {
-			console.log(date)
 			$.ajax({
 				url:            "/getSchedulesByDateStart",
 				type:           'get',

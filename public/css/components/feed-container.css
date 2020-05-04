@@ -1,0 +1,24 @@
+.hashtags {
+    color: #0E6D90;
+    line-height: 2 !important;
+    word-spacing: 12px;
+}
+
+.justify-text {
+    text-align: justify;
+}
+
+.limit-text {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 2; /* number of lines to show */
+    -webkit-box-orient: vertical;
+}
+
+.seeMore {
+    color: #042189;
+    font-weight: 600 !important;
+    cursor: pointer;
+    font-size: 0.89rem !important;
+}
