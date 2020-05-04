@@ -13,7 +13,7 @@ $( document ).ready(function() {
             },
             error: function (data) {
                 if (data.status == 401) {
-                    window.location = "/";
+                    window.location.href = "/";
                 }else if (data.status == 500) {
                     openServiceModal('Atenção', data.responseText, 3, 'OK');
                 }
@@ -106,12 +106,12 @@ $( document ).ready(function() {
                 contentType:    'application/json',
                 success: function (data) {
                     if (data.status == "ok") {
-                        window.location = "/";
+                        window.location.href = "/";
                     }
                 },
                 error: function (data) {
                     if (data.status == 401) {
-                        window.location = "/";
+                        window.location.href = "/";
                     }else if (data.status == 500) {
                         openServiceModal('Atenção', data.responseText, 3,"OK");
                     }
@@ -294,19 +294,14 @@ async function setSchedules(schedules){
     const container = $($('feed-container')[0].shadow);
     container.find('helper-schedule').remove()
     const fragment = $(document.createDocumentFragment())
-    for(let i = 0; i < schedules.length; i++){
-        var schedule = schedules[i]
-        console.log(schedule)
+    schedules.forEach(schedule => {
         const el = document.createElement('helper-schedule')
-        el.config(schedule._id, schedule.photo, schedule.serviceName,
-                  schedule.profession, schedule.ScheduleDate, schedule.ScheduleDateEnd, schedule.modelIcon, schedule.model,
-                  schedule.title, schedule.text, schedule.isScheduled, schedule.isFavorited, schedule.categoriesObjects)
-        
+        el.config(schedule._id, schedule.photo, `${schedule.CreatorId.name} ${schedule.CreatorId.surname}`,
+        schedule.CreatorId.specialization, schedule.ScheduleDate, schedule.ScheduleDateEnd, schedule.modelIcon, schedule.model,
+        schedule.serviceName, schedule.description, schedule.isScheduled, schedule.isFavorited, schedule.categories)
         fragment.append(el)
-    } 
-    
+    }); 
     container.append(fragment)
-    
 }
 
 async function fetchCategories(){
@@ -324,7 +319,6 @@ async function fetchCategories(){
 
                 var html    = "";
                 for(var i = 0; i < categories.length; i++){
-                    console.log(categories[i].name)
                     html +=  `
                         <label class="dropdown-option">
                             <div class="mdc-checkbox">
@@ -352,7 +346,11 @@ async function fetchCategories(){
 
             },
             error: function (data) {
-                alert(data.responseJSON.status);
+                if (data.status == 401) {
+                    window.location.href = "/";
+                }else if (data.status == 500) {
+                    openServiceModal('Atenção', data.responseText, 3, 'OK');
+                }
             }
         });    
     }else{

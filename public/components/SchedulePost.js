@@ -45,7 +45,7 @@ class SchedulePost extends HTMLElement {
         var listOfCategories = "";
 
         this.categories.forEach((item) => {
-          listOfCategories += "#"+ item.name + "  ";
+          listOfCategories += "#"+ item.category.name + "  ";
         })
 
         // DATE CONFIG

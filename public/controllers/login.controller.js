@@ -1,5 +1,27 @@
 $(document).ready(() => {
-    const btnDoLogin    = $("#btnLogin");
+    const btnDoLogin         = $("#btnLogin");
+
+    $("#btnRecoverPassword").click(function (e) { 
+        var email = $("#txEmailForgot").val();
+        if (email != undefined && email != "") {
+            e.preventDefault();
+            $.ajax({
+                url:            "/recoverPassword",
+                type:           'post',
+                dataType:       'json',
+                contentType:    'application/json',
+                success: function (data) {
+                    openServiceModal('Atenção', "Se seu e-mail estiver cadastrado em nossa \n base de dados, você receberá um e-mail com um passo a passo para resetar sua senha", 1,"OK");
+                },
+                error: function (data) {
+                    openServiceModal('Atenção', "Ocorreu um erro ao tentar o processo de recuperação de senha \n Entre em contato com a gente pelo e-mail contato@helper.com.br", 3,"OK");
+                },
+                data: JSON.stringify({email: email})
+            });
+            
+        }
+        
+    });
     
     btnDoLogin.on("click", () => {
         var email       = $("#txtEmailLogin").val();
@@ -29,5 +51,22 @@ $(document).ready(() => {
                 data: JSON.stringify({email: email, password: password})
             });
         }
-    });    
+    });  
+
+    function openServiceModal(title, subtittle, modalType, text, func = closeDialog) {
+        var serviceModal = $("helper-service-modal")[0]
+        serviceModal.config(
+        {
+            type:       modalType,
+            title:      title,
+            subtitle:   subtittle,
+            btnText:    text
+        }, func)
+        serviceModal.open()
+    }
+
+    function closeDialog(){
+        $("helper-service-modal")[0].close()
+    }
+      
 })

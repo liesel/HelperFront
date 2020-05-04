@@ -12,6 +12,7 @@
     "moment": "^2.24.0"
   },
   "devDependencies": {
+    "lorem-ipsum": "^2.0.3",
     "standard": "^14.3.3"
   },
   "scripts": {
