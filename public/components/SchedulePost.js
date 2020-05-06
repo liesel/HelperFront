@@ -47,7 +47,9 @@ class SchedulePost extends HTMLElement {
         let overflow = el.scrollHeight > el.clientHeight;
         if(overflow){
             $(this).find("#scheduleText").append(
-                "<span class='seeMore'>visualizar mais</span>"
+                `<div style="text-align: right;">
+                    <span class='seeMore'>visualizar mais</span>
+                </div>`
             )
         }
         $(this).find(".seeMore").on("click", (e)=>{
@@ -115,7 +117,7 @@ class SchedulePost extends HTMLElement {
                                 <div style="max-width: 800px !important">
                                     <span class="limit-text bold" style="font-size: 1.125rem !important;">${this.title}</span>
                                     <div id="scheduleText">
-                                        <p id="description" class="content-text limit-text">${this.text}</p>
+                                        <p id="description" class="content-text limit-text justify-text">${this.text}</p>
                                     </div>
                                     <p class="hashtags">${listOfCategories}<p>
                                 </div>
