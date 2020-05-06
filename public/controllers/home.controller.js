@@ -72,17 +72,16 @@ $(document).ready(function () {
         return realCategories;
     };
 
-    function openServiceModal(title, subtittle, modalType, text, field, func = errorHandlerModal) {
+    function openServiceModal(title, subtittle, modalType, text, field, next) {
         var serviceModal = $("helper-service-modal")[0]
+        var func = errorHandlerModal
         serviceModal.config(
             {
                 type: modalType,
                 title: title,
                 subtitle: subtittle,
                 btnText: text
-            }, () => {
-                func(field)
-            })
+            }, func.bind(null, field), next )
         serviceModal.open()
     }
 
@@ -308,8 +307,13 @@ $(document).ready(function () {
         return x > y
     }
 
-    function testAgendar() {
-        openServiceModal('Atenção', "Tem certeza que deseja agendar?", 1, "OK");
+    function testAgendar(data) {
+        console.log(data)
+        openServiceModal('Atenção', `Tem certeza que deseja agendar? ID: ${data.id}; DATA INICIAL: ${data.startDate}`, 1, undefined, undefined, confirmModalAfterSchedule.bind(null, data));
+    }
+
+    function confirmModalAfterSchedule(data){
+        alert(JSON.stringify(data))
     }
 
     function closeModalAndBackhome() {

@@ -8,7 +8,7 @@ class ServiceModal extends HTMLElement {
         console.log("modal connected");
     }
 
-    config(data, next) {
+    config(data, cancel, next) {
         var {type, title, subtitle, btnText} = data;
         this.type = type || 3;
         this.btnText = btnText || 'fechar';
@@ -51,7 +51,7 @@ class ServiceModal extends HTMLElement {
         if($(btnConfirm).length != 0){
             $(btnConfirm).on("click", next)
         } else if ($(btnCustom).length != 0) {
-            $(btnCustom).on("click", next)
+            $(btnCustom).on("click", cancel)
         }
 
     }

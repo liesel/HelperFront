@@ -26,7 +26,13 @@ class SchedulePost extends HTMLElement {
         let btnLike = $(this).find('#add-to-favorites')
         let btnSchedule = $(this).find('#agendar')
         btnLike.on('click', this.like.bind(this))
-        btnSchedule.on("click", addSchedule)
+
+        var data = {
+            id: id,
+            startDate: startDate
+        }
+
+        btnSchedule.on("click", addSchedule.bind(null, data))
     }
 
     like() {
