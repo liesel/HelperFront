@@ -51,7 +51,7 @@
       <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse justify-content-end" id="navbarSupportedContent">
-        <div class="material-nav-items" data-toggle="tooltip" data-placement="bottom" title="Notificações">
+        {{!-- <div class="material-nav-items" data-toggle="tooltip" data-placement="bottom" title="Notificações">
             <span class="material-icons">
                 notifications
                 <div class="circle">
@@ -62,7 +62,7 @@
             <span class="material-icons">
                 event
             </span>
-        </div>
+        </div> --}}
         <div id="navuser" class="material-nav-items user-profile" data-toggle="tooltip" data-placement="bottom" title="Dados do usuário">
           <img src="/images/avatar-1.svg" class="card-img-top" alt="...">
         </div>
@@ -204,7 +204,7 @@
         <div class="modal-body">
           <div class="row">
             <div class="col-md-7">
-              <label class="mdc-text-field mdc-text-field--outlined dark" style="width: 100%;">
+              <label id="labelServiceName" class="mdc-text-field mdc-text-field--outlined dark" style="width: 100%;">
                 <input id="txtServiceName" name="txtServiceName" type="text" class="mdc-text-field__input" placeholder="Descreva o titulo do serviço"
                   aria-labelledby="service"
                   aria-controls="service-name"
@@ -263,7 +263,7 @@
                   <label for="radio-grupo" style="margin-bottom: 0 !important;">Grupo</label>
                 </div>
                 <div id="div-persons" class="pt-4 row header invisible">
-                  <label class="col-md-6 mdc-text-field mdc-text-field--outlined dark" style="width: 100%;">
+                  <label id="labelQtdPeople" class="col-md-6 mdc-text-field mdc-text-field--outlined dark" style="width: 100%;">
                     <input id="qtdPersons" type="text" class="mdc-text-field__input numberonly" placeholder="100"
                       aria-labelledby="persons"
                       aria-controls="persons-name"
@@ -281,7 +281,7 @@
                 <div class="d-flex pt-4">
                   <div class="px-1">
                     <h4 style="font-size: 14px !important;">Data do serviço</h4>
-                    <label class="input-append date dark mdc-text-field mdc-text-field--outlined mdc-text-field--with-trailing-icon">
+                    <label id="labelServiceDate" class="input-append date dark mdc-text-field mdc-text-field--outlined mdc-text-field--with-trailing-icon">
                       <input type="text" id="txtServiceDate" name="txtServiceDate" class="mdc-text-field__input" aria-labelledby="my-label-id" placeholder="DD MM AAAA">
                       <div class="mdc-notched-outline">
                         <div class="mdc-notched-outline__leading"></div>
@@ -340,7 +340,7 @@
               </div>
               <div class="pt-4">
                 <div>
-                  <label class="mdc-text-field mdc-text-field--outlined mdc-text-field--with-trailing-icon dark"
+                  <label id="labelWhereby" class="mdc-text-field mdc-text-field--outlined mdc-text-field--with-trailing-icon dark"
                   style="width: 100%;">
                     <input type="text" id="txtWhereby" name="txtWhereby" class="mdc-text-field__input" aria-labelledby="linkwhere" placeholder="Ex: whereby.com/nomedasala" required>
                     <span class="mdc-notched-outline">
@@ -356,7 +356,7 @@
                   </label>
                 </div>
                 <div class="pt-4">
-                  <label class="mdc-text-field mdc-text-field--outlined mdc-text-field--with-trailing-icon dark"
+                  <label id="labelPicpay" class="mdc-text-field mdc-text-field--outlined mdc-text-field--with-trailing-icon dark"
                   style="width: 100%;">
                     <input type="text" id="txtPicpay" name="txtPicpay" class="mdc-text-field__input" aria-labelledby="linkpic" placeholder="Ex: picpay.me/seunome" required>
                     <span class="mdc-notched-outline">
@@ -372,7 +372,7 @@
                   </label>
                 </div>
                 <div class="pt-4">
-                  <label class="mdc-text-field mdc-text-field--textarea dark">
+                  <label id="labelDescription" class="mdc-text-field mdc-text-field--textarea dark">
                     <textarea class="mdc-text-field__input" id="txtDescription" name="txtDescription" aria-labelledby="my-label-id" placeholder="Descreva informações sobre o serviço" rows="8" cols="50" required></textarea>
                     <div class="mdc-notched-outline">
                       <div class="mdc-notched-outline__leading"></div>
@@ -458,7 +458,7 @@
             </div>
             <div class="col-md-9">
               <div>
-                <label class="mdc-text-field mdc-text-field--outlined dark" style="width: 100%;">
+                <label id="labelEditName" class="mdc-text-field mdc-text-field--outlined dark" style="width: 100%;">
                   <input type="text" id="txtEditName" name="txtEditName" class="mdc-text-field__input" placeholder="Insira seu nome"
                     aria-labelledby="username" value="{{session.username}}" required>
                   <span class="mdc-notched-outline">
@@ -472,7 +472,7 @@
                 </label>
               </div>
               <div class="pt-4">
-                <label class="mdc-text-field mdc-text-field--outlined dark" style="width: 100%;">
+                <label id="labelEditSurname" class="mdc-text-field mdc-text-field--outlined dark" style="width: 100%;">
                   <input type="text" id="txtEditSurname" name="txtEditSurname" class="mdc-text-field__input" placeholder="Informe seu sobrenome"
                     aria-labelledby="sobrenomme" required value={{session.userSurname}}>
                   <span class="mdc-notched-outline">
@@ -486,7 +486,7 @@
                 </label>
               </div>
               <div class="pt-4">
-                <label class="mdc-text-field mdc-text-field--outlined dark" style="width: 100%;">
+                <label id="labelEditEspecializacao" class="mdc-text-field mdc-text-field--outlined dark" style="width: 100%;">
                   <input type="text" id="txtEditEspecializacao" name="txtEditEspecializacao" class="mdc-text-field__input" placeholder="Insira as áreas de conhecimentos"
                     aria-labelledby="especializacao" value="{{session.userSpecialization}}" required>
                   <span class="mdc-notched-outline">
@@ -500,7 +500,7 @@
                 </label>
               </div>
               <div class="pt-4">
-                <label class="mdc-text-field mdc-text-field--textarea dark">
+                <label id="labelEditServiceDescription" class="mdc-text-field mdc-text-field--textarea dark">
                   <textarea class="mdc-text-field__input" aria-labelledby="my-label-id" id="txaServiceDescription" name="txaServiceDescription"
                   placeholder="Fale um pouco sobre você" rows="8" cols="50" value="oi" required>{{session.userServiceDescription}}</textarea>
                   <div class="mdc-notched-outline">

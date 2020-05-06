@@ -7,7 +7,7 @@ class SchedulePost extends HTMLElement {
         console.log('schedule connected')
     }
 
-    config(id, photo, creator, startDate, endDate, title, description, isScheduled, isFavorited, categories, type) {
+    config(id, photo, creator, startDate, endDate, title, description, isScheduled, isFavorited, categories, type, addSchedule) {
         this.id = id;
         this.creator = creator;
         this.photo = photo || "/images/avatar-1.svg";
@@ -21,8 +21,12 @@ class SchedulePost extends HTMLElement {
         this.text = description || "";
         this.isScheduled = isScheduled || true;
         this.favoriteIcon = isFavorited ? 'favorite' : 'favorite_border';
-        this.categories = categories
+        this.categories = categories;
         this.render();
+        let btnLike = $(this).find('#add-to-favorites')
+        let btnSchedule = $(this).find('#agendar')
+        btnLike.on('click', this.like.bind(this))
+        btnSchedule.on("click", addSchedule)
     }
 
     like() {
@@ -36,10 +40,6 @@ class SchedulePost extends HTMLElement {
                 // request
             }
         }
-    }
-
-    toSchedule(){
-        alert("agendar");
     }
 
     multiLineOverflows(){
@@ -138,10 +138,6 @@ class SchedulePost extends HTMLElement {
         `
 
         setTimeout(this.multiLineOverflows.bind(this), 500)
-        let btnLike = $(this).find('#add-to-favorites')
-        let btnSchedule = $(this).find('#agendar')
-        btnLike.on('click', this.like.bind(this))
-        btnSchedule.on("click", this.toSchedule.bind(this))
     }
 }
 
