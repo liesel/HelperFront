@@ -170,7 +170,7 @@ app.get("/getMyEvents", userIsAuthenticated, (req, res) => {
             'HelperAutorization': `Bearer ${req.session.token}`
         }, body: {}})
     .then(function (response) {
-        console.log(response.data.schedules);
+        // console.log(response.data.schedules);
         res.send(response.data.schedules);
     })
     .catch(function (error) {
@@ -286,11 +286,109 @@ app.get("/getSchedulesByDateStart", userIsAuthenticated, (req, res) => {
     })
 })
 
+app.get("/getServicesCount", userIsAuthenticated, (req, res) => {
+    axios.get(`${BACK_END_URL}/v1/schedule/SchedulesCountForCreatorID`,
+    {
+        params: {
+            id: req.session.userId
+        },
+        headers: {
+            'accept': 'application/json',
+            'HelperAutorization': `Bearer ${req.session.token}`
+        },
+    })
+    .then(function (response) {
+        res.send({count: response.data.count});
+    })
+    .catch(function (error) {
+        console.log(error);
+        res.status(500).send(error.response.data);
+    })
+})
+
+app.get("/getAllServices", userIsAuthenticated, (req, res) => {
+    axios.get(`${BACK_END_URL}/v1/schedule/SchedulesForCreatorID`,
+    {
+        params: {
+            id: req.session.userId
+        },
+        headers: {
+            'accept': 'application/json',
+            'HelperAutorization': `Bearer ${req.session.token}`
+        },
+    })
+    .then(function (response) {
+        res.send({schedules: response.data.schedules});
+    })
+    .catch(function (error) {
+        console.log(error);
+        res.status(500).send(error.response.data);
+    })
+})
+
+app.get("/getMySchedulesCount", userIsAuthenticated, (req, res) => {
+    axios.get(`${BACK_END_URL}/v1/schedule/SchedulesCountForClientID`,
+    {
+        params: {
+            id: req.session.userId
+        },
+        headers: {
+            'accept': 'application/json',
+            'HelperAutorization': `Bearer ${req.session.token}`
+        },
+    })
+    .then(function (response) {
+        res.send({count: response.data.count});
+    })
+    .catch(function (error) {
+        console.log(error);
+        res.status(500).send(error.response.data);
+    })
+})
+
+app.get("/getAllMySchedules", userIsAuthenticated, (req, res) => {
+    axios.get(`${BACK_END_URL}/v1/schedule/SchedulesForClientID`,
+    {
+        params: {
+            id: req.session.userId
+        },
+        headers: {
+            'accept': 'application/json',
+            'HelperAutorization': `Bearer ${req.session.token}`
+        },
+    })
+    .then(function (response) {
+        res.send({schedules: response.data.schedules});
+    })
+    .catch(function (error) {
+        console.log(error);
+        res.status(500).send(error.response.data);
+    })
+})
+
+app.get("/getAllSchedules", userIsAuthenticated, (req, res) => {
+    axios.get(`${BACK_END_URL}/v1/schedule/SchedulesForHome`,
+    {
+        params: {
+            id: req.session.userId
+        },
+        headers: {
+            'accept': 'application/json',
+            'HelperAutorization': `Bearer ${req.session.token}`
+        },
+    })
+    .then(function (response) {
+        res.send({schedules: response.data.schedules});
+    })
+    .catch(function (error) {
+        console.log(error);
+        res.status(500).send(error.response.data);
+    })
+})
+
 app.get('/home',redirectLogin, (req, res) => {
     res.render('home', {})
 })
-
-
 
 app.post('/userEdit', userIsAuthenticated, (req, res) => {
     var name                = req.body.name; 

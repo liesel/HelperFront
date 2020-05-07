@@ -26,11 +26,13 @@ $(document).ready(function () {
 
     //HOME
     var selectedCategories = [];
+    
     fetchCategories()
     fetchNextSchedules()
 
-    // $(".day").on("click", (e) => {
-    // })
+    // SIDE MENU
+    fetchServicesCount()
+    fetchMySchedulesCount()
 
     const itemStatus = $('div.row.side-status-item')
     itemStatus.on("click", (event) => {
@@ -44,13 +46,13 @@ $(document).ready(function () {
         var item = $(event.target);
         switch (item.attr("data-link")) {
             case "home":
-                // fetchSchedules()
+                fetchSchedules()
                 break;
             case "servicos":
-                // fetchServices()
+                fetchServices()
                 break;
             case "agendamentos":
-                // fetchSchedules()
+                fetchMySchedules()
                 break;
             case "favoritos":
                 // fetchSchedules()
@@ -336,6 +338,108 @@ $(document).ready(function () {
         container.append(fragment)
     }
 
+    async function fetchServicesCount(){
+        $.ajax({
+            url: "/getServicesCount",
+            type: 'get',
+            dataType: 'json',
+            contentType: 'application/json',
+            success: function (data) {
+                var count = data.count
+                $("#countServices").text(count)
+            },
+            error: function (data) {
+                if (data.status == 401) {
+                    window.location.href = "/";
+                } else if (data.status == 500) {
+                    openServiceModal('Atenção', data.responseText, 3, 'OK');
+                }
+            },
+            data: {}
+        });
+    }
+
+    async function fetchServices(){
+        $.ajax({
+            url: "/getAllServices",
+            type: 'get',
+            dataType: 'json',
+            contentType: 'application/json',
+            success: function (data) {
+                setSchedules(data.schedules)
+            },
+            error: function (data) {
+                if (data.status == 401) {
+                    window.location.href = "/";
+                } else if (data.status == 500) {
+                    openServiceModal('Atenção', data.responseText, 3, 'OK');
+                }
+            },
+            data: {}
+        });
+    }
+
+    async function fetchMySchedulesCount(){
+        $.ajax({
+            url: "/getMySchedulesCount",
+            type: 'get',
+            dataType: 'json',
+            contentType: 'application/json',
+            success: function (data) {
+                var count = data.count
+                $("#countMySchedules").text(count)
+            },
+            error: function (data) {
+                if (data.status == 401) {
+                    window.location.href = "/";
+                } else if (data.status == 500) {
+                    openServiceModal('Atenção', data.responseText, 3, 'OK');
+                }
+            },
+            data: {}
+        });
+    }
+
+    async function fetchMySchedules(){
+        $.ajax({
+            url: "/getAllMySchedules",
+            type: 'get',
+            dataType: 'json',
+            contentType: 'application/json',
+            success: function (data) {
+                setSchedules(data.schedules)
+            },
+            error: function (data) {
+                if (data.status == 401) {
+                    window.location.href = "/";
+                } else if (data.status == 500) {
+                    openServiceModal('Atenção', data.responseText, 3, 'OK');
+                }
+            },
+            data: {}
+        });
+    }
+
+    async function fetchSchedules(){
+        $.ajax({
+            url: "/getAllSchedules",
+            type: 'get',
+            dataType: 'json',
+            contentType: 'application/json',
+            success: function (data) {
+                setSchedules(data.schedules)
+            },
+            error: function (data) {
+                if (data.status == 401) {
+                    window.location.href = "/";
+                } else if (data.status == 500) {
+                    openServiceModal('Atenção', data.responseText, 3, 'OK');
+                }
+            },
+            data: {}
+        });
+    }
+
     async function fetchCategories() {
         var categories = [];
         if (localStorage.getItem('categories') == undefined || {}) {
@@ -399,19 +503,6 @@ $(document).ready(function () {
             el.schedule = {};
             fragment.append(el);
             // el.countLines()
-        }
-
-        container.append(fragment)
-    }
-
-    async function fetchServices() {
-        const container = $($('feed-container')[0].shadow);
-        const fragment = $(document.createDocumentFragment())
-
-        for (let i = 0; i < 2; i++) {
-            const el = document.createElement('helper-service')
-            el.service = {};
-            fragment.append(el)
         }
 
         container.append(fragment)
