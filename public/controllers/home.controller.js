@@ -1,36 +1,11 @@
 $(document).ready(function () {
-
-    var getMyEvents = function () {
-        $.ajax({
-            url: "/getMyEvents",
-            type: 'get',
-            dataType: 'json',
-            contentType: 'application/json',
-            success: function (data) {
-                $('#schedulesGiven').text(data.schedulesGiven)
-                $('#schedulesRecivied').text(data.schedulesRecevied)
-
-            },
-            error: function (data) {
-                if (data.status == 401) {
-                    window.location.href = "/";
-                } else if (data.status == 500) {
-                    openServiceModal('Atenção', data.responseText, 3, 'OK');
-                }
-            },
-            data: {}
-        });
-    }
-
-    getMyEvents();
-
     //HOME
     var selectedCategories = [];
-    
+    AddLoadingHUD()
+
+    getMyEvents();
     fetchCategories()
     fetchNextSchedules()
-
-    // SIDE MENU
     fetchServicesCount()
     fetchMySchedulesCount()
 
@@ -92,6 +67,28 @@ $(document).ready(function () {
             $(label).addClass('mdc-text-field--invalid').focus()
         }
         $("helper-service-modal")[0].close()
+    }
+
+    function getMyEvents () {
+        $.ajax({
+            url: "/getMyEvents",
+            type: 'get',
+            dataType: 'json',
+            contentType: 'application/json',
+            success: function (data) {
+                $('#schedulesGiven').text(data.schedulesGiven)
+                $('#schedulesRecivied').text(data.schedulesRecevied)
+
+            },
+            error: function (data) {
+                if (data.status == 401) {
+                    window.location.href = "/";
+                } else if (data.status == 500) {
+                    openServiceModal('Atenção', data.responseText, 3, 'OK');
+                }
+            },
+            data: {}
+        });
     }
 
     $("#btnSaveEdition").click(function (e) {
@@ -208,17 +205,23 @@ $(document).ready(function () {
         } else if (isBiggerThan(numberStartTime, numberEndTime)) {
             openServiceModal('Campo Inválido', 'O Horário final precisa ser maior que o horário inicial.', 3, 'OK', SERVICE_FINAL_TIME);
         } else {
+            Loading().open()
+
             $.ajax({
                 url: "/doSaveService",
                 type: 'post',
                 dataType: 'json',
                 contentType: 'application/json',
                 success: function (data) {
+                    Loading().close()
+
                     if (data.status == "ok") {
                         openServiceModal('Sucesso', data.responseText, 2, 'OK', closeModalAndBackhome);
                     }
                 },
                 error: function (data) {
+                    Loading().close()
+
                     if (data.status == 401) {
                         window.location = "/";
                     } else if (data.status == 500) {
@@ -252,16 +255,19 @@ $(document).ready(function () {
 
         if (input.val().length >= 4) {
             var text = input.val()
-
+            Loading().open()
+            
             $.ajax({
                 url: "/getSchedulesByName",
                 type: 'get',
                 dataType: 'json',
                 contentType: 'application/json',
-                success: function (data) {
-                    setSchedules(data)
+                success: async function (data) {
+                    await setSchedules(data)
+                    Loading().close()
                 },
                 error: function (data) {
+                    Loading().close()
                     if (data.status == 401) {
                         window.location = "/";
                     } else if (data.status == 500) {
@@ -276,15 +282,20 @@ $(document).ready(function () {
     })
 
     window.fectchSchedulesByDate = function fetchSchedulesByDateStart(date) {
+        Loading().open()
+
         $.ajax({
             url: "/getSchedulesByDateStart",
             type: 'get',
             dataType: 'json',
             contentType: 'application/json',
-            success: function (data) {
-                setSchedules(data)
+            success: async function (data) {
+                await setSchedules(data)
+                Loading().close()
             },
             error: function (data) {
+                Loading().close()
+
                 if (data.status == 401) {
                     window.location = "/";
                 } else if (data.status == 500) {
@@ -339,6 +350,8 @@ $(document).ready(function () {
     }
 
     async function fetchServicesCount(){
+        Loading().open()
+
         $.ajax({
             url: "/getServicesCount",
             type: 'get',
@@ -347,8 +360,11 @@ $(document).ready(function () {
             success: function (data) {
                 var count = data.count
                 $("#countServices").text(count)
+                Loading().close()
             },
             error: function (data) {
+                Loading().close()
+
                 if (data.status == 401) {
                     window.location.href = "/";
                 } else if (data.status == 500) {
@@ -357,9 +373,11 @@ $(document).ready(function () {
             },
             data: {}
         });
+
     }
 
     async function fetchServices(){
+        Loading().open()
         $.ajax({
             url: "/getAllServices",
             type: 'get',
@@ -367,8 +385,11 @@ $(document).ready(function () {
             contentType: 'application/json',
             success: function (data) {
                 setSchedules(data.schedules)
+                Loading().close()
             },
             error: function (data) {
+                Loading().close()
+
                 if (data.status == 401) {
                     window.location.href = "/";
                 } else if (data.status == 500) {
@@ -380,6 +401,7 @@ $(document).ready(function () {
     }
 
     async function fetchMySchedulesCount(){
+        Loading().open()
         $.ajax({
             url: "/getMySchedulesCount",
             type: 'get',
@@ -388,8 +410,11 @@ $(document).ready(function () {
             success: function (data) {
                 var count = data.count
                 $("#countMySchedules").text(count)
+                Loading().close()
             },
             error: function (data) {
+                Loading().close()
+
                 if (data.status == 401) {
                     window.location.href = "/";
                 } else if (data.status == 500) {
@@ -401,6 +426,7 @@ $(document).ready(function () {
     }
 
     async function fetchMySchedules(){
+        Loading().open()
         $.ajax({
             url: "/getAllMySchedules",
             type: 'get',
@@ -408,8 +434,11 @@ $(document).ready(function () {
             contentType: 'application/json',
             success: function (data) {
                 setSchedules(data.schedules)
+                Loading().close()
             },
             error: function (data) {
+                Loading().close()
+
                 if (data.status == 401) {
                     window.location.href = "/";
                 } else if (data.status == 500) {
@@ -421,6 +450,7 @@ $(document).ready(function () {
     }
 
     async function fetchSchedules(){
+        Loading().open()
         $.ajax({
             url: "/getAllSchedules",
             type: 'get',
@@ -428,8 +458,11 @@ $(document).ready(function () {
             contentType: 'application/json',
             success: function (data) {
                 setSchedules(data.schedules)
+                Loading().close()
             },
             error: function (data) {
+                Loading().close()
+
                 if (data.status == 401) {
                     window.location.href = "/";
                 } else if (data.status == 500) {
@@ -441,6 +474,7 @@ $(document).ready(function () {
     }
 
     async function fetchCategories() {
+        Loading().open()
         var categories = [];
         if (localStorage.getItem('categories') == undefined || {}) {
             $.ajax({
@@ -479,8 +513,11 @@ $(document).ready(function () {
                         new CheckboxDropdown(checkboxesDropdowns[i])
                     }
 
+                    Loading().close()
                 },
                 error: function (data) {
+                    Loading().close()
+
                     if (data.status == 401) {
                         window.location.href = "/";
                     } else if (data.status == 500) {
@@ -516,6 +553,20 @@ $(document).ready(function () {
 
 })
 
+// 
+// LOADING
+// 
+
+function AddLoadingHUD(){
+    const container = $('body');
+    container.find('loading-component').remove();
+    var el = document.createElement('loading-component');
+    container.append(el)
+}
+
+function Loading(){
+    return $('loading-component')[0];
+}
 
 // 
 // DROPDOWN

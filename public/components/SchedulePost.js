@@ -143,7 +143,7 @@ class SchedulePost extends HTMLElement {
                 </div>
         `
 
-        setTimeout(this.multiLineOverflows.bind(this), 500)
+        setTimeout(this.multiLineOverflows.bind(this), 50)
     }
 }
 
