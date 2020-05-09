@@ -1,5 +1,6 @@
-$(document).ready(function () {
+$(() => {
     //HOME
+    var selectedAvatar = "";
     var selectedCategories = [];
     AddLoadingHUD()
 
@@ -112,6 +113,7 @@ $(document).ready(function () {
         } else if (serviceDescription == "" || serviceDescription == undefined) {
             openServiceModal('Atenção', "Informe uma descrição do serviço", 3, "OK", SERVICE_DESCRIPTION);
         } else {
+            Loading().open()
             $.ajax({
                 url: "/userEdit",
                 type: 'post',
@@ -121,8 +123,10 @@ $(document).ready(function () {
                     if (data.status == "ok") {
                         window.location.href = "/";
                     }
+                    Loading().close()
                 },
                 error: function (data) {
+                    Loading().close()
                     if (data.status == 401) {
                         window.location.href = "/";
                     } else if (data.status == 500) {
@@ -134,6 +138,65 @@ $(document).ready(function () {
         }
 
     });
+
+    $("img[data-edit='avatar']").click((e) => {
+        var avatar = $(e.target).attr("data-name")
+        switch(avatar){
+            case "1":
+                selectedAvatar = "avatar-1";
+                break;
+            case "2":
+                selectedAvatar = "avatar-2";
+                break;
+            case "3":
+                selectedAvatar = "avatar-3";
+                break;
+            case "4":
+                selectedAvatar = "avatar-4";
+                break;
+            case "5":
+                selectedAvatar = "avatar-5";
+                break;
+            case "6":
+                selectedAvatar = "avatar-6";
+                break;
+            case "7":
+                selectedAvatar = "avatar-7";
+                break;
+            default:
+                selectedAvatar = "avatar-8";
+                break;
+        }
+    });
+
+    $("#applyAvatar").click((e) => {
+        if (selectedAvatar != ""){
+            Loading().open()
+            $.ajax({
+                url: "/userEditAvatar",
+                type: 'post',
+                dataType: 'json',
+                contentType: 'application/json',
+                success: function (data) {
+                    Loading().close()
+                    if (data.status == "ok") {
+                        window.location.href = "/";
+                    }
+                },
+                error: function (data) {
+                    Loading().close()
+                    if (data.status == 401) {
+                        window.location.href = "/";
+                    } else if (data.status == 500) {
+                        openServiceModal('Atenção', data.responseText, 3, "OK");
+                    }
+                },
+                data: JSON.stringify({ avatar: selectedAvatar })
+            });
+        }
+        $('#modalEditAvatar').modal('hide')
+
+    })
 
     $("#btnSair").click(function (e) {
         $.ajax({

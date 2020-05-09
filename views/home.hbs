@@ -64,7 +64,7 @@
             </span>
         </div> --}}
         <div id="navuser" class="material-nav-items user-profile" data-toggle="tooltip" data-placement="bottom" title="Dados do usuário">
-          <img src="/images/avatar-1.svg" class="card-img-top" alt="...">
+          <img id="navUserAvatar" src="/images/{{session.avatar}}.svg" class="card-img-top" alt="...">
         </div>
     </div>
   </nav>
@@ -79,7 +79,7 @@
       <div class="col-md-3 col-sm-4 no-padding-margin" style="min-width: fit-content;">
         <div class="card">
           <div class="d-flex justify-content-center px-4 pt-40">
-            <img src="/images/avatar-1.svg" class="card-img-top" alt="...">
+            <img id="sideUserAvatar" src="/images/{{session.avatar}}.svg" class="card-img-top" alt="...">
           </div>
           <div class="card-body text-center">
             <h2 class="card-title"><strong>{{session.userFullname}}</strong></h2>
@@ -449,7 +449,7 @@
         <div class="modal-body">
           <div class="row header">
             <div class="col-md-3" style="padding-right: 35px; paddin-left: 10px; position:relative;">
-              <img src="/images/avatar-1.svg" class="card-img-top" alt="...">
+              <img id="userAvatarEdit" src="/images/{{session.avatar}}.svg" class="card-img-top" alt="...">
                 <div data-toggle="modal" data-target="#modalEditAvatar" class="circleEdit">
                    <span class="material-icons">
                       create
@@ -535,36 +535,36 @@
         <div class="modal-body">
           <div class="row header">
             <div class="col-md-3 col-sm-3" style="padding-right: 10px; paddin-left: 10px;">
-              <img src="/images/avatar-1.svg" class="card-img-top" alt="...">
+              <img data-name="1" data-edit="avatar" src="/images/avatar-1.svg" class="card-img-top" alt="..." style="cursor: pointer;">
             </div>
             <div class="col-md-3 col-sm-3" style="padding-right: 10px; paddin-left: 10px;">
-              <img src="/images/avatar-2.svg" class="card-img-top" alt="...">
+              <img data-name="2" data-edit="avatar" src="/images/avatar-2.svg" class="card-img-top" alt="..." style="cursor: pointer;">
             </div>
             <div class="col-md-3 col-sm-3" style="padding-right: 10px; paddin-left: 10px;">
-              <img src="/images/avatar-3.svg" class="card-img-top" alt="...">
+              <img data-name="3" data-edit="avatar" src="/images/avatar-3.svg" class="card-img-top" alt="..." style="cursor: pointer;">
             </div>
             <div class="col-md-3 col-sm-3" style="padding-right: 10px; paddin-left: 10px;">
-              <img src="/images/avatar-4.svg" class="card-img-top" alt="...">
+              <img data-name="4" data-edit="avatar" src="/images/avatar-4.svg" class="card-img-top" alt="..." style="cursor: pointer;">
             </div>
           </div>
            <div class="row header pt-4">
             <div class="col-md-3 col-sm-3" style="padding-right: 10px; paddin-left: 10px;">
-              <img src="/images/avatar-1.svg" class="card-img-top" alt="...">
+              <img data-name="5" data-edit="avatar" src="/images/avatar-5.svg" class="card-img-top" alt="..." style="cursor: pointer;">
             </div>
             <div class="col-md-3 col-sm-3" style="padding-right: 10px; paddin-left: 10px;">
-              <img src="/images/avatar-2.svg" class="card-img-top" alt="...">
+              <img data-name="6" data-edit="avatar" src="/images/avatar-6.svg" class="card-img-top" alt="..." style="cursor: pointer;">
             </div>
             <div class="col-md-3 col-sm-3" style="padding-right: 10px; paddin-left: 10px;">
-              <img src="/images/avatar-3.svg" class="card-img-top" alt="...">
+              <img data-name="7" data-edit="avatar" src="/images/avatar-7.svg" class="card-img-top" alt="..." style="cursor: pointer;">
             </div>
             <div class="col-md-3 col-sm-3" style="padding-right: 10px; paddin-left: 10px;">
-              <img src="/images/avatar-4.svg" class="card-img-top" alt="...">
+              <img data-name="8" data-edit="avatar" src="/images/avatar-8.svg" class="card-img-top" alt="..." style="cursor: pointer;">
             </div>
           </div>
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-outline-cancel" data-dismiss="modal">cancelar</button>
-          <button type="button" class="btn btn-primary dark">salvar edição</button>
+          <button id="applyAvatar" type="button" class="btn btn-primary dark">aplicar avatar</button>
         </div>
       </div>
     </div>
@@ -574,7 +574,7 @@
     <div id="modalNavuser" class="modal-user shadow-sm">
       <div style="padding-left: 48px; padding-right: 48px; padding-top: 24px;">
         <div class="d-flex justify-content-center px-4 pt-40 pb-3 user-photo">
-          <img src="/images/avatar-1.svg" class="card-img-top" alt="...">
+          <img id="editAvatarModal" src="/images/{{session.avatar}}.svg" class="card-img-top" alt="...">
             <div class="profileCircleIcon">
               <span class="material-icons">
                 create
@@ -582,8 +582,8 @@
             </div>
         </div>
         <div class="text-center">
-          <h2 class="card-title" style="font-size: 1rem !important;"><strong>Karem Carvalho</strong></h2>
-          <p class="card-text">karem.carvalho@fcamara.com.br</p>
+          <h2 class="card-title" style="font-size: 1rem !important;"><strong>{{session.userFullname}}</strong></h2>
+          <p class="card-text">{{session.email}}</p>
         </div>
         <div class="pt-3">
           <div class="d-flex justify-content-center">

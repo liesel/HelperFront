@@ -1,33 +1,36 @@
-$(()=>{
-    
-    var modalStacks = []
-    
+$(()=>{    
     // Editar Perfil
     $('#modalEditProfile').on('show.bs.modal', function (event) {
         var modal = $(this)
-        modalStacks.push('edit-profile')
+        if(window.modalStacks.length < 1) {
+            window.modalStacks.push('edit-profile')
+        }
     })
 
     $('#modalEditProfile').on('hide.bs.modal', function (event) {
         var modal = $(this)
-        modalStacks.pop()
+        if(window.modalStacks.length == 1) {
+            window.modalStacks.shift()
+        }
     })
 
     // Editar Avatar
     $('#modalEditAvatar').on('show.bs.modal', function (event) {
         var modal = $(this)
-        modalStacks.push('edit-avatar')
-        if(modalStacks.length > 0 && modalStacks[0] == 'edit-profile'){
+        if(window.modalStacks.length > 0 && window.modalStacks[0] == 'edit-profile'){
+            window.modalStacks.push('edit-avatar')
             $('#modalEditProfile').modal('hide')
+        } else if (window.modalStacks.length < 1) {
+            window.modalStacks.push('edit-avatar')
         }
     })
 
     $('#modalEditAvatar').on('hide.bs.modal', function (event) {
-        if(modalStacks.length > 0 && modalStacks[0] == 'edit-profile'){
-            modalStacks.pop()
+        if(window.modalStacks.length > 0 && modalStacks[0] == 'edit-profile'){
+            window.modalStacks.pop()
             $('#modalEditProfile').modal('show')
-        } else if (modalStacks.length > 0) {
-            modalStacks.pop()
+        } else if (window.modalStacks.length > 0) {
+            window.modalStacks.pop()
         }
     })
 
@@ -48,7 +51,7 @@ $(()=>{
 
     $('.backdropUser').on("click", (e) => {
         $('.backdropUser').removeClass("active")
-        modalStacks.pop()
+        window.modalStacks.pop()
     })
 
     $('.profileCircleIcon').on("click", ()=> {

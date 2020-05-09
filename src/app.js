@@ -87,7 +87,8 @@ app.post("/saveUser", (req, res) => {
         email:     	        req.body.email,
         name:      	        req.body.name,
         surname:   	        req.body.surname,
-        password:  	        req.body.password
+        password:  	        req.body.password,
+        avatar:             'avatar-1'
     },
     {
         headers: {
@@ -391,10 +392,10 @@ app.get('/home',redirectLogin, (req, res) => {
 })
 
 app.post('/userEdit', userIsAuthenticated, (req, res) => {
-    var name                = req.body.name; 
-    var surname             = req.body.surname; 
-    var specialization      = req.body.specialization; 
-    var serviceDescription  = req.body.serviceDescription; 
+    var name                = req.body.name;
+    var surname             = req.body.surname;
+    var specialization      = req.body.specialization;
+    var serviceDescription  = req.body.serviceDescription;
     axios.patch(`${BACK_END_URL}/v1/user/EditMyUser`, 
     {
         name:     	        name,
@@ -410,6 +411,33 @@ app.post('/userEdit', userIsAuthenticated, (req, res) => {
     }
    )
     .then(function (response) {
+        req.session.userFullname            = response.data.name+" "+response.data.surname
+        req.session.userSurname             = response.data.surname
+        req.session.username                = response.data.name
+        req.session.email                   = response.data.email
+        res.send({status:"ok"});
+    })
+    .catch(function (error) {
+        console.log(error);
+        res.send(error);
+    })
+})
+
+app.post('/userEditAvatar', userIsAuthenticated, (req, res) => {
+    var avatar                = req.body.avatar;
+    axios.patch(`${BACK_END_URL}/v1/user/EditMyUser`, 
+    {
+        avatar:             avatar
+    },
+    {
+        headers: {
+            'accept': 'application/json',
+            'HelperAutorization': `Bearer ${req.session.token}`
+        }
+    }
+   )
+    .then(function (response) {
+        req.session.avatar                  = response.data.avatar
         res.send({status:"ok"});
     })
     .catch(function (error) {
@@ -433,6 +461,7 @@ app.post('/doLogin', redirectHome, (req, res) => {
         req.session.username                = response.data.user.name
         req.session.userSpecialization      = response.data.user.specialization
         req.session.userServiceDescription  = response.data.user.serviceDescription
+        req.session.avatar                  = response.data.user.avatar
         res.locals.session                  = req.session;
         res.send({status:"ok"});
     })
