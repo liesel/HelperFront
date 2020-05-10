@@ -457,7 +457,7 @@ app.post('/doLogin', redirectHome, (req, res) => {
         password:     req.body.password
     })
     .then(function (response) {
-        console.log(response.data);
+        console.log(response.data.user._id);
         console.log("log da session");
         console.log(req.session);
         req.session.token                   = response.data.token
