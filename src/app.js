@@ -4,6 +4,7 @@ const hbs           = require('hbs')
 const bodyParser    = require('body-parser')
 const axios         = require('axios').default;
 const session       = require("express-session")
+const MongoStore    = require('connect-mongo')(session);
 const app           = express()
 const moment        = require('moment');
 const TWO_HOURS     = 1000 * 60 * 60 *2
@@ -15,7 +16,8 @@ const  {
     SESS_LIFETIME   = TWO_HOURS,
     SESS_NAME       = 'sid',
     SESS_SECRET     = 'IT`S A SECRET!!__\o/',
-    BACK_END_URL    = 'http://localhost.charlesproxy.com:3000'
+    BACK_END_URL    = 'http://localhost.charlesproxy.com:3000',
+    MONGO_URI       = 'mongodb://localhost:27017/helper-session'
 } = process.env
 
 const redirectLogin = (req, res, next) => {
@@ -65,6 +67,7 @@ app.use(session({
     nanme:                  SESS_NAME,
     resave:                 false,
     saveUninitialized:      false,
+    store:                  new MongoStore({ url: MONGO_URI }),
     secret: SESS_SECRET,
     cookie:{
         maxAge:             SESS_LIFETIME,
