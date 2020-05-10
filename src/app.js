@@ -114,6 +114,7 @@ app.post("/saveUser", (req, res) => {
         req.session.email           = response.data.user.email
         req.session.userFullname    = response.data.user.name+" "+response.data.user.surname
         req.session.username        = response.data.user.name
+        req.session.avatar          = response.data.user.avatar
         res.locals.session          = req.session;
         res.send({status:"ok"});
     })
