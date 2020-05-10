@@ -62,6 +62,7 @@ app.set('view engine', 'hbs')
 // Setup static directory to serve
 app.use(express.static(publicDirectoryPath))
 app.use( bodyParser.json() );
+console.log('TÁ EM PROD!!!!!!!!!!! '+IN_PROD);
 
 app.use(session({
     nanme:                  SESS_NAME,
@@ -457,9 +458,6 @@ app.post('/doLogin', redirectHome, (req, res) => {
         password:     req.body.password
     })
     .then(function (response) {
-        console.log(response.data.user._id);
-        console.log("log da session");
-        console.log(req.session);
         req.session.token                   = response.data.token
         req.session.userId                  = response.data.user._id
         req.session.email                   = response.data.user.email
