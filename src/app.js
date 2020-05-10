@@ -20,8 +20,10 @@ const  {
 
 const redirectLogin = (req, res, next) => {
     if (!req.session.userId) {
+        console.log("redireciono");        
         res.redirect('/');
     }else{
+        console.log("deixou passar");
         next();
     }
 }
