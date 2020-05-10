@@ -6,7 +6,7 @@ const axios         = require('axios').default;
 const session       = require("express-session")
 const MongoStore    = require('connect-mongo')(session);
 const app           = express()
-app.set('trust proxy', 1);
+app.set('trust proxy', 1); //TODO check this understand why heroku only work session with that
 const moment        = require('moment');
 const TWO_HOURS     = 1000 * 60 * 60 *2
 var categories      = []; 
@@ -74,7 +74,7 @@ app.use(session({
     cookie:{
         maxAge:             SESS_LIFETIME,
         sameSite:           true,
-        secure:             true
+        secure:             IN_PROD
     }
 }))
 
