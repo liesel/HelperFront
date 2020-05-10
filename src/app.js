@@ -464,10 +464,10 @@ app.post('/doLogin', redirectHome, (req, res) => {
         req.session.email                   = response.data.user.email
         req.session.userFullname            = response.data.user.name+" "+response.data.user.surname
         req.session.userSurname             = response.data.user.surname
+        req.session.avatar                  = response.data.user.avatar
         req.session.username                = response.data.user.name
         req.session.userSpecialization      = response.data.user.specialization
         req.session.userServiceDescription  = response.data.user.serviceDescription
-        req.session.avatar                  = response.data.user.avatar
         res.locals.session                  = req.session;
         res.send({status:"ok"});
     })
