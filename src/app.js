@@ -6,6 +6,7 @@ const axios         = require('axios').default;
 const session       = require("express-session")
 const MongoStore    = require('connect-mongo')(session);
 const app           = express()
+app.set('trust proxy', 1);
 const moment        = require('moment');
 const TWO_HOURS     = 1000 * 60 * 60 *2
 var categories      = []; 
@@ -67,13 +68,13 @@ console.log('TÁ EM PROD!!!!!!!!!!! '+IN_PROD);
 app.use(session({
     nanme:                  SESS_NAME,
     resave:                 false,
-    saveUninitialized:      false,
+    saveUninitialized:      true,
     store:                  new MongoStore({ url: MONGO_URI }),
     secret: SESS_SECRET,
     cookie:{
         maxAge:             SESS_LIFETIME,
         sameSite:           true,
-        secure:             IN_PROD
+        secure:             true
     }
 }))
 
