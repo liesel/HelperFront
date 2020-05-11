@@ -8966,11 +8966,11 @@ a.mdc-list-item {
   font-size: 0.813rem;
 }
 
-.mdc-text-field__input:required ~ .mdc-floating-label::after,
+/* .mdc-text-field__input:required ~ .mdc-floating-label::after,
 .mdc-text-field__input:required ~ .mdc-notched-outline .mdc-floating-label::after {
   margin-left: 1px;
   content: "*";
-}
+} */
 
 .mdc-text-field--textarea {
   display: inline-flex;
