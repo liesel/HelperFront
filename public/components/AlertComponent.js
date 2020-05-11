@@ -8,7 +8,20 @@ class AlertComponent extends HTMLElement {
         this.title = data.title || 'Title';
         this.type = data.type || 2;
         this.subtitle = data.subtitle || 'Subtitle';
-        this.email = data.email || '';
+
+        if(data.email){
+            var arrEmail = data.email.split("");
+            var index = arrEmail.indexOf("@");
+            if(index > 9){
+                var domain = data.email.substring(index);
+                var name = data.email.substring(0, 9);
+                var email = name + "..." + domain;
+                this.email = email;
+            } else {
+                this.email = data.email || ''
+            }
+        }
+
         this.btnText = data.btnText || '';
         this.btn = '';
 
@@ -51,7 +64,6 @@ class AlertComponent extends HTMLElement {
                     <div>${this.subtitle}</div>
                 `
                 break;
-            break;
             default:
                 this.alertStyle = 'alert-danger';
                 this.closeStyle = 'danger';
@@ -74,11 +86,6 @@ class AlertComponent extends HTMLElement {
         }
 
     }
-
-    // open(){
-    //     var alert = $($(this.root).find('.alert')[0]);
-    //     alert.addClass('show')
-    // }
 
     close(){
         var alert = $(this.root).find('#divAlert');

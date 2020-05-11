@@ -109,13 +109,18 @@ app.post("/saveUser", (req, res) => {
             res.send({status:"Usuário já cadastrado"});
             return;
         }
-        req.session.token           = response.data.token
-        req.session.userId          = response.data.user._id
-        req.session.email           = response.data.user.email
-        req.session.userFullname    = response.data.user.name+" "+response.data.user.surname
-        req.session.username        = response.data.user.name
-        req.session.avatar          = response.data.user.avatar
-        res.locals.session          = req.session;
+
+        req.session.token                   = response.data.token
+        req.session.userId                  = response.data.user._id
+        req.session.email                   = response.data.user.email
+        req.session.userFullname            = response.data.user.name+" "+response.data.user.surname
+        req.session.username                = response.data.user.name
+        req.session.avatar                  = response.data.user.avatar
+        req.session.userSurname             = response.data.user.surname
+        req.session.userSpecialization      = response.data.user.specialization
+        req.session.userServiceDescription  = response.data.user.serviceDescription
+        res.locals.session                  = req.session;
+
         res.send({status:"ok"});
     })
     .catch(function (error) {

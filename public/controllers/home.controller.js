@@ -10,6 +10,44 @@ $(() => {
     fetchServicesCount()
     fetchMySchedulesCount()
 
+    // 
+    // SUCCESS
+    // 
+
+    // callAlert({
+    //     title: "Sucesso",
+    //     type: 2,
+    //     subtitle: "Descrição"
+    // }, ()=>{
+    //     alert("success")
+    // })
+
+    // 
+    // ALERT
+    // 
+
+    // callAlert({
+    //     title: "Confirmação de e-mail",
+    //     type: 1,
+    //     email: "Karem.carvalho@fcamara.com.br"
+    // }, ()=>{
+    //     alert("warning")
+    // })
+
+    // 
+    // ERROR
+    // 
+
+    // callAlert({
+    //     title: "Error",
+    //     type: 3,
+    //     subtitle: "Descrição"
+
+    // }, ()=>{
+    //     alert("error")
+    // })
+
+
     const itemStatus = $('div.row.side-status-item')
     itemStatus.on("click", (event) => {
         for (const item of itemStatus) {
@@ -311,8 +349,6 @@ $(() => {
         selectedCategories = param1.categories;
     });
 
-    callAlert({})
-
     $('#searchSchedules').on('keypress', (e) => {
         const input = $(e.target)
 
@@ -369,12 +405,14 @@ $(() => {
         })
     }
 
-    function callAlert(data) {
+    function callAlert(data, next) {
         const container = $('#alert-container');
+        console.log(container)
         container.find('alert-component').remove();
 
         var el = document.createElement('alert-component');
-        el.config(data, () => { alert('ok!') })
+        el.config(data, next)
+        console.log(el)
 
         container.append(el)
     }
