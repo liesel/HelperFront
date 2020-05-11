@@ -318,7 +318,7 @@ $(() => {
                     Loading().close()
 
                     if (data.status == "ok") {
-                        openServiceModal('Sucesso', data.responseText, 2, 'OK', closeModalAndBackhome);
+                        openServiceModal('Sucesso', data.responseText, 2, 'OK', closeModalAndBackServices);
                     }
                 },
                 error: function (data) {
@@ -442,6 +442,11 @@ $(() => {
     function closeModalAndBackhome() {
         $("helper-service-modal")[0].close()
         window.location = "/home";
+    }
+
+    function closeModalAndBackServices(){
+        $("helper-service-modal")[0].close()
+        fetchServices()
     }
 
     async function setSchedules(schedules) {
