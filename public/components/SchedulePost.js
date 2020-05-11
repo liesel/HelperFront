@@ -7,7 +7,7 @@ class SchedulePost extends HTMLElement {
         console.log('schedule connected')
     }
 
-    config(id, photo, creator, startDate, endDate, title, description, isScheduled, isFavorited, categories, type, addSchedule) {
+    config(id, photo, creator, startDate, endDate, title, description, isScheduled, isFavorited, categories, type, addSchedule, cancelSchedule, isMine) {
         this.id = id;
         this.creator = creator;
         this.photo = photo || "/images/avatar-1.svg";
@@ -22,9 +22,18 @@ class SchedulePost extends HTMLElement {
         this.isScheduled = isScheduled || true;
         this.favoriteIcon = isFavorited ? 'favorite' : 'favorite_border';
         this.categories = categories;
+        this.isMine = isMine || false;
+
         this.render();
+        
         let btnLike = $(this).find('#add-to-favorites')
         let btnSchedule = $(this).find('#agendar')
+
+        if(this.isMine){
+            let btnCancel = $(this).find('#cancelar')
+            btnCancel.on('click', cancelSchedule.bind(null))
+        }
+
         btnLike.on('click', this.like.bind(this))
 
         var data = {
@@ -71,6 +80,11 @@ class SchedulePost extends HTMLElement {
 
     render() {
         var listOfCategories = "";
+        var btnCancel = "";
+
+        if(this.isMine){
+            btnCancel = `<button id="cancelar" type="button" class="btn btn-outline-cancel" data-dismiss="modal">cancelar</button>`
+        }
 
         this.categories.forEach((item) => {
           listOfCategories += "#"+ item.category.name + "  ";
@@ -132,11 +146,11 @@ class SchedulePost extends HTMLElement {
                     </div>
                     <div class="row footer">
                         <div class="ml-auto">
-                            <button type="button" class="btn btn-outline-cancel" data-dismiss="modal">cancelar</button>
-                            <button id="agendar" class="mdc-button dark">
+                            ${btnCancel}
+                            <button id="agendar" class="mdc-button ${this.isMine ? 'light' : 'dark'}">
                             <div class="mdc-button__ripple"></div>
                             <i class="material-icons mdc-button__icon" aria-hidden="true">event</i>
-                            <span class="mdc-button__label">agendar</span>
+                            <span class="mdc-button__label">${this.isMine ? 'agendado' : 'agendar'}</span>
                             </button>
                         </div>
                     </div>

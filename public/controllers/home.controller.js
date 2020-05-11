@@ -9,6 +9,7 @@ $(() => {
     fetchNextSchedules()
     fetchServicesCount()
     fetchMySchedulesCount()
+    fetchSchedules()
 
     // 
     // SUCCESS
@@ -423,7 +424,15 @@ $(() => {
 
     function testAgendar(data) {
         console.log(data)
-        openServiceModal('Atenção', `Tem certeza que deseja agendar? ID: ${data.id}; DATA INICIAL: ${data.startDate}`, 1, undefined, undefined, confirmModalAfterSchedule.bind(null, data));
+        openServiceModal('Atenção', `Tem certeza que deseja agendar?`, 1, undefined, undefined, confirmModalAfterSchedule.bind(null, data));
+    }
+
+    function testCancel(){
+        alert("cancel")
+    }
+
+    function testEdit(){
+        alert("edit")
     }
 
     function confirmModalAfterSchedule(data){
@@ -444,6 +453,23 @@ $(() => {
             el.config(schedule._id, schedule.photo, schedule.CreatorId, schedule.ScheduleDate, schedule.ScheduleDateEnd,
                 schedule.serviceName, schedule.description, schedule.isScheduled, schedule.isFavorited, schedule.categories, schedule.ScheduleType,
                 testAgendar
+            )
+            fragment.append(el)
+        });
+        container.append(fragment)
+    }
+
+    async function setServices(services) {
+        const container = $($('feed-container')[0].shadow);
+        container.find('helper-service').remove()
+        const fragment = $(document.createDocumentFragment())
+        console.log("MY SERVICES")
+        console.log(services)
+        services.forEach(service => {
+            const el = document.createElement('helper-service')
+            el.config(service._id, service.photo, service.CreatorId, service.ScheduleDate, service.ScheduleDateEnd,
+                service.serviceName, service.description, service.categories, service.ScheduleType,
+                testEdit, testCancel, service.number
             )
             fragment.append(el)
         });
@@ -485,7 +511,7 @@ $(() => {
             dataType: 'json',
             contentType: 'application/json',
             success: function (data) {
-                setSchedules(data.schedules)
+                setServices(data.schedules)
                 Loading().close()
             },
             error: function (data) {
