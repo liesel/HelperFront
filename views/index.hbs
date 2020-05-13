@@ -1,10 +1,15 @@
 <!doctype html>
-<html lang="pt-br">
+<html lang="pt-br" itemscope itemtype="http://schema.org/Article">
 
 <head>
   <!-- Required meta tags -->
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+  <!-- Google SignIn -->
+  <meta name="google-signin-scope" content="profile email">
+  <meta name="google-signin-client_id" content="257771422298-kf6vcatq65esnjinr5oejg9o1el7lb51.apps.googleusercontent.com">
+  <script src="https://apis.google.com/js/platform.js" async defer></script>
 
   <!-- Font -->
   <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@400;500;700;800&display=swap" rel="stylesheet">
@@ -19,7 +24,7 @@
   <link rel="stylesheet" href="/css/components/textfield.css">
   <link rel="stylesheet" href="/css/components/radio.css">
   <link rel="stylesheet" href="/css/components/dropdown.css">
-  <link rel="stylesheet" href="/css/side-modal.css"
+  <link rel="stylesheet" href="/css/side-modal.css">
 
   <!-- Required styles for MDC Web -->
   <link rel="stylesheet" href="/css/material-components-web.css">
@@ -54,9 +59,8 @@
   <!-- Side Modal -->
   <div class="backdrop">
     <div class="side-modal shadow-lg">
-      <div data-form="login">
+      <div data-form="login" class="pb-4">
         <h2 class="modal-title">Login</h2>
-        
           <div class="pt-4">
             <label class="mdc-text-field mdc-text-field--outlined" style="width: 100%;">
               <input type="email" id="txtEmailLogin" name="txtEmailLogin" class="mdc-text-field__input" placeholder="Insira aqui seu e-mail"
@@ -109,6 +113,8 @@
           </div>
           <button type="submit" id="btnLogin" name="btnLogin" class="btn btn-primary btn-block btn-raised register">entrar</button>
           <div class="login-info">Ainda não tem cadastro? <a id="redirect-signup" style="cursor: pointer;">Crie uma conta</a></div>
+
+          <div class="g-signin2" data-onsuccess="onSignIn" data-theme="dark" style="width: 100% !important;"></div>
         
       </div>
       <div data-form="register" class="invisible">
@@ -143,13 +149,13 @@
             </label>
           </div>
           <div class="pt-4">
-            <label class="mdc-text-field mdc-text-field--outlined" style="width: 100%;">
+            <label id="labelEmailRegister" class="mdc-text-field mdc-text-field--outlined" style="width: 100%;">
               <input type="email" id="txtEmailRegister" name="txtEmailRegister" class="mdc-text-field__input" placeholder="Insira aqui seu e-mail"
                 aria-labelledby="user" required>
               <span class="mdc-notched-outline">
                 <span class="mdc-notched-outline__leading"></span>
                 <span class="mdc-notched-outline__notch">
-                  <span class="mdc-floating-label" id="user">Usuário</span>
+                  <span class="mdc-floating-label" id="emailLabelFloating">Usuário</span>
                 </span>
                 <span class="mdc-notched-outline__trailing">
                 </span>
@@ -184,7 +190,7 @@
               </div>
               <div class="mdc-checkbox__ripple"></div>
             </div>
-            <label for="checkbox-termos" style="margin-bottom: 0; text-align: start;">
+            <label for="checkbox-termos" style="margin-bottom: 0; text-align: start; padding-bottom: 24px;">
               Ao se registar, você concorda com os <strong>termos de uso</strong> e a <strong>politica de privacidade</strong></label>
           </div>
         </form>
@@ -229,7 +235,7 @@ integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifw
 crossorigin="anonymous"></script>
 
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.bundle.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/inputmask/4.0.9/jquery.inputmask.bundle.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/inputmask/4.0.9/jquery.inputmask.bundle.min.js"></script>
 <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.13.1/js/bootstrap-select.min.js"></script> -->
 
 <!-- ASSETS -->
@@ -246,6 +252,21 @@ crossorigin="anonymous"></script>
 <script src="/utils/main.js"></script>
 <script src="/controllers/login.controller.js"></script>
 <script src="/controllers/register.controller.js"></script>
+
+<script>
+  function onSignIn(googleUser) {
+    var profile = googleUser.getBasicProfile();
+    // console.log('ID: ' + profile.getId()); // Do not send to your backend! Use an ID token instead.
+    // console.log('Name: ' + profile.getName());
+    // console.log('Image URL: ' + profile.getImageUrl());
+    console.log('Email: ' + profile.getEmail()); // This is null if the 'email' scope is not present.
+    console.log("profile: ", googleUser.getBasicProfile())
+
+    var email = profile.getEmail()
+    window.signInCallback(email)
+  }
+
+</script>
 
 </body>
 

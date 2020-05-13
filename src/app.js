@@ -483,6 +483,38 @@ app.post('/doLogin', redirectHome, (req, res) => {
     })
 })
 
+app.post('/doGoogleLogin', redirectHome, (req, res) => {
+
+    // console.log('https://helperfc.herokuapp.com/callBackGoogle')
+    axios.post(`${BACK_END_URL}/v1/user/login-google`, {
+        email:        req.body.email,
+    })
+    .then(function (response) {
+        console.log(response.data)
+
+        if(response.data.status != 401){
+            req.session.token                   = response.data.token
+            req.session.userId                  = response.data.user._id
+            req.session.email                   = response.data.user.email
+            req.session.userFullname            = response.data.user.name+" "+response.data.user.surname
+            req.session.userSurname             = response.data.user.surname
+            req.session.avatar                  = response.data.user.avatar
+            req.session.username                = response.data.user.name
+            req.session.userSpecialization      = response.data.user.specialization
+            req.session.userServiceDescription  = response.data.user.serviceDescription
+            res.locals.session                  = req.session;
+            res.send({status:"ok"});
+        } else {
+            res.send({status:"google-unauthorized"})
+        }
+
+    })
+    .catch(function (error) {
+        console.log(error);
+        res.status(401).send('Não autorizado');
+    })
+})
+
 
 app.listen(PORT, () => {
     console.log(`Server is up on port ${PORT} `)

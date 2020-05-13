@@ -38,6 +38,10 @@
 
   <link href="https://unpkg.com/gijgo@1.9.13/css/gijgo.min.css" rel="stylesheet" type="text/css" />
 
+  <!-- Google SignIn -->
+  <meta name="google-signin-scope" content="profile email">
+  <meta name="google-signin-client_id" content="257771422298-kf6vcatq65esnjinr5oejg9o1el7lb51.apps.googleusercontent.com">
+
   <title>Helper</title>
 </head>
 
@@ -634,7 +638,7 @@
   <!-- CONTROLLERS -->
   <script src="/controllers/home.controller.js"></script>
 
-    <script src="/scripts/bootstrap-datepicker.js"></script>
+  <script src="/scripts/bootstrap-datepicker.js"></script>
   <script src="/scripts/bootstrap-datepicker.pt-BR.min.js"></script>
 
   <!-- UTILS -->
@@ -648,7 +652,16 @@
   <script src="/components/AlertComponent.js"></script>
   <script src="/components/LoadingComponent.js"></script>
   <script src="/utils/main.js"></script>
-  
+
+  <script>
+    function onLoad() {
+      gapi.load('auth2', function() {
+          gapi.auth2.init();
+      });
+    }
+  </script>
+
+  <script src="https://apis.google.com/js/platform.js?onload=onLoad" async defer></script>
 
 </body>
 
