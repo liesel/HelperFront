@@ -677,7 +677,7 @@ $(() => {
         const container = $('#side-feed');
         const fragment = $(document.createDocumentFragment())
 
-        for (let i = 0; i < 2; i++) {
+        for (let i = 0; i < 3; i++) {
             const el = document.createElement('helper-schedule-next')
             el.schedule = {};
             fragment.append(el);

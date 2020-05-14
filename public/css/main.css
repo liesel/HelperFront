@@ -25,6 +25,111 @@ body {
     font-family: Raleway,Roboto,Helvetica,Arial,sans-serif !important;
     background-color: #EBECEE !important;
     font-size: 0.889rem !important;
+    overflow-x: hidden;
+}
+
+/* Extra small devices (phones, 600px and down) */
+@media only screen and (max-width: 600px) {
+
+}
+
+/* Small devices (portrait tablets and large phones, 600px and up) */
+@media only screen and (min-width: 600px) {
+
+}
+
+/* Medium devices (landscape tablets, 768px and up) */
+@media only screen and (min-width: 768px) {
+    .row-container {
+        left: 20%;
+        transform: translateX(-20%);
+    }
+    .col-calendar {
+        display: none;
+    }
+}
+
+/* Large devices (laptops/desktops, 992px and up) */
+@media only screen and (min-width: 992px) {
+    .row-container {
+        left: 25%;
+        transform: translateX(-20%);
+    }
+    .col-calendar {
+        display: none;
+    }
+
+}
+
+/* Extra large devices (large laptops and desktops, 1200px and up) */
+@media only screen and (min-width: 1280px) {
+    .row-container {
+        left: 20.5%;
+        transform: translateX(-20.5%);
+    }
+
+    .col-calendar {
+        display: block;
+    }
+}
+
+@media only screen and (min-width: 1330px) {
+    .row-container {
+        left: 22%;
+        transform: translateX(-20.5%);
+    }
+
+    .col-calendar {
+        display: block;
+    }
+}
+
+@media only screen and (min-width: 1400px) {
+    .row-container {
+        left: 25.5%;
+        transform: translateX(-20.5%);
+    }
+
+    .col-calendar {
+        display: block;
+    }
+}
+
+.row-container {
+    position: relative;
+    padding-left: 15px;
+    padding-right: 15px;
+    padding-top: 48px;
+    padding-bottom: 48px;
+    display: inline-flex;
+}
+
+.col-user {
+    position: sticky;
+    top:120px;
+    margin-left: 10px;
+    width: 304px;
+    height: 616px;
+}
+
+.col-feed {
+    position: relative;
+    width: 600px;
+    padding-left: 31px;
+    padding-right: 33px;
+}
+
+.comp-calendar {
+    width: 302px;
+    padding-bottom: 4px;
+}
+
+.col-calendar {
+    position: sticky;
+    top: 120px;
+    float: left;
+    width: 302px;
+    height: 1062px;
 }
 
 p {
@@ -203,7 +308,7 @@ div.side-status-item.clicked > span, div.side-status-item.clicked > p {
 
 .tooltip-inner {
     margin-top: 6px !important;
-    background-color: var(--theme-primary-main,#173863) !important;
+    background-color: #00005B !important;
     padding-left: 20px !important;
     padding-right: 20px !important;
 }
