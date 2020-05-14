@@ -1,4 +1,4 @@
-$(document).ready(() => {
+$(document).ready((e) => {
     const btnDoLogin         = $("#btnLogin");
 
     window.signInCallback = (email) => {
@@ -15,16 +15,13 @@ $(document).ready(() => {
                 },
                 error: function (data) {
                     var serviceModal = $("helper-service-modal")[0]
-
                     if(data.status = "google-unauthorized"){
-                        // reset if screen has been refreshed
 
                         var auth2 = gapi.auth2.getAuthInstance();
                         auth2.signOut().then(function () {
                             console.log('User signed out.');
                         });
                         
-                        // config textfield
                         $('#txtEmailRegister').val(email)
                         $('#txtEmailRegister').addClass('mdc-text-field--disabled')
                         $('#txtEmailRegister').attr('disabled', true)

@@ -89,9 +89,11 @@ app.get('/',redirectHome, (req, res) => {
 
 app.post("/saveUser", (req, res) => {
     
+    var email = req.session.email || req.body.email;
+
     axios.post(`${BACK_END_URL}/v1/user/createUser`, 
     {
-        email:     	        req.body.email,
+        email:     	        email,
         name:      	        req.body.name,
         surname:   	        req.body.surname,
         password:  	        req.body.password,
@@ -484,8 +486,6 @@ app.post('/doLogin', redirectHome, (req, res) => {
 })
 
 app.post('/doGoogleLogin', redirectHome, (req, res) => {
-
-    // console.log('https://helperfc.herokuapp.com/callBackGoogle')
     axios.post(`${BACK_END_URL}/v1/user/login-google`, {
         email:        req.body.email,
     })
@@ -505,6 +505,8 @@ app.post('/doGoogleLogin', redirectHome, (req, res) => {
             res.locals.session                  = req.session;
             res.send({status:"ok"});
         } else {
+            req.session.email                   = req.body.email;
+            res.locals.session                  = req.session;
             res.send({status:"google-unauthorized"})
         }
 

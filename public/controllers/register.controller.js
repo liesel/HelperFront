@@ -1,7 +1,6 @@
 $(document).ready(function () {
     const url_back      = "http://localhost:3000/";
 
-
     function dateRangeError(){
         $("helper-service-modal")[0].close()
     }
@@ -18,10 +17,9 @@ $(document).ready(function () {
         serviceModal.open()
     }
 
-
-
     $("#btnRegisterUser").click(function (e) { 
         e.preventDefault();
+
         const name      = $("#txtNameRegister").val();
         const surname   = $("#txtSurnameRegister").val();
         const email     = $("#txtEmailRegister").val();
