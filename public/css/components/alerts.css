@@ -14,8 +14,12 @@
 }
 
 #alert-container {
-    padding-left: 0px !important;
-    padding-right: 0px !important;
+    position: relative;
+    left: 50%;
+    max-width: 1220px;
+    padding-left: 8px !important;
+    padding-right: 8px !important;
+    transform: translateX(-50.5%);
 }
 
 .alert-warning {

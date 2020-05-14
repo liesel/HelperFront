@@ -110,7 +110,7 @@ class SchedulePost extends HTMLElement {
                             <div class="pt-2"><strong>${this.name}</strong></div>
                             <div>${this.specialization}</div>
                         </div>
-                        <div class="ml-auto" style="margin-right: -15px !important;">
+                        <div class="ml-auto" style="margin-right: -15px !important; display: none;">
                             <button id="add-to-favorites"
                             class="mdc-icon-button"
                             aria-label="Add to favorites"

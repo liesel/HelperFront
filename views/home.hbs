@@ -75,123 +75,126 @@
 
   <!-- CONTAINER -->
   <div class="container-fluid">
+          
+    <!-- ALERT -->
+    {{!-- <div id="alert-container"></div> --}}
     <div class="row-container">
-      <!-- ALERT -->
-      {{!-- <div id="alert-container" class="col-12"></div> --}}
 
-      <!-- SIDE NAV -->
-      <div class="col-user">
-        <div class="card">
-          <div class="d-flex justify-content-center px-4 pt-40">
-            <img id="sideUserAvatar" src="/images/{{session.avatar}}.svg" class="card-img-top" alt="...">
-          </div>
-          <div class="card-body text-center">
-            <h2 class="card-title"><strong>{{session.userFullname}}</strong></h2>
-            <div>
-              <p class="card-text">{{session.email}}</p>
-              {{!-- <p class="card-text">UX Designer I Lorem psilum</p> --}}
+        <!-- SIDE NAV -->
+        <div class="col-user">
+          <div class="card">
+            <div class="d-flex justify-content-center px-4 pt-40">
+              <img id="sideUserAvatar" src="/images/{{session.avatar}}.svg" class="card-img-top" alt="...">
             </div>
-            <div class="divisor"></div>
-            <div>
-              <div data-link="home" class="row justify-content-between side-status-item clicked">
-                <span class="material-icons pb-1">
-                    home
-                </span>
-                <p class="mr-auto pl-3" style="padding-top: 2px !important;">Home</p>
+            <div class="card-body text-center">
+              <h2 class="card-title"><strong>{{session.userFullname}}</strong></h2>
+              <div>
+                <p class="card-text">{{session.email}}</p>
+                {{!-- <p class="card-text">UX Designer I Lorem psilum</p> --}}
               </div>
-              <div data-link="servicos" class="row justify-content-between side-status-item">
+              <div class="divisor"></div>
+              <div>
+                <div data-link="home" class="row justify-content-between side-status-item clicked">
+                  <span class="material-icons pb-1">
+                      home
+                  </span>
+                  <p class="mr-auto pl-3" style="padding-top: 2px !important;">Home</p>
+                </div>
+                <div data-link="servicos" class="row justify-content-between side-status-item">
+                  <span class="material-icons pb-1">
+                      videocam
+                  </span>
+                  <p class="mr-auto pl-3" style="padding-top: 2px !important;">Serviços adicionados</p>
+                  <p id="countServices" class="side-index">10</p>
+                </div>
+                <div data-link="agendamentos" class="row justify-content-between side-status-item">
+                  <span class="material-icons pb-1">
+                      event
+                  </span>
+                  <p class="mr-auto pl-3" style="padding-top: 2px !important;">Meus agendamentos</p>
+                  <p id="countMySchedules" class="side-index">4</p>
+                </div>
+                {{!-- <div data-link="favoritos" class="row justify-content-between side-status-item">
+                  <span class="material-icons pb-1">
+                      favorite
+                  </span>
+                  <p class="mr-auto pl-3" style="padding-top: 2px !important;">Favoritos</p>
+                  <p class="side-index">05</p>
+                </div> --}}
+              </div>
+              <div class="divisor"></div>
+              <div class="row justify-content-between side-info-item">
                 <span class="material-icons pb-1">
                     videocam
                 </span>
-                <p class="mr-auto pl-3" style="padding-top: 2px !important;">Serviços adicionados</p>
-                <p id="countServices" class="side-index">10</p>
+                <p class="mr-auto pl-3" style="padding-top: 2px !important;">Minhas colaborações</p>
+                <p class="side-index" id="schedulesGiven" name="schedulesGiven" ></p>
               </div>
-              <div data-link="agendamentos" class="row justify-content-between side-status-item">
+              <div class="row justify-content-between side-info-item">
                 <span class="material-icons pb-1">
                     event
                 </span>
-                <p class="mr-auto pl-3" style="padding-top: 2px !important;">Meus agendamentos</p>
-                <p id="countMySchedules" class="side-index">4</p>
-              </div>
-              {{!-- <div data-link="favoritos" class="row justify-content-between side-status-item">
-                <span class="material-icons pb-1">
-                    favorite
-                </span>
-                <p class="mr-auto pl-3" style="padding-top: 2px !important;">Favoritos</p>
-                <p class="side-index">05</p>
-              </div> --}}
-            </div>
-            <div class="divisor"></div>
-            <div class="row justify-content-between side-info-item">
-              <span class="material-icons pb-1">
-                  videocam
-              </span>
-              <p class="mr-auto pl-3" style="padding-top: 2px !important;">Minhas colaborações</p>
-              <p class="side-index" id="schedulesGiven" name="schedulesGiven" ></p>
-            </div>
-            <div class="row justify-content-between side-info-item">
-              <span class="material-icons pb-1">
-                  event
-              </span>
-              <p class="mr-auto pl-3" style="padding-top: 2px !important;">Agendamentos obtidos</p>
-              <p class="side-index" id="schedulesRecivied" name="schedulesRecivied"></p>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- MIDDLE -->
-      <div class="col-feed">
-        <!-- ADD SERVICE -->
-        <div class="card">
-          <div class="row justify-content-between no-padding-margin column-service">
-              <span class="bold col-md-8" style="font-size: 1.125rem !important;">Olá, {{session.username}} inicie sua colaboração</span>
-              <button type="button" class="btn col-md-3 fill ml-auto" data-toggle="modal" data-target="#modalAddService">
-                adicionar serviço
-              </button>
-          </div>
-        </div>
-        <!-- SEARCH BAR -->
-        <div class="card pt-4 mt-4 div-search">
-          <h2 class="card-title text-center"><strong>Comece sua busca por colaborações aqui</strong></h2>
-          <div style="padding: 24px 32px 32px 32px;">
-            <label class="mdc-text-field mdc-text-field--fullwidth mdc-text-field--with-leading-icon text-search">
-              <i class="material-icons mdc-text-field__icon mdc-text-field__icon--leading" style="color: #EBECEE;" tabindex="0" role="button">search</i>
-              <input id="searchSchedules"
-                     class="mdc-text-field__input"
-                     type="text"
-                     placeholder="Pesquise por aulas, consultas e cursos"
-                     aria-label="Pesquise por aulas, consultas e cursos"
-                     style="padding-left: 48px !important; padding-right: 48px !important;">
-              <div class="mdc-line-ripple" style="display: none;"></div>
-            </label>
-          </div>
-        </div>
-        <!-- CONTENT -->
-        <feed-container></feed-container>
-      </div>
-      <!-- CALENDAR -->
-      <div class="col-calendar">
-          <div id="calendar" class="comp-calendar">
-          </div>
-          <div class="mt-4">
-            <div class="card col-12" style="padding: 18px;">
-              <div>
-                <div class="row">
-                  <div class="col-8" style="padding-right: 0 !important;">
-                    <h4>Seus próximos agendamentos</h4>
-                  </div>
-                  <div class="col-4">
-                    <div id="btntest" class="pl-auto showAll" style="margin-top: -4px !important;">ver tudo</div>
-                  </div>
-                </div>
-
-                <div id="side-feed" class="pt-3">
-                </div>
+                <p class="mr-auto pl-3" style="padding-top: 2px !important;">Agendamentos obtidos</p>
+                <p class="side-index" id="schedulesRecivied" name="schedulesRecivied"></p>
               </div>
             </div>
           </div>
-      </div>
+        </div>
+
+        <!-- MIDDLE -->
+        <div class="col-feed">
+          <!-- ADD SERVICE -->
+          <div class="card">
+            <div class="row justify-content-between no-padding-margin column-service">
+                <span class="bold col-md-8" style="font-size: 1.125rem !important;">Olá, {{session.username}} inicie sua colaboração</span>
+                <button type="button" class="btn col-md-3 fill ml-auto" data-toggle="modal" data-target="#modalAddService">
+                  adicionar serviço
+                </button>
+            </div>
+          </div>
+          <!-- SEARCH BAR -->
+          <div class="card pt-4 mt-4 div-search">
+            <h2 class="card-title text-center"><strong>Comece sua busca por colaborações aqui</strong></h2>
+            <div style="padding: 24px 32px 32px 32px;">
+              <label class="mdc-text-field mdc-text-field--fullwidth mdc-text-field--with-leading-icon text-search">
+                <i class="material-icons mdc-text-field__icon mdc-text-field__icon--leading" style="color: #EBECEE;" tabindex="0" role="button">search</i>
+                <input id="searchSchedules"
+                      class="mdc-text-field__input"
+                      type="text"
+                      placeholder="Pesquise por aulas, consultas e cursos"
+                      aria-label="Pesquise por aulas, consultas e cursos"
+                      style="padding-left: 48px !important; padding-right: 48px !important;">
+                <div class="mdc-line-ripple" style="display: none;"></div>
+              </label>
+            </div>
+          </div>
+          <!-- CONTENT -->
+          <feed-container></feed-container>
+        </div>
+
+        <!-- CALENDAR -->
+        <div class="col-calendar">
+            <div id="calendar" class="comp-calendar">
+            </div>
+            <div class="mt-4">
+              <div class="card col-12" style="padding: 18px;">
+                <div>
+                  <div class="row">
+                    <div class="col-8" style="padding-right: 0 !important;">
+                      <h4>Seus próximos agendamentos</h4>
+                    </div>
+                    <div class="col-4">
+                      <div id="btntest" class="pl-auto showAll" style="margin-top: -4px !important;">ver tudo</div>
+                    </div>
+                  </div>
+
+                  <div id="side-feed" class="pt-3">
+                  </div>
+                </div>
+              </div>
+            </div>
+        </div>
+      
     </div>
   </div>
 
