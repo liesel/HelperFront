@@ -10,6 +10,7 @@ $(() => {
     fetchServicesCount()
     fetchMySchedulesCount()
     fetchSchedules()
+    console.log(window)
 
     // 
     // SUCCESS
@@ -131,6 +132,13 @@ $(() => {
         });
     }
 
+    function logout(){
+        var auth2 = gapi.auth2.getAuthInstance();
+        auth2.signOut().then(function () {
+            console.log('User signed out.');
+        });
+    }
+
     $("#btnSaveEdition").click(function (e) {
         e.preventDefault();
 
@@ -238,6 +246,9 @@ $(() => {
     })
 
     $("#btnSair").click(function (e) {
+
+        logout()
+
         $.ajax({
             url: "/doLogout",
             type: 'post',
@@ -257,8 +268,7 @@ $(() => {
             },
             data: {}
         });
-
-
+    
     });
 
     $("#btnSaveService").click(function (e) {
@@ -667,7 +677,7 @@ $(() => {
         const container = $('#side-feed');
         const fragment = $(document.createDocumentFragment())
 
-        for (let i = 0; i < 2; i++) {
+        for (let i = 0; i < 3; i++) {
             const el = document.createElement('helper-schedule-next')
             el.schedule = {};
             fragment.append(el);

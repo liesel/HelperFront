@@ -45,3 +45,8 @@
     font-weight: bold !important;
     border-color: var(--theme-secondary-main,#1594C4) !important;
 }
+
+.abcRioButton {
+    margin-top: 16px !important;
+    width: 100% !important;
+}

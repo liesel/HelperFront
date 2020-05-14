@@ -89,9 +89,11 @@ app.get('/',redirectHome, (req, res) => {
 
 app.post("/saveUser", (req, res) => {
     
+    var email = req.session.email || req.body.email;
+
     axios.post(`${BACK_END_URL}/v1/user/createUser`, 
     {
-        email:     	        req.body.email,
+        email:     	        email,
         name:      	        req.body.name,
         surname:   	        req.body.surname,
         password:  	        req.body.password,
@@ -476,6 +478,38 @@ app.post('/doLogin', redirectHome, (req, res) => {
         req.session.userServiceDescription  = response.data.user.serviceDescription
         res.locals.session                  = req.session;
         res.send({status:"ok"});
+    })
+    .catch(function (error) {
+        console.log(error);
+        res.status(401).send('Não autorizado');
+    })
+})
+
+app.post('/doGoogleLogin', redirectHome, (req, res) => {
+    axios.post(`${BACK_END_URL}/v1/user/login-google`, {
+        email:        req.body.email,
+    })
+    .then(function (response) {
+        console.log(response.data)
+
+        if(response.data.status != 401){
+            req.session.token                   = response.data.token
+            req.session.userId                  = response.data.user._id
+            req.session.email                   = response.data.user.email
+            req.session.userFullname            = response.data.user.name+" "+response.data.user.surname
+            req.session.userSurname             = response.data.user.surname
+            req.session.avatar                  = response.data.user.avatar
+            req.session.username                = response.data.user.name
+            req.session.userSpecialization      = response.data.user.specialization
+            req.session.userServiceDescription  = response.data.user.serviceDescription
+            res.locals.session                  = req.session;
+            res.send({status:"ok"});
+        } else {
+            req.session.email                   = req.body.email;
+            res.locals.session                  = req.session;
+            res.send({status:"google-unauthorized"})
+        }
+
     })
     .catch(function (error) {
         console.log(error);

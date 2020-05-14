@@ -1,5 +1,52 @@
-$(document).ready(() => {
+$(document).ready((e) => {
     const btnDoLogin         = $("#btnLogin");
+
+    window.signInCallback = (email) => {
+        if (email != undefined) {
+            $.ajax({
+                url:            "/doGoogleLogin",
+                type:           'post',
+                dataType:       'json',
+                contentType:    'application/json',
+                success: function (data) {
+                    if (data.status == "ok") {
+                        window.location = "/home";
+                    }
+                },
+                error: function (data) {
+                    var serviceModal = $("helper-service-modal")[0]
+                    if(data.status = "google-unauthorized"){
+
+                        var auth2 = gapi.auth2.getAuthInstance();
+                        auth2.signOut().then(function () {
+                            console.log('User signed out.');
+                        });
+                        
+                        $('#txtEmailRegister').val(email)
+                        $('#txtEmailRegister').addClass('mdc-text-field--disabled')
+                        $('#txtEmailRegister').attr('disabled', true)
+
+                        $('#labelEmailRegister').addClass('mdc-text-field--disabled')
+                        $('#emailLabelFloating').css("display", "none")
+                        $('#labelEmailRegister').removeClass("mdc-text-field--invalid")
+
+                        window.redirectToSignup()
+                    } else {
+                        serviceModal.config({
+                            type: 3,
+                            title: 'Login Inválido!',
+                            subtitle: 'Por favor, verifique as credenciais.',
+                            btnText:    "OK"
+                        }, ()=>{ 
+                            serviceModal.close() 
+                        })
+                        serviceModal.open()
+                    }
+                },
+                data: JSON.stringify({email: email})
+            });
+        }
+    }
 
     $("#btnRecoverPassword").click(function (e) { 
         var email = $("#txEmailForgot").val();

@@ -133,18 +133,24 @@
         })
 
         $('#redirect-signup').on("click", ()=> {
-            redirectToSignup()
+            window.redirectToSignup()
         })
 
         btnRegister.on("click", () => {
-           redirectToSignup()
+            window.redirectToSignup()
+
+            $('#txtEmailRegister').val("")
+            $('#txtEmailRegister').removeClass('mdc-text-field--disabled')
+            $('#txtEmailRegister').attr('disabled', false)
+            $('#labelEmailRegister').removeClass('mdc-text-field--disabled')
+            $('#emailLabelFloating').css("display", "inline-block")
         })
 
         btnForgot.on("click", () => {
             redirectToForgot()
         })
 
-        var redirectToSignup =() => {
+        window.redirectToSignup = () => {
             modal.removeClass("active").addClass("active")
             registerDiv.removeClass("invisible")
             loginDiv.removeClass("invisible").addClass("invisible")

@@ -38,6 +38,10 @@
 
   <link href="https://unpkg.com/gijgo@1.9.13/css/gijgo.min.css" rel="stylesheet" type="text/css" />
 
+  <!-- Google SignIn -->
+  <meta name="google-signin-scope" content="profile email">
+  <meta name="google-signin-client_id" content="257771422298-kf6vcatq65esnjinr5oejg9o1el7lb51.apps.googleusercontent.com">
+
   <title>Helper</title>
 </head>
 
@@ -71,12 +75,12 @@
 
   <!-- CONTAINER -->
   <div class="container-fluid">
-    <div class="row main">
+    <div class="row-container">
       <!-- ALERT -->
-      <div id="alert-container" class="col-12"></div>
+      {{!-- <div id="alert-container" class="col-12"></div> --}}
 
       <!-- SIDE NAV -->
-      <div class="col-md-3 col-sm-4 no-padding-margin" style="min-width: fit-content;">
+      <div class="col-user">
         <div class="card">
           <div class="d-flex justify-content-center px-4 pt-40">
             <img id="sideUserAvatar" src="/images/{{session.avatar}}.svg" class="card-img-top" alt="...">
@@ -137,7 +141,7 @@
       </div>
 
       <!-- MIDDLE -->
-      <div class="col-lg-7 col-md-4 col-sm-6 px-32">
+      <div class="col-feed">
         <!-- ADD SERVICE -->
         <div class="card">
           <div class="row justify-content-between no-padding-margin column-service">
@@ -167,8 +171,8 @@
         <feed-container></feed-container>
       </div>
       <!-- CALENDAR -->
-      <div class="col-md-2 col-sm-1 no-padding-margin">
-          <div id="calendar" width="100% important;">
+      <div class="col-calendar">
+          <div id="calendar" class="comp-calendar">
           </div>
           <div class="mt-4">
             <div class="card col-12" style="padding: 18px;">
@@ -571,7 +575,7 @@
   </div>
 
   <div class="backdropUser">
-    <div id="modalNavuser" class="modal-user shadow-sm">
+    <div id="modalNavuser" class="modal-user shadow">
       <div style="padding-left: 48px; padding-right: 48px; padding-top: 24px;">
         <div class="d-flex justify-content-center px-4 pt-40 pb-3 user-photo">
           <img id="editAvatarModal" src="/images/{{session.avatar}}.svg" class="card-img-top" alt="...">
@@ -634,7 +638,7 @@
   <!-- CONTROLLERS -->
   <script src="/controllers/home.controller.js"></script>
 
-    <script src="/scripts/bootstrap-datepicker.js"></script>
+  <script src="/scripts/bootstrap-datepicker.js"></script>
   <script src="/scripts/bootstrap-datepicker.pt-BR.min.js"></script>
 
   <!-- UTILS -->
@@ -648,7 +652,16 @@
   <script src="/components/AlertComponent.js"></script>
   <script src="/components/LoadingComponent.js"></script>
   <script src="/utils/main.js"></script>
-  
+
+  <script>
+    function onLoad() {
+      gapi.load('auth2', function() {
+          gapi.auth2.init();
+      });
+    }
+  </script>
+
+  <script src="https://apis.google.com/js/platform.js?onload=onLoad" async defer></script>
 
 </body>
 

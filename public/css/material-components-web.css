@@ -8606,12 +8606,13 @@ a.mdc-list-item {
 }
 
 .mdc-text-field--outlined.mdc-text-field--disabled {
-  background-color: transparent;
+  background-color: #F4F4F4;
+  pointer-events: none !important;
 }
 .mdc-text-field--outlined.mdc-text-field--disabled .mdc-notched-outline__leading,
 .mdc-text-field--outlined.mdc-text-field--disabled .mdc-notched-outline__notch,
 .mdc-text-field--outlined.mdc-text-field--disabled .mdc-notched-outline__trailing {
-  border-color: rgba(0, 0, 0, 0.06);
+  border-color: #BCBCBC;
 }
 @media screen and (-ms-high-contrast: active) {
   .mdc-text-field--outlined.mdc-text-field--disabled .mdc-notched-outline__leading,
@@ -9076,7 +9077,7 @@ a.mdc-list-item {
 }
 .mdc-text-field--textarea.mdc-text-field--focused .mdc-notched-outline__leading,
 .mdc-text-field--textarea.mdc-text-field--focused .mdc-notched-outline__notch,
-.mdc-text-field--textarea.mdc-text-field--focused .mdc-notched-outline__trailing {
+.mdc-text-field--textarea.mdc-text-field--focused .mdc-notched-outli border-bottom-color: rgba(0, 0, 0, 0.06);ne__trailing {
   border-width: 2px;
 }
 
