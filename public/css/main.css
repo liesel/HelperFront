@@ -30,9 +30,12 @@ body {
 
 /* Medium devices (landscape tablets, 768px and up) */
 @media only screen and (min-width: 768px) {
+    #alert-container {
+        width: 68.7%;
+    }
     .row-container {
-        left: 25%;
-        transform: translateX(-20%);
+        left: 30%;
+        transform: translateX(-21.5%);
     }
     .col-calendar {
         display: none;
@@ -41,6 +44,9 @@ body {
 
 /* Large devices (laptops/desktops, 992px and up) */
 @media only screen and (min-width: 992px) {
+    #alert-container {
+        width: 68.7%;
+    }
     .row-container {
         left: 30%;
         transform: translateX(-20%);
@@ -48,11 +54,13 @@ body {
     .col-calendar {
         display: none;
     }
-
 }
 
 /* Extra large devices (large laptops and desktops, 1200px and up) */
 @media only screen and (min-width: 1280px) {
+    #alert-container {
+        width: 94.9%;
+    }
     .row-container {
         left: 20.5%;
         transform: translateX(-20.5%);
@@ -65,8 +73,11 @@ body {
 
 
 @media only screen and (min-width: 1330px) {
+    #alert-container {
+        width: 94.9%;
+    }
     .row-container {
-        left: 22%;
+        left: 23.5%;
         transform: translateX(-20.5%);
     }
 
@@ -76,8 +87,11 @@ body {
 }
 
 @media only screen and (min-width: 1400px) {
+    #alert-container {
+        width: 94.9%;
+    }
     .row-container {
-        left: 25.5%;
+        left: 27.5%;
         transform: translateX(-20.5%);
     }
 
@@ -87,15 +101,22 @@ body {
 }
 
 #alert-container {
-    padding-left: 0px;
+    display: none;
+    padding-left: 12px;
     padding-bottom: 33px;
+}
+
+.break {
+    flex-basis: 100%;
+    height: 0;
 }
 
 .row-container {
     display: flex;
+    flex-wrap: wrap;
     position: relative;
-    padding-left: 15px;
-    padding-right: 15px;
+    /* padding-left: 15px;
+    padding-right: 15px; */
     padding-bottom: 48px;
     width: 1280px;
 }
@@ -123,7 +144,6 @@ body {
 .col-calendar {
     position: sticky;
     top: 120px;
-    float: left;
     width: 302px;
     height: 1062px;
 }

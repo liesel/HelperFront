@@ -15,13 +15,13 @@ $(() => {
     // SUCCESS
     // 
 
-    callAlert({
-        title: "Sucesso",
-        type: 2,
-        subtitle: "Descrição"
-    }, ()=>{
-        alert("success")
-    })
+    // callAlert({
+    //     title: "Sucesso",
+    //     type: 2,
+    //     subtitle: "Descrição"
+    // }, ()=>{
+    //     alert("success")
+    // })
 
     // 
     // ALERT
@@ -424,6 +424,7 @@ $(() => {
 
     function callAlert(data, next) {
         const container = $('#alert-container');
+        $('#alert-container').css('display', 'block');
         console.log(container)
         container.find('alert-component').remove();
 
