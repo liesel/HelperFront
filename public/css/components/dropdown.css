@@ -13,6 +13,8 @@
     transform-origin: 50% 0;
     transform: scale(1, 0);
     transition: transform .15s ease-in-out .15s;
+    max-height: 202px;
+    overflow-y: scroll;
     z-index: 99999;
 }
 
@@ -46,6 +48,7 @@
 
 .demo-width-class {
     width: 100%;
+
 }
 
 .mdc-select--outlined:not(.mdc-select--disabled).mdc-select--focused .mdc-notched-outline .mdc-notched-outline__leading,
