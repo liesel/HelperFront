@@ -122,13 +122,20 @@
   border-radius: 0;
 }
 .datepicker table tr td.today,
-.datepicker table tr td.today:hover,
-.datepicker table tr td.today.disabled,
-.datepicker table tr td.today.disabled:hover {
-  background-color: var(--theme-secondary-main, #1594C4) !important;;
+.datepicker table tr td.today.disabled {
+  background-color: var(--theme-secondary-main, #1594C4) !important;
   border-color: var(--theme-secondary-main, #1594C4) !important;
   color: #fff;
+  transition: background-color border-color 0.5s ease-in-out;
 }
+
+.datepicker table tr td.today:hover,
+.datepicker table tr td.today.disabled:hover {
+  background-color: #43AFD8 !important;
+  border-color: #43AFD8 !important;
+  color: #fff;
+}
+
 .datepicker table tr td.today:hover,
 .datepicker table tr td.today:hover:hover,
 .datepicker table tr td.today.disabled:hover,
@@ -280,14 +287,22 @@
   background-color: #666666 \9;
 }
 .datepicker table tr td.active,
-.datepicker table tr td.active:hover,
-.datepicker table tr td.active.disabled,
-.datepicker table tr td.active.disabled:hover {
+.datepicker table tr td.active.disabled {
   background-color: var(--theme-primary-main, #042189) !important;
   border-color: var(--theme-primary-main, #042189) !important;;
   color: #fff;
   text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25);
+  transition: background-color border-color 0.25s ease-in-out;
 }
+
+.datepicker table tr td.active:hover,
+.datepicker table tr td.active.disabled:hover {
+  background-color:  #4E49BA !important;
+  border-color: #4E49BA !important;;
+  color: #fff;
+  text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25);
+}
+
 .datepicker table tr td.active:hover,
 .datepicker table tr td.active:hover:hover,
 .datepicker table tr td.active.disabled:hover,
@@ -342,15 +357,18 @@
   color: #999;
   cursor: default;
 }
+
 .datepicker table tr td span.active,
-.datepicker table tr td span.active:hover,
 .datepicker table tr td span.active.disabled,
+.datepicker table tr td span.active:hover,
 .datepicker table tr td span.active.disabled:hover {
   background-color: #042189;
   border-color: #042189;
   color: #fff;
   text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25);
+  transition: background-color border-color 0.5s ease-in-out;
 }
+
 .datepicker table tr td span.active:hover,
 .datepicker table tr td span.active:hover:hover,
 .datepicker table tr td span.active.disabled:hover,

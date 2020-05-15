@@ -7,17 +7,32 @@
 .btn.login {
     color: var(--theme-secondary-main,#1594C4) !important;
     background-color: #ffffff !important;
+    transition: background-color 0.25s ease-in-out;
 }
 
 .btn.fill {
     color: #ffffff !important;
     background-color: var(--theme-secondary-main,#1594C4) !important;
+    transition: background-color 0.25s ease-in-out;
+}
+
+.btn.login:hover, .btn.login:focus {
+    background-color: #F5F9FF !important;
+}
+
+.btn.fill:hover, .btn.fill:focus {
+    background-color: #43AFD8 !important;
 }
 
 .btn-outline-cancel {
     color: var(--theme-primary-main, #173863) !important;
     background-color: #ffffff !important;
     border-color: var(--theme-primary-main, #173863) !important;
+    transition: background-color 0.25s ease-in-out;
+}
+
+.btn-outline-cancel:hover, .btn-outline-cancel:focus {
+    background-color: #F5F9FF !important;
 }
 
 .mdc-button.dark, .btn.dark {
@@ -31,6 +46,11 @@
     text-transform: lowercase !important;
     font-weight: bold !important;
     border-color: var(--theme-primary-main, #173863) !important;
+    transition: background-color 0.25s ease-in-out;
+}
+
+.mdc-button.dark:hover, .btn.dark:hover, .mdc-button.dark:focus, .btn.dark:focus {
+    background-color: #4E49BA !important;
 }
 
 .mdc-button.light, .btn.light {
@@ -44,6 +64,11 @@
     text-transform: lowercase !important;
     font-weight: bold !important;
     border-color: var(--theme-secondary-main,#1594C4) !important;
+    transition: background-color 0.25s ease-in-out;
+}
+
+.mdc-button.light:hover, .btn.light:hover, .mdc-button.light:focus, .btn.light:focus {
+    background-color: #43AFD8 !important;
 }
 
 .abcRioButton {

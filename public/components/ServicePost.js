@@ -21,6 +21,7 @@ class ServicePost extends HTMLElement {
         this.text = description || "";
         this.categories = categories;
         this.numberOfSchedules = number || 0;
+        console.log(creator)
         
         this.render();
 
@@ -105,13 +106,13 @@ class ServicePost extends HTMLElement {
                             </div>
                         </div>
                         <div class="d-flex footer">
-                            <div class="d-flex" style="font-size: 14px !important; color: #747474;">
+                            <div class="d-flex" style="padding-top: 5px; font-size: 14px !important; color: #747474;">
                                 <span class="material-icons">event_available</span>            
                                 <div class="pl-2 mr-auto" style="padding-top: 2px;">Agendamentos obtidos: <strong>${this.numberOfSchedules}</strong>
                             </div>
                         </div>
                         <div class="ml-auto" >
-                            <button id="cancelar" type="button" class="btn btn-outline-cancel" data-dismiss="modal">cancelar</button>
+                            <button id="cancelar" type="button" class="btn btn-outline-cancel" data-dismiss="modal" style="margin-right: 14px;">cancelar</button>
                             <button id="edit" class="mdc-button dark">
                             <div class="mdc-button__ripple"></div>
                             <i class="material-icons mdc-button__icon" aria-hidden="true">create</i>

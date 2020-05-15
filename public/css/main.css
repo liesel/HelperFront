@@ -1,6 +1,6 @@
 :root {
     --theme-primary-main: #042189;
-    --theme-primary-light: #4E49BA;
+    --theme-primary-light: #4E49BA99;
     --theme-primary-dark: #00005B;
     --theme-secondary-main: #1594C4;
     --theme-secondary-light: #43AFD8;
@@ -26,16 +26,6 @@ body {
     background-color: #EBECEE !important;
     font-size: 0.889rem !important;
     overflow-x: hidden;
-}
-
-/* Extra small devices (phones, 600px and down) */
-@media only screen and (max-width: 600px) {
-
-}
-
-/* Small devices (portrait tablets and large phones, 600px and up) */
-@media only screen and (min-width: 600px) {
-
 }
 
 /* Medium devices (landscape tablets, 768px and up) */
@@ -73,6 +63,7 @@ body {
     }
 }
 
+
 @media only screen and (min-width: 1330px) {
     .row-container {
         left: 22%;
@@ -95,13 +86,18 @@ body {
     }
 }
 
+#alert-container {
+    padding-left: 0px;
+    padding-bottom: 33px;
+}
+
 .row-container {
+    display: flex;
     position: relative;
     padding-left: 15px;
     padding-right: 15px;
-    padding-top: 48px;
     padding-bottom: 48px;
-    display: inline-flex;
+    width: 1280px;
 }
 
 .col-user {
@@ -230,9 +226,14 @@ div.side-status-item.clicked > span, div.side-status-item.clicked > p {
     color: #159CCF !important;
 }
 
+div.side-status-item:hover:not(.clicked) > span, div.side-status-item:hover:not(.clicked) > p {
+    color: #4E49BA !important;
+}
+
 .side-status-item > span, .side-info-item > span {
     color: var(--theme-primary-main, #173863) !important;
     pointer-events: none;
+    transition: color 0.2s ease-in-out;
 }
 
 .row.header, d-flex.header, .row.content {

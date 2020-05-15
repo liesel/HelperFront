@@ -35,6 +35,7 @@ class SchedulePostNext extends HTMLElement {
                     color: #0E6D90;
                     line-height: 2 !important;
                     word-spacing: 12px;
+                    padding-bottom: 4px;
                   }
 
                   .justify-text {
@@ -55,18 +56,22 @@ class SchedulePostNext extends HTMLElement {
                   .title {
                     font-size: 1.125rem !important;
                   }
+
+                  .next-content {
+                    padding-left: 16px;
+                    padding-right: 24px;
+                    padding-top: 16px;
+                  }
                 </style>
         
-                <div class="user-content p-2 mt-3">
+                <div class="user-content next-content mt-3">
                     <div class="d-flex content-info">
                       <div data-content="date">${this.createdDate}</div>
                     </div>
                     <div class="pt-1">
-                      <div>
                         <span class="limit-text bold title">${this.title}</span>
                         <p class="limit-text justify-text" style="line-height: 1.5 !important;">${this.text}</p>
                         <p class="hashtags">${listOfCategories}<p>
-                      </div>
                     </div>
                 </div>
         `

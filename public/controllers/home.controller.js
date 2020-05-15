@@ -16,13 +16,13 @@ $(() => {
     // SUCCESS
     // 
 
-    // callAlert({
-    //     title: "Sucesso",
-    //     type: 2,
-    //     subtitle: "Descrição"
-    // }, ()=>{
-    //     alert("success")
-    // })
+    callAlert({
+        title: "Sucesso",
+        type: 2,
+        subtitle: "Descrição"
+    }, ()=>{
+        alert("success")
+    })
 
     // 
     // ALERT
@@ -432,17 +432,17 @@ $(() => {
         return x > y
     }
 
-    function testAgendar(data) {
+    function scheduleAgendar(data) {
         console.log(data)
         openServiceModal('Atenção', `Tem certeza que deseja agendar?`, 1, undefined, undefined, confirmModalAfterSchedule.bind(null, data));
     }
 
-    function testCancel(){
-        alert("cancel")
+    function serviceCancel(){
+        openServiceModal('Opa!', `Tem certeza que deseja cancelar esse serviço?`, 1, undefined, undefined, closeModalAndBackServices.bind(null));
     }
 
-    function testEdit(){
-        alert("edit")
+    function serviceEdit(){
+        alert('editar')
     }
 
     function confirmModalAfterSchedule(data){
@@ -467,7 +467,7 @@ $(() => {
             const el = document.createElement('helper-schedule')
             el.config(schedule._id, schedule.photo, schedule.CreatorId, schedule.ScheduleDate, schedule.ScheduleDateEnd,
                 schedule.serviceName, schedule.description, schedule.isScheduled, schedule.isFavorited, schedule.categories, schedule.ScheduleType,
-                testAgendar
+                scheduleAgendar
             )
             fragment.append(el)
         });
@@ -484,7 +484,7 @@ $(() => {
             const el = document.createElement('helper-service')
             el.config(service._id, service.photo, service.CreatorId, service.ScheduleDate, service.ScheduleDateEnd,
                 service.serviceName, service.description, service.categories, service.ScheduleType,
-                testEdit, testCancel, service.number
+                serviceEdit, serviceCancel, service.number
             )
             fragment.append(el)
         });

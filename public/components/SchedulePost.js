@@ -83,7 +83,7 @@ class SchedulePost extends HTMLElement {
         var btnCancel = "";
 
         if(this.isMine){
-            btnCancel = `<button id="cancelar" type="button" class="btn btn-outline-cancel" data-dismiss="modal">cancelar</button>`
+            btnCancel = `<button id="cancelar" type="button" class="btn btn-outline-cancel" data-dismiss="modal" style="margin-right: 16px;">cancelar</button>`
         }
 
         this.categories.forEach((item) => {
@@ -97,7 +97,7 @@ class SchedulePost extends HTMLElement {
         var endHour = moment(`${this.endDate}`).format("HH:mm");
         var date = moment(`${this.startDate}`).format(format);
         date = date.replace("of", "de");
-        date += startHour + " às " + endHour;
+        date += startHour + " às " + endHour; 
 
         this.innerHTML = `
                 

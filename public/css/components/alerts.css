@@ -13,15 +13,6 @@
     color: #FAAB3F !important;
 }
 
-#alert-container {
-    position: relative;
-    left: 50%;
-    max-width: 1220px;
-    padding-left: 8px !important;
-    padding-right: 8px !important;
-    transform: translateX(-50.5%);
-}
-
 .alert-warning {
     font-size: 14px;
     color: #232323 !important;

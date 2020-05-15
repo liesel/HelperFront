@@ -103,7 +103,7 @@ class AlertComponent extends HTMLElement {
 
             <style>
                 .alert{
-                    margin-bottom: 2rem !important;
+                    margin: 0 !important;
                 }
 
                 .IconSuccess {
@@ -123,7 +123,7 @@ class AlertComponent extends HTMLElement {
                 }
             </style>
 
-            <div id="divAlert" class="alert ${this.alertStyle} alert-dismissible fade show" role="alert" style="min-width: fit-content;">
+            <div id="divAlert" class="alert ${this.alertStyle} alert-dismissible fade show" role="alert">
                 <div class="d-flex">
                     <div class="pt-1">
                         ${this.icon}
