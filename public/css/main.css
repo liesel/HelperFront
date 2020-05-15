@@ -31,7 +31,7 @@ body {
 /* Medium devices (landscape tablets, 768px and up) */
 @media only screen and (min-width: 768px) {
     .row-container {
-        left: 20%;
+        left: 25%;
         transform: translateX(-20%);
     }
     .col-calendar {
@@ -42,7 +42,7 @@ body {
 /* Large devices (laptops/desktops, 992px and up) */
 @media only screen and (min-width: 992px) {
     .row-container {
-        left: 25%;
+        left: 30%;
         transform: translateX(-20%);
     }
     .col-calendar {
@@ -382,4 +382,23 @@ div.side-status-item:hover:not(.clicked) > span, div.side-status-item:hover:not(
     margin-top: 16px;
     margin-right: 16px;
     margin-bottom: 16px;
+}
+
+.circular-avatar {
+    height: 152px !important;
+    width: 152px !important;
+    border-radius: 50%;
+    transition: border 0.1s ease-in-out;
+    box-shadow: 0 0 2px rgba(0,0,0,0.23);
+    cursor: pointer;
+}
+
+.circular-avatar:hover {
+    box-shadow: 0 0 2px #159CCF;
+    border: 2.7px solid #159CCF;
+}
+
+.circular-avatar.actived {
+    box-shadow: 0 0 2px #159CCF;
+    border: 2.7px solid #159CCF;
 }

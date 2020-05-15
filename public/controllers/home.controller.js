@@ -10,7 +10,6 @@ $(() => {
     fetchServicesCount()
     fetchMySchedulesCount()
     fetchSchedules()
-    console.log(window)
 
     // 
     // SUCCESS
@@ -180,7 +179,7 @@ $(() => {
                         openServiceModal('Atenção', data.responseText, 3, "OK");
                     }
                 },
-                data: JSON.stringify({ name: name, surname: surname, specialization: specialization, serviceDescription: serviceDescription })
+                data: JSON.stringify({ name: name, surname: surname, specialization: specialization, serviceDescription: serviceDescription, avatar: selectedAvatar })
             });
         }
 
@@ -217,32 +216,39 @@ $(() => {
     });
 
     $("#applyAvatar").click((e) => {
-        if (selectedAvatar != ""){
-            Loading().open()
-            $.ajax({
-                url: "/userEditAvatar",
-                type: 'post',
-                dataType: 'json',
-                contentType: 'application/json',
-                success: function (data) {
-                    Loading().close()
-                    if (data.status == "ok") {
-                        window.location.href = "/";
-                    }
-                },
-                error: function (data) {
-                    Loading().close()
-                    if (data.status == 401) {
-                        window.location.href = "/";
-                    } else if (data.status == 500) {
-                        openServiceModal('Atenção', data.responseText, 3, "OK");
-                    }
-                },
-                data: JSON.stringify({ avatar: selectedAvatar })
-            });
+        console.log(window.modalStacks)
+        if(window.modalStacks.length > 0 && window.modalStacks[0] == 'edit-profile'){
+            if(selectedAvatar != "") {
+                $('#userAvatarEdit').attr('src', "/images/"+selectedAvatar+".svg")
+            }
+            $('#modalEditAvatar').modal('hide')
+        } else {
+            if (selectedAvatar != ""){
+                Loading().open()
+                $.ajax({
+                    url: "/userEditAvatar",
+                    type: 'post',
+                    dataType: 'json',
+                    contentType: 'application/json',
+                    success: function (data) {
+                        Loading().close()
+                        if (data.status == "ok") {
+                            window.location.href = "/";
+                        }
+                    },
+                    error: function (data) {
+                        Loading().close()
+                        if (data.status == 401) {
+                            window.location.href = "/";
+                        } else if (data.status == 500) {
+                            openServiceModal('Atenção', data.responseText, 3, "OK");
+                        }
+                    },
+                    data: JSON.stringify({ avatar: selectedAvatar })
+                });
+            }
+            $('#modalEditAvatar').modal('hide')
         }
-        $('#modalEditAvatar').modal('hide')
-
     })
 
     $("#btnSair").click(function (e) {

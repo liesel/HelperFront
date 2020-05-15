@@ -150,6 +150,11 @@
             redirectToForgot()
         })
 
+        $('.circular-avatar').on('click', (e) => {
+            $('.circular-avatar').removeClass('actived')
+            $(e.target).removeClass('actived').addClass("actived")
+        })
+
         window.redirectToSignup = () => {
             modal.removeClass("active").addClass("active")
             registerDiv.removeClass("invisible")

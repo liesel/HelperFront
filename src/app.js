@@ -411,12 +411,15 @@ app.post('/userEdit', userIsAuthenticated, (req, res) => {
     var surname             = req.body.surname;
     var specialization      = req.body.specialization;
     var serviceDescription  = req.body.serviceDescription;
+    var avatar              = req.body.avatar;
+
     axios.patch(`${BACK_END_URL}/v1/user/EditMyUser`, 
     {
         name:     	        name,
         surname:            surname,
         specialization:   	specialization,
         serviceDescription: serviceDescription,
+        avatar:             avatar
     },
     {
         headers: {
@@ -430,6 +433,7 @@ app.post('/userEdit', userIsAuthenticated, (req, res) => {
         req.session.userSurname             = response.data.surname
         req.session.username                = response.data.name
         req.session.email                   = response.data.email
+        req.session.avatar                  = response.data.avatar
         res.send({status:"ok"});
     })
     .catch(function (error) {
