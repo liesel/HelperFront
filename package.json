@@ -10,7 +10,8 @@
     "express": "^4.17.1",
     "express-session": "^1.17.0",
     "hbs": "^4.1.1",
-    "moment": "^2.24.0"
+    "moment": "^2.24.0",
+    "@sendgrid/mail": "^6.4.0"
   },
   "devDependencies": {
     "lorem-ipsum": "^2.0.3",
