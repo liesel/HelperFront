@@ -6,6 +6,10 @@ const axios         = require('axios').default;
 const session       = require("express-session")
 const MongoStore    = require('connect-mongo')(session);
 const app           = express()
+
+// CONFIG DOTENV
+require('dotenv').config()
+
 app.set('trust proxy', 1); //TODO check this understand why heroku only work session with that
 const moment        = require('moment');
 const TWO_HOURS     = 1000 * 60 * 60 *2
@@ -84,6 +88,7 @@ app.use(function (req, res, next) {
 });
 
 app.get('/',redirectHome, (req, res) => {
+    res.locals.clientId                 = process.env.CLIENT_ID;
     res.render('index')
 })
 
@@ -403,6 +408,7 @@ app.get("/getAllSchedules", userIsAuthenticated, (req, res) => {
 })
 
 app.get('/home',redirectLogin, (req, res) => {
+    res.locals.clientId                 = process.env.CLIENT_ID;
     res.render('home', {})
 })
 
@@ -491,7 +497,7 @@ app.post('/doLogin', redirectHome, (req, res) => {
 
 app.post('/doGoogleLogin', redirectHome, (req, res) => {
     axios.post(`${BACK_END_URL}/v1/user/login-google`, {
-        email:        req.body.email,
+        token:        req.body.token
     })
     .then(function (response) {
         console.log(response.data)
