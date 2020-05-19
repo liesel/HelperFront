@@ -277,6 +277,58 @@ $(() => {
     
     });
 
+    function changeLayout(type){
+        switch(type){
+            case 1:
+                // ADD SERVICE
+                $('#modalAddServiceTitle').text('Cadastrar serviço')
+                break;
+            case 2:
+                // SAVE SERVICE
+                $('#modalAddServiceTitle').text('Editar serviço')
+                
+                // DISABLE
+                var labels = ['#labelServiceName', "#labelServiceDate", '#labelHorarioInicial', '#labelHorarioFinal']
+                var floatingLabels = ['']
+                var txtFloatingLabels = ['']
+
+                var textfields = ['#txtServiceName', '#txtServiceDate',
+                '#txtInitialTime', '#txtFinalTime']
+
+                textfields.forEach(element => {
+                    $(element).attr('disabled', true)
+                    $(element).addClass('mdc-text-field--disabled')
+                });
+
+                labels.forEach(element => {
+                    $(element).addClass('mdc-text-field--disabled')
+                    $(element).removeClass("mdc-text-field--invalid")
+                })
+
+                // FLOATING LABEL
+                $('#nameAddService').css("display", "none")
+
+                break;
+            default:
+                // CLEAN SERVICE
+                var textfields = ['#txtServiceName', '#qtdPersons', '#txtServiceDate',
+                                  '#txtInitialTime', '#txtFinalTime', '#txtWhereby',
+                                  '#txtPicpay', '#txtDescription']
+
+                textfields.forEach(element => {
+                    $(element).text('')
+                });
+                break;
+        }
+    }
+
+    $('#btnShowModalService').click((e) => {
+
+        changeLayout(1)
+        $('#modalAddService').modal('show');
+
+    })
+
     $("#btnSaveService").click(function (e) {
 
         const SERVICE_NAME          = "#labelServiceName",
@@ -336,6 +388,7 @@ $(() => {
                     if (data.status == "ok") {
                         openServiceModal('Sucesso', data.responseText, 2, 'OK', closeModalAndBackServices);
                     }
+                    changeLayout(3)
                 },
                 error: function (data) {
                     Loading().close()
@@ -345,6 +398,7 @@ $(() => {
                     } else if (data.status == 500) {
                         openServiceModal('Atenção', data.responseText, 3, "OK");
                     }
+                    changeLayout(3)
                 },
                 data: JSON.stringify(
                     {
@@ -361,6 +415,11 @@ $(() => {
             });
         }
     });
+
+    $('#btnCancelAddService').on('click', (e) => {
+        changeLayout('3')
+        $('#modalAddService').modal('hide');
+    })
 
     $("#selectCategories").on("valueHasChanged", function (event, param1) {
         selectedCategories = param1.categories;
@@ -445,11 +504,30 @@ $(() => {
     }
 
     function serviceCancel(){
+        changeLayout(3)
         openServiceModal('Opa!', `Tem certeza que deseja cancelar esse serviço?`, 1, undefined, undefined, closeModalAndBackServices.bind(null));
     }
 
-    function serviceEdit(){
-        alert('editar')
+    function serviceEdit(data){
+        console.log('my service: ', data)
+        changeLayout(2)
+
+        // CONFIGURE - SESSION !!!
+
+        moment.locale('pt-BR');
+        var startHour = moment(data.startDate).format("HH:mm");
+        var endHour = moment(data.endDate).format("HH:mm");
+        var date = moment(data.startDate).format("DD/MM/YYYY")
+
+        $('#txtServiceName').val(data.title)
+        $('#txtInitialTime').val(startHour)
+        $('#txtFinalTime').val(endHour)
+        $('#txtServiceDate').val(date)
+        $('#txtWhereby').val('falta link')
+        $('#txtPicpay').val('falta link')
+        $('#txtDescription').val(data.description)
+
+        $('#modalAddService').modal('show');
     }
 
     function confirmModalAfterSchedule(data){

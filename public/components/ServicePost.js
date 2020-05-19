@@ -21,15 +21,26 @@ class ServicePost extends HTMLElement {
         this.text = description || "";
         this.categories = categories;
         this.numberOfSchedules = number || 0;
-        console.log(creator)
         
         this.render();
+
+        var data = {
+            id:                 id,
+            creator:            creator,
+            startDate:          startDate,
+            endDate:            endDate,
+            title,              title,
+            description:        description,
+            categories:         categories,
+            numberOfSchedules:  number,
+            type:               type
+        }
 
         let btnCancel = $(this).find('#cancelar')
         btnCancel.on('click', cancelSchedule.bind(null))
 
         let btnEdit = $(this).find('#edit')
-        btnEdit.on('click', editSchedule.bind(null))
+        btnEdit.on('click', editSchedule.bind(null, data))
     }
 
     multiLineOverflows(){

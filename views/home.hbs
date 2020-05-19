@@ -147,7 +147,7 @@
         <div class="card">
           <div class="row justify-content-between no-padding-margin column-service">
               <span class="bold col-md-8" style="font-size: 1.125rem !important;">Olá, {{session.username}} inicie sua colaboração</span>
-              <button type="button" class="btn col-md-3 fill ml-auto" data-toggle="modal" data-target="#modalAddService">
+              <button id="btnShowModalService" type="button" class="btn col-md-3 fill ml-auto">
                 adicionar serviço
               </button>
           </div>
@@ -202,7 +202,7 @@
     <div class="modal-dialog modal-dialog-scrollable modal-dialog-centered" role="document">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title" id="modalAddServiceTitle">Cadastrar serviço</h5>
+          <h5 class="modal-title" id="modalAddServiceTitle"></h5>
           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">&times;</span>
           </button>
@@ -219,7 +219,7 @@
                 <span class="mdc-notched-outline">
                   <span class="mdc-notched-outline__leading"></span>
                   <span class="mdc-notched-outline__notch">
-                    <span class="mdc-floating-label" id="service">Nome do serviço</span>
+                    <span class="mdc-floating-label" id="nameAddService">Nome do serviço</span>
                   </span>
                   <span class="mdc-notched-outline__trailing">
                   </span>
@@ -436,7 +436,7 @@
           </div>
         </div>
         <div class="modal-footer">
-          <button type="button" class="btn btn-outline-cancel" data-dismiss="modal">cancelar</button>
+          <button id="btnCancelAddService" type="button" class="btn btn-outline-cancel">cancelar</button>
           <button id="btnSaveService" name="btnSaveService" type="button" class="btn btn-primary dark">salvar serviço</button>
         </div>
       </div>
