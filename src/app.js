@@ -249,7 +249,7 @@ app.post("/doEditService", userIsAuthenticated, (req, res) => {
             category: req.body.categories[index]._id
         });
     }
-    axios.post(`${BACK_END_URL}/v1/schedule/Edit`, 
+    axios.post(`${BACK_END_URL}/v1/schedule/Edit`,
     {
         whereby: 			req.body.whereBy,
         picpay: 			req.body.picpay,

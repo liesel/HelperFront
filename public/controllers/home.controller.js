@@ -67,6 +67,7 @@ $(() => {
                 break;
             case "servicos":
                 fetchServices()
+                fetchServicesCount()
                 break;
             case "agendamentos":
                 fetchMySchedules()
@@ -282,10 +283,12 @@ $(() => {
     window.changeLayout = (type) =>{
         switch(type){
             case 1:
+                toggleService = false
                 // ADD SERVICE
                 $('#modalAddServiceTitle').text('Cadastrar serviço')
                 break;
             case 2:
+                toggleService = true
                 // SAVE SERVICE
                 $('#modalAddServiceTitle').text('Editar serviço')
                 
@@ -330,13 +333,41 @@ $(() => {
                 break;
             default:
                 // CLEAN SERVICE
+                $('#nameAddService').css("display", "block")
+
+                // DISABLE
+                var labels = ['#labelServiceName', "#labelServiceDate", '#labelHorarioInicial', '#labelHorarioFinal']
+                var floatingLabels = ['#labelWhereby','#labelPicpay', '#labelDescription']
+                var txtFloatingLabels = ['#linkwhere', '#linkpic', '#servicedesc']
+
                 var textfields = ['#txtServiceName', '#qtdPersons', '#txtServiceDate',
                                   '#txtInitialTime', '#txtFinalTime', '#txtWhereby',
                                   '#txtPicpay', '#txtDescription']
 
+                labels.forEach(element => {
+                    $(element).removeClass('mdc-text-field--disabled')
+                    $(element).removeClass("mdc-text-field--invalid")
+                })
+
+                floatingLabels.forEach(element => {
+                    $(element).removeClass('mdc-text-field--label-floating')
+                })
+
+                txtFloatingLabels.forEach(element => {
+                    $(element).removeClass('mdc-floating-label--float-above')
+                    $(element).css('background','#fff')
+                    $(element).css('padding-left','6px')
+                    $(element).css('padding-right','6px')
+                }) 
+
                 textfields.forEach(element => {
-                    $(element).text('')
+                    $(element).val('')
+                    console.log($(element).val())
+                    $(element).attr('disabled', false)
+                    $(element).removeClass('mdc-text-field--disabled')
                 });
+
+                $("#labelCategoriesSelect").removeClass("mdc-floating-label--float-above");
 
                 var checkBoxes = $('.mdc-checkbox__native-control.dark:checked')
                 checkBoxes.each(el => {
@@ -348,7 +379,7 @@ $(() => {
     }
 
     $('#btnShowModalService').click((e) => {
-
+        window.changeLayout(3)
         window.changeLayout(1)
         $('#modalAddService').modal('show');
 
@@ -356,7 +387,7 @@ $(() => {
 
     $("#btnSaveService").click(function (e) {
 
-        const SERVICE_NAME          = "#labelServiceName",
+        const SERVICE_NAME    = "#labelServiceName",
         SERVICE_DATE          = "#labelServiceDate",
         SERVICE_INITIAL_TIME  = "#labelHorarioInicial",
         SERVICE_FINAL_TIME    = "#labelHorarioFinal",
@@ -414,7 +445,10 @@ $(() => {
                         if (data.status == "ok") {
                             openServiceModal('Sucesso', data.responseText, 2, 'OK', closeModalAndBackServices);
                         }
+
                         window.changeLayout(3)
+                        $('#modalAddService').modal('hide');
+
                     },
                     error: function (data) {
                         Loading().close()
@@ -629,7 +663,7 @@ $(() => {
 
     function closeModalAndBackServices(){
         $("helper-service-modal")[0].close()
-        fetchServices()
+        $("div[data-link='servicos']").click()
     }
 
     async function setSchedules(schedules) {
