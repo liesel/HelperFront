@@ -94,8 +94,6 @@ app.get('/',redirectHome, (req, res) => {
 
 app.post("/saveUser", (req, res) => {
 
-    console.log("MEU EMAIL TA KRL? ", req.session.email)
-    
     var email = req.session.email || req.body.email;
 
     axios.post(`${BACK_END_URL}/v1/user/createUser`, 
