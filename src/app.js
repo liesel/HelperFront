@@ -241,6 +241,41 @@ app.post("/doSaveService", userIsAuthenticated, (req, res) => {
     })
 })
 
+app.post("/doEditService", userIsAuthenticated, (req, res) => {
+    console.log(req.body);
+    var categories = []
+    for (let index = 0; index < req.body.categories.length; index++) {
+        categories.push({
+            category: req.body.categories[index]._id
+        });
+    }
+    axios.post(`${BACK_END_URL}/v1/schedule/Edit`, 
+    {
+        whereby: 			req.body.whereBy,
+        picpay: 			req.body.picpay,
+        ScheduleType: 		1,
+        description:        req.body.description,
+        categories: 		categories,
+        CreatorId: 			req.session.userId,
+        serviceId:          req.body.id
+    },
+    {
+        headers: {
+            'accept': 'application/json',
+            'HelperAutorization': `Bearer ${req.session.token}`
+        }
+    })
+    .then(function (response) {
+        console.log(response);
+        res.send({status:"ok"});
+    })
+    .catch(function (error) {
+        console.log(error);
+        res.status(500).send(error.response.data);
+    })
+})
+
+
 app.post("/getAllCategories", (req, res) => {
     axios.get(`${BACK_END_URL}/v1/category/findAllActive`, {
         headers: {

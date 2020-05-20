@@ -7,10 +7,10 @@ class SchedulePost extends HTMLElement {
         console.log('schedule connected')
     }
 
-    config(id, photo, creator, startDate, endDate, title, description, isScheduled, isFavorited, categories, type, addSchedule, cancelSchedule, isMine) {
+    config(id, photo, creator, startDate, endDate, title, description, isScheduled, isFavorited, categories, picpay, whereby,  type, addSchedule, cancelSchedule, isMine) {
         this.id = id;
         this.creator = creator;
-        this.photo = photo || "/images/avatar-1.svg";
+        this.photo = "/images/"+photo+".svg";
         this.name = creator.name + " " + creator.surname;
         this.specialization = creator.specialization;
         this.startDate = startDate;

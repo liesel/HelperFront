@@ -2,6 +2,8 @@ $(() => {
     //HOME
     var selectedAvatar = "";
     var selectedCategories = [];
+    var toggleService = false;
+    var idService = 0;
     AddLoadingHUD()
 
     getMyEvents();
@@ -277,7 +279,7 @@ $(() => {
     
     });
 
-    function changeLayout(type){
+    window.changeLayout = (type) =>{
         switch(type){
             case 1:
                 // ADD SERVICE
@@ -289,23 +291,40 @@ $(() => {
                 
                 // DISABLE
                 var labels = ['#labelServiceName', "#labelServiceDate", '#labelHorarioInicial', '#labelHorarioFinal']
-                var floatingLabels = ['']
-                var txtFloatingLabels = ['']
+                var floatingLabels = ['#labelWhereby','#labelPicpay', '#labelDescription']
+                var txtFloatingLabels = ['#linkwhere', '#linkpic', '#servicedesc']
 
                 var textfields = ['#txtServiceName', '#txtServiceDate',
                 '#txtInitialTime', '#txtFinalTime']
 
                 textfields.forEach(element => {
                     $(element).attr('disabled', true)
-                    $(element).addClass('mdc-text-field--disabled')
+                    $(element).removeClass('mdc-text-field--disabled').addClass('mdc-text-field--disabled')
                 });
 
                 labels.forEach(element => {
-                    $(element).addClass('mdc-text-field--disabled')
+                    $(element).removeClass('mdc-text-field--disabled').addClass('mdc-text-field--disabled')
                     $(element).removeClass("mdc-text-field--invalid")
                 })
 
+                floatingLabels.forEach(element => {
+                    $(element).removeClass('mdc-text-field--label-floating').addClass('mdc-text-field--label-floating')
+                })
+
+                txtFloatingLabels.forEach(element => {
+                    $(element).removeClass('mdc-floating-label--float-above').addClass('mdc-floating-label--float-above')
+                    $(element).css('background','#fff')
+                    $(element).css('padding-left','6px')
+                    $(element).css('padding-right','6px')
+                }) 
+
                 // FLOATING LABEL
+                $("#labelCategoriesSelect").removeClass("mdc-floating-label--float-above").addClass("mdc-floating-label--float-above")
+
+                $("#labelCategoriesSelect").css("background", "#fff")
+                $("#labelCategoriesSelect").css("padding-right", "5px")
+                $("#labelCategoriesSelect").css("padding-left", "5px")
+
                 $('#nameAddService').css("display", "none")
 
                 break;
@@ -318,13 +337,19 @@ $(() => {
                 textfields.forEach(element => {
                     $(element).text('')
                 });
+
+                var checkBoxes = $('.mdc-checkbox__native-control.dark:checked')
+                checkBoxes.each(el => {
+                    checkBoxes[el].click()
+                })
+
                 break;
         }
     }
 
     $('#btnShowModalService').click((e) => {
 
-        changeLayout(1)
+        window.changeLayout(1)
         $('#modalAddService').modal('show');
 
     })
@@ -332,13 +357,13 @@ $(() => {
     $("#btnSaveService").click(function (e) {
 
         const SERVICE_NAME          = "#labelServiceName",
-              SERVICE_DATE          = "#labelServiceDate",
-              SERVICE_INITIAL_TIME  = "#labelHorarioInicial",
-              SERVICE_FINAL_TIME    = "#labelHorarioFinal",
-              SERVICE_WHEREBY       = "#labelWhereby",
-              SERVICE_PICPAY        = "#labelPicpay",
-              SERVICE_DESCRIPTION   = "#labelDescription",
-              SERVICE_QTD           = "#labelQtdPeople"
+        SERVICE_DATE          = "#labelServiceDate",
+        SERVICE_INITIAL_TIME  = "#labelHorarioInicial",
+        SERVICE_FINAL_TIME    = "#labelHorarioFinal",
+        SERVICE_WHEREBY       = "#labelWhereby",
+        SERVICE_PICPAY        = "#labelPicpay",
+        SERVICE_DESCRIPTION   = "#labelDescription",
+        SERVICE_QTD           = "#labelQtdPeople"
 
         var serviceName = $("#txtServiceName").val();
         var serviceDate = $("#txtServiceDate").val();
@@ -352,72 +377,123 @@ $(() => {
         var numberStartTime = startTime.replace(':', '');
         var numberEndTime = endTime.replace(':', '');
 
-        if (selectedCategories.length < 1) {
-            openServiceModal('Campo Obrigatório', 'Selecione pelo menos uma categoria', 3, 'OK');
-        } else if (serviceName == "" || serviceName == undefined) {
-            openServiceModal('Campo Obrigatório', "Informe o nome do serviço", 3, 'OK', SERVICE_NAME);
-        } else if (serviceDate == "" || serviceDate == undefined) {
-            openServiceModal('Campo Obrigatório', "Informe a data do serviço", 3, 'OK', SERVICE_DATE);
-        } else if (startTime == "" || startTime == undefined) {
-            openServiceModal('Campo Obrigatório', "Informe a hora do início", 3, 'OK', SERVICE_INITIAL_TIME);
-        } else if (endTime == "" || endTime == undefined) {
-            openServiceModal('Campo Obrigatório', "Informe a hora do fim", 3, 'OK', SERVICE_FINAL_TIME);
-        } else if (whereBy == "" || whereBy == undefined) {
-            openServiceModal('Campo Obrigatório', "Informe o link do WhereBy", 3, 'OK', SERVICE_WHEREBY);
-        } else if (picpay == "" || picpay == undefined) {
-            openServiceModal('Campo Obrigatório', "Informe o link do Picpay", 3, 'OK', SERVICE_PICPAY);
-        } else if (description == "" || description == undefined) {
-            openServiceModal('Campo Obrigatório', "Informe a descrição do serviço", 3, 'OK', SERVICE_DESCRIPTION);
-        } else if (type == "" || type == undefined) {
-            openServiceModal('Campo Obrigatório', "Informe o modelo do agendamento", 3, 'OK');
-        } else if (type == "Grupo" && (qtdPeople == "" || qtdPeople == undefined)) {
-            openServiceModal('Campo Obrigatório', "Informe a quantidade de pessoas", 3, 'OK', SERVICE_QTD);
-        } else if (isBiggerThan(numberStartTime, numberEndTime)) {
-            openServiceModal('Campo Inválido', 'O Horário final precisa ser maior que o horário inicial.', 3, 'OK', SERVICE_FINAL_TIME);
+        if(!toggleService){
+            if (selectedCategories.length < 1) {
+                openServiceModal('Campo Obrigatório', 'Selecione pelo menos uma categoria', 3, 'OK');
+            } else if (serviceName == "" || serviceName == undefined) {
+                openServiceModal('Campo Obrigatório', "Informe o nome do serviço", 3, 'OK', SERVICE_NAME);
+            } else if (serviceDate == "" || serviceDate == undefined) {
+                openServiceModal('Campo Obrigatório', "Informe a data do serviço", 3, 'OK', SERVICE_DATE);
+            } else if (startTime == "" || startTime == undefined) {
+                openServiceModal('Campo Obrigatório', "Informe a hora do início", 3, 'OK', SERVICE_INITIAL_TIME);
+            } else if (endTime == "" || endTime == undefined) {
+                openServiceModal('Campo Obrigatório', "Informe a hora do fim", 3, 'OK', SERVICE_FINAL_TIME);
+            } else if (whereBy == "" || whereBy == undefined) {
+                openServiceModal('Campo Obrigatório', "Informe o link do WhereBy", 3, 'OK', SERVICE_WHEREBY);
+            } else if (picpay == "" || picpay == undefined) {
+                openServiceModal('Campo Obrigatório', "Informe o link do Picpay", 3, 'OK', SERVICE_PICPAY);
+            } else if (description == "" || description == undefined) {
+                openServiceModal('Campo Obrigatório', "Informe a descrição do serviço", 3, 'OK', SERVICE_DESCRIPTION);
+            } else if (type == "" || type == undefined) {
+                openServiceModal('Campo Obrigatório', "Informe o modelo do agendamento", 3, 'OK');
+            } else if (type == "Grupo" && (qtdPeople == "" || qtdPeople == undefined)) {
+                openServiceModal('Campo Obrigatório', "Informe a quantidade de pessoas", 3, 'OK', SERVICE_QTD);
+            } else if (isBiggerThan(numberStartTime, numberEndTime)) {
+                openServiceModal('Campo Inválido', 'O Horário final precisa ser maior que o horário inicial.', 3, 'OK', SERVICE_FINAL_TIME);
+            } else {
+                Loading().open()
+
+                $.ajax({
+                    url: "/doSaveService",
+                    type: 'post',
+                    dataType: 'json',
+                    contentType: 'application/json',
+                    success: function (data) {
+                        Loading().close()
+
+                        if (data.status == "ok") {
+                            openServiceModal('Sucesso', data.responseText, 2, 'OK', closeModalAndBackServices);
+                        }
+                        window.changeLayout(3)
+                    },
+                    error: function (data) {
+                        Loading().close()
+
+                        if (data.status == 401) {
+                            window.location = "/";
+                        } else if (data.status == 500) {
+                            openServiceModal('Atenção', data.responseText, 3, "OK");
+                        }
+                        window.changeLayout(3)
+                    },
+                    data: JSON.stringify(
+                        {
+                            categories: getSelectedsCategories(selectedCategories),
+                            serviceName: serviceName,
+                            serviceDate: serviceDate,
+                            startTime: startTime,
+                            endTime: endTime,
+                            whereBy: whereBy,
+                            picpay: picpay,
+                            description: description,
+                            type: type
+                        })
+                });
+
+            }
         } else {
-            Loading().open()
+            if (selectedCategories.length < 1) {
+                openServiceModal('Campo Obrigatório', 'Selecione pelo menos uma categoria', 3, 'OK');
+            } else if (whereBy == "" || whereBy == undefined) {
+                openServiceModal('Campo Obrigatório', "Informe o link do WhereBy", 3, 'OK', SERVICE_WHEREBY);
+            } else if (picpay == "" || picpay == undefined) {
+                openServiceModal('Campo Obrigatório', "Informe o link do Picpay", 3, 'OK', SERVICE_PICPAY);
+            } else if (description == "" || description == undefined) {
+                openServiceModal('Campo Obrigatório', "Informe a descrição do serviço", 3, 'OK', SERVICE_DESCRIPTION);
+            } else if (type == "Grupo" && (qtdPeople == "" || qtdPeople == undefined)) {
+                openServiceModal('Campo Obrigatório', "Informe a quantidade de pessoas", 3, 'OK', SERVICE_QTD);
+            } else {
+                Loading().open()
 
-            $.ajax({
-                url: "/doSaveService",
-                type: 'post',
-                dataType: 'json',
-                contentType: 'application/json',
-                success: function (data) {
-                    Loading().close()
+                $.ajax({
+                    url: "/doEditService",
+                    type: 'post',
+                    dataType: 'json',
+                    contentType: 'application/json',
+                    success: function (data) {
+                        Loading().close()
 
-                    if (data.status == "ok") {
-                        openServiceModal('Sucesso', data.responseText, 2, 'OK', closeModalAndBackServices);
-                    }
-                    changeLayout(3)
-                },
-                error: function (data) {
-                    Loading().close()
+                        if (data.status == "ok") {
+                            openServiceModal('Sucesso', data.responseText, 2, 'OK', closeModalAndBackServices);
+                        }
+                        window.changeLayout(3)
+                    },
+                    error: function (data) {
+                        Loading().close()
 
-                    if (data.status == 401) {
-                        window.location = "/";
-                    } else if (data.status == 500) {
-                        openServiceModal('Atenção', data.responseText, 3, "OK");
-                    }
-                    changeLayout(3)
-                },
-                data: JSON.stringify(
+                        if (data.status == 401) {
+                            window.location = "/";
+                        } else if (data.status == 500) {
+                            openServiceModal('Atenção', data.responseText, 3, "OK");
+                        }
+                        window.changeLayout(3)
+                    },
+                    data: JSON.stringify(
                     {
                         categories: getSelectedsCategories(selectedCategories),
-                        serviceName: serviceName,
-                        serviceDate: serviceDate,
-                        startTime: startTime,
-                        endTime: endTime,
                         whereBy: whereBy,
                         picpay: picpay,
                         description: description,
-                        type: type
+                        type: type,
+                        id: idService
                     })
-            });
+                });
+            }
         }
     });
 
     $('#btnCancelAddService').on('click', (e) => {
-        changeLayout('3')
+        window.changeLayout(3)
         $('#modalAddService').modal('hide');
     })
 
@@ -504,13 +580,18 @@ $(() => {
     }
 
     function serviceCancel(){
-        changeLayout(3)
+        window.changeLayout(3)
         openServiceModal('Opa!', `Tem certeza que deseja cancelar esse serviço?`, 1, undefined, undefined, closeModalAndBackServices.bind(null));
     }
 
+    $("#cancelServiceX").on("click", async () => {
+        window.changeLayout(3)
+        $('#modalAddService').modal('hide');
+    })
+
     function serviceEdit(data){
-        console.log('my service: ', data)
-        changeLayout(2)
+        Loading().open()
+        window.changeLayout(2)
 
         // CONFIGURE - SESSION !!!
 
@@ -523,11 +604,18 @@ $(() => {
         $('#txtInitialTime').val(startHour)
         $('#txtFinalTime').val(endHour)
         $('#txtServiceDate').val(date)
-        $('#txtWhereby').val('falta link')
-        $('#txtPicpay').val('falta link')
+        $('#txtWhereby').val(data.whereby)
+        $('#txtPicpay').val(data.picpay)
         $('#txtDescription').val(data.description)
 
+        data.categories.forEach(el => {
+            var category =  el.category.name
+            var element = $(`input[type="checkbox"][value='${category}']`)
+            element.click();
+        })
+
         $('#modalAddService').modal('show');
+        Loading().close()
     }
 
     function confirmModalAfterSchedule(data){
@@ -550,9 +638,9 @@ $(() => {
         const fragment = $(document.createDocumentFragment())
         schedules.forEach(schedule => {
             const el = document.createElement('helper-schedule')
-            el.config(schedule._id, schedule.photo, schedule.CreatorId, schedule.ScheduleDate, schedule.ScheduleDateEnd,
-                schedule.serviceName, schedule.description, schedule.isScheduled, schedule.isFavorited, schedule.categories, schedule.ScheduleType,
-                scheduleAgendar
+            el.config(schedule._id, schedule.CreatorId.avatar, schedule.CreatorId, schedule.ScheduleDate, schedule.ScheduleDateEnd,
+                schedule.serviceName, schedule.description, schedule.isScheduled, schedule.isFavorited, schedule.categories, service.picpay, service.whereby,
+                schedule.ScheduleType, scheduleAgendar
             )
             fragment.append(el)
         });
@@ -563,12 +651,10 @@ $(() => {
         const container = $($('feed-container')[0].shadow);
         container.find('helper-service').remove()
         const fragment = $(document.createDocumentFragment())
-        console.log("MY SERVICES")
-        console.log(services)
         services.forEach(service => {
             const el = document.createElement('helper-service')
-            el.config(service._id, service.photo, service.CreatorId, service.ScheduleDate, service.ScheduleDateEnd,
-                service.serviceName, service.description, service.categories, service.ScheduleType,
+            el.config(service._id, service.CreatorId.avatar, service.CreatorId, service.ScheduleDate, service.ScheduleDateEnd,
+                service.serviceName, service.description, service.categories, service.picpay, service.whereby, service.ScheduleType,
                 serviceEdit, serviceCancel, service.number
             )
             fragment.append(el)
@@ -879,8 +965,8 @@ CheckboxDropdown.prototype.toggleOpen = function (forceOpen) {
         if (this.$el.find(":checked").length == 0) {
             this.$floatinglabel.removeClass("mdc-floating-label--float-above")
         }
-        $(this.$floatinglabel).css("padding-left", "0px")
-        $(this.$floatinglabel).css("padding-right", "0px")
+        $(this.$floatinglabel).css("padding-left", "5px")
+        $(this.$floatinglabel).css("padding-right", "5px")
     }
     this.reset()
 }

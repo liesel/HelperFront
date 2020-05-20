@@ -1,4 +1,11 @@
-$(()=>{    
+$(()=>{
+
+    // EDIT SERVICE
+
+    $('#modalAddService').on('hide.bs.modal', function (event) {
+        window.changeLayout(3)
+    })
+
     // Editar Perfil
     $('#modalEditProfile').on('show.bs.modal', function (event) {
         var modal = $(this)

@@ -7,10 +7,10 @@ class ServicePost extends HTMLElement {
         console.log('service connected')
     }
 
-    config(id, photo, creator, startDate, endDate, title, description, categories, type, editSchedule, cancelSchedule, number) {
+    config(id, photo, creator, startDate, endDate, title, description, categories, picpay, whereby, type, editSchedule, cancelSchedule, number) {
         this.id = id;
         this.creator = creator;
-        this.photo = photo || "/images/avatar-1.svg";
+        this.photo = "/images/"+photo+".svg";
         this.name = creator.name + " " + creator.surname;
         this.specialization = creator.specialization;
         this.startDate = startDate;
@@ -33,7 +33,9 @@ class ServicePost extends HTMLElement {
             description:        description,
             categories:         categories,
             numberOfSchedules:  number,
-            type:               type
+            type:               type,
+            picpay:             picpay,
+            whereby:            whereby
         }
 
         let btnCancel = $(this).find('#cancelar')
