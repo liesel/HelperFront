@@ -673,7 +673,7 @@ $(() => {
         schedules.forEach(schedule => {
             const el = document.createElement('helper-schedule')
             el.config(schedule._id, schedule.CreatorId.avatar, schedule.CreatorId, schedule.ScheduleDate, schedule.ScheduleDateEnd,
-                schedule.serviceName, schedule.description, schedule.isScheduled, schedule.isFavorited, schedule.categories, service.picpay, service.whereby,
+                schedule.serviceName, schedule.description, schedule.isScheduled, schedule.isFavorited, schedule.categories, schedule.picpay, schedule.whereby,
                 schedule.ScheduleType, scheduleAgendar
             )
             fragment.append(el)

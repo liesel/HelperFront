@@ -93,6 +93,8 @@ app.get('/',redirectHome, (req, res) => {
 })
 
 app.post("/saveUser", (req, res) => {
+
+    console.log("MEU EMAIL TA KRL? ", req.session.email)
     
     var email = req.session.email || req.body.email;
 
@@ -535,9 +537,7 @@ app.post('/doGoogleLogin', redirectHome, (req, res) => {
         token:        req.body.token
     })
     .then(function (response) {
-        console.log(response.data)
-
-        if(response.data.status != 401){
+        if(response.data.user){
             req.session.token                   = response.data.token
             req.session.userId                  = response.data.user._id
             req.session.email                   = response.data.user.email
@@ -550,14 +550,13 @@ app.post('/doGoogleLogin', redirectHome, (req, res) => {
             res.locals.session                  = req.session;
             res.send({status:"ok"});
         } else {
-            req.session.email                   = req.body.email;
-            res.locals.session                  = req.session;
+            req.session.email  = response.data.email;
+            res.locals.session = req.session;
             res.send({status:"google-unauthorized"})
         }
-
     })
     .catch(function (error) {
-        console.log(error);
+        console.log(error);        
         res.status(401).send('Não autorizado');
     })
 })
