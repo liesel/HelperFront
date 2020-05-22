@@ -12,7 +12,7 @@ $(() => {
     fetchServicesCount()
     fetchMySchedulesCount()
     fetchSchedules()
-
+    
     // 
     // SUCCESS
     // 
