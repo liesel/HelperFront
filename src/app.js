@@ -6,6 +6,10 @@ const axios         = require('axios').default;
 const session       = require("express-session")
 const MongoStore    = require('connect-mongo')(session);
 const app           = express()
+
+// CONFIG DOTENV
+require('dotenv').config()
+
 app.set('trust proxy', 1); //TODO check this understand why heroku only work session with that
 const moment        = require('moment');
 const TWO_HOURS     = 1000 * 60 * 60 *2
@@ -84,11 +88,12 @@ app.use(function (req, res, next) {
 });
 
 app.get('/',redirectHome, (req, res) => {
+    res.locals.clientId                 = process.env.CLIENT_ID;
     res.render('index')
 })
 
 app.post("/saveUser", (req, res) => {
-    
+
     var email = req.session.email || req.body.email;
 
     axios.post(`${BACK_END_URL}/v1/user/createUser`, 
@@ -235,6 +240,41 @@ app.post("/doSaveService", userIsAuthenticated, (req, res) => {
         res.status(500).send(error.response.data);
     })
 })
+
+app.post("/doEditService", userIsAuthenticated, (req, res) => {
+    console.log(req.body);
+    var categories = []
+    for (let index = 0; index < req.body.categories.length; index++) {
+        categories.push({
+            category: req.body.categories[index]._id
+        });
+    }
+    axios.post(`${BACK_END_URL}/v1/schedule/Edit`,
+    {
+        whereby: 			req.body.whereBy,
+        picpay: 			req.body.picpay,
+        ScheduleType: 		1,
+        description:        req.body.description,
+        categories: 		categories,
+        CreatorId: 			req.session.userId,
+        serviceId:          req.body.id
+    },
+    {
+        headers: {
+            'accept': 'application/json',
+            'HelperAutorization': `Bearer ${req.session.token}`
+        }
+    })
+    .then(function (response) {
+        console.log(response);
+        res.send({status:"ok"});
+    })
+    .catch(function (error) {
+        console.log(error);
+        res.status(500).send(error.response.data);
+    })
+})
+
 
 app.post("/getAllCategories", (req, res) => {
     axios.get(`${BACK_END_URL}/v1/category/findAllActive`, {
@@ -403,6 +443,7 @@ app.get("/getAllSchedules", userIsAuthenticated, (req, res) => {
 })
 
 app.get('/home',redirectLogin, (req, res) => {
+    res.locals.clientId                 = process.env.CLIENT_ID;
     res.render('home', {})
 })
 
@@ -491,12 +532,10 @@ app.post('/doLogin', redirectHome, (req, res) => {
 
 app.post('/doGoogleLogin', redirectHome, (req, res) => {
     axios.post(`${BACK_END_URL}/v1/user/login-google`, {
-        email:        req.body.email,
+        token:        req.body.token
     })
     .then(function (response) {
-        console.log(response.data)
-
-        if(response.data.status != 401){
+        if(response.data.user){
             req.session.token                   = response.data.token
             req.session.userId                  = response.data.user._id
             req.session.email                   = response.data.user.email
@@ -509,14 +548,13 @@ app.post('/doGoogleLogin', redirectHome, (req, res) => {
             res.locals.session                  = req.session;
             res.send({status:"ok"});
         } else {
-            req.session.email                   = req.body.email;
-            res.locals.session                  = req.session;
+            req.session.email  = response.data.email;
+            res.locals.session = req.session;
             res.send({status:"google-unauthorized"})
         }
-
     })
     .catch(function (error) {
-        console.log(error);
+        console.log(error);        
         res.status(401).send('Não autorizado');
     })
 })

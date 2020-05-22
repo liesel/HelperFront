@@ -1,4 +1,5 @@
-$(()=>{    
+$(()=>{
+
     // Editar Perfil
     $('#modalEditProfile').on('show.bs.modal', function (event) {
         var modal = $(this)

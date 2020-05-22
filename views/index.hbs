@@ -9,8 +9,7 @@
   <!-- Google SignIn -->
   <meta name="google-signin-scope" content="profile email">
   
-  <meta name="google-signin-client_id" content="257771422298-kf6vcatq65esnjinr5oejg9o1el7lb51.apps.googleusercontent.com">
-  <script src="https://apis.google.com/js/platform.js" async defer></script>
+  <meta name="google-signin-client_id" content={{clientId}}>
 
   <!-- Font -->
   <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@400;500;700;800&display=swap" rel="stylesheet">
@@ -259,12 +258,51 @@ crossorigin="anonymous"></script>
 <script>
   
   function onSignIn(googleUser) {
+    
+    var id_token = googleUser.getAuthResponse().id_token;
     var profile = googleUser.getBasicProfile();
-    var email = profile.getEmail()
-    window.signInCallback(email)
+
+    $.ajax({
+      url: "/doGoogleLogin",
+      type: 'post',
+      dataType: 'json',
+      contentType: 'application/json',
+      success: function (data) {
+          if (data.status == "ok") {
+              window.location = "/home";
+          } else if (data.status == "google-unauthorized") {
+
+            $('#txtEmailRegister').val(profile.getEmail())
+            $('#txtEmailRegister').addClass('mdc-text-field--disabled')
+            $('#txtEmailRegister').attr('disabled', true)
+
+            $('#labelEmailRegister').addClass('mdc-text-field--disabled')
+            $('#emailLabelFloating').css("display", "none")
+            $('#labelEmailRegister').removeClass("mdc-text-field--invalid")
+
+            window.redirectToSignup()
+          }
+      },
+      error: function (data) {
+          serviceModal.config({
+              type: 3,
+              title: 'Login Inválido!',
+              subtitle: 'Por favor, verifique as credenciais.',
+              btnText:    "OK"
+          }, ()=>{ 
+              serviceModal.close() 
+              window.location = "/";
+          })
+          serviceModal.open()
+      },
+      data: JSON.stringify({token: id_token})
+    });
+
   }
 
 </script>
+
+<script src="https://apis.google.com/js/platform.js" async defer></script>
 
 </body>
 

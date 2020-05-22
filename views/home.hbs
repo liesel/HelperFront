@@ -40,7 +40,7 @@
 
   <!-- Google SignIn -->
   <meta name="google-signin-scope" content="profile email">
-  <meta name="google-signin-client_id" content="257771422298-kf6vcatq65esnjinr5oejg9o1el7lb51.apps.googleusercontent.com">
+  <meta name="google-signin-client_id" content={{clientId}}>
 
   <title>Helper</title>
 </head>
@@ -147,7 +147,7 @@
         <div class="card">
           <div class="row justify-content-between no-padding-margin column-service">
               <span class="bold col-md-8" style="font-size: 1.125rem !important;">Olá, {{session.username}} inicie sua colaboração</span>
-              <button type="button" class="btn col-md-3 fill ml-auto" data-toggle="modal" data-target="#modalAddService">
+              <button id="btnShowModalService" type="button" class="btn col-md-3 fill ml-auto">
                 adicionar serviço
               </button>
           </div>
@@ -199,11 +199,11 @@
 
   <!-- Adicionar Serviço Modal -->
   <div class="modal fade" id="modalAddService" tabindex="-1" role="dialog" aria-labelledby="modalAddServiceTitle" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-scrollable modal-dialog-centered" role="document">
+    <div id="divContentModal" class="modal-dialog modal-dialog-scrollable modal-dialog-centered" role="document">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title" id="modalAddServiceTitle">Cadastrar serviço</h5>
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <h5 class="modal-title" id="modalAddServiceTitle"></h5>
+          <button id="cancelServiceX" type="button" class="close">
             <span aria-hidden="true">&times;</span>
           </button>
         </div>
@@ -219,7 +219,7 @@
                 <span class="mdc-notched-outline">
                   <span class="mdc-notched-outline__leading"></span>
                   <span class="mdc-notched-outline__notch">
-                    <span class="mdc-floating-label" id="service">Nome do serviço</span>
+                    <span class="mdc-floating-label" id="nameAddService">Nome do serviço</span>
                   </span>
                   <span class="mdc-notched-outline__trailing">
                   </span>
@@ -237,7 +237,7 @@
                     <div class="mdc-notched-outline">
                       <div class="mdc-notched-outline__leading"></div>
                       <div class="mdc-notched-outline__notch">
-                        <label id="outlined-select-label" class="mdc-floating-label">Categoria</label>
+                        <label id="labelCategoriesSelect" class="mdc-floating-label">Categoria</label>
                       </div>
                       <div class="mdc-notched-outline__trailing"></div>
                     </div>
@@ -383,7 +383,7 @@
                     <div class="mdc-notched-outline">
                       <div class="mdc-notched-outline__leading"></div>
                       <div class="mdc-notched-outline__notch">
-                        <label class="mdc-floating-label" id="my-label-id">Descrição do serviço</label>
+                        <label class="mdc-floating-label" id="servicedesc">Descrição do serviço</label>
                       </div>
                       <div class="mdc-notched-outline__trailing"></div>
                     </div>
@@ -436,7 +436,7 @@
           </div>
         </div>
         <div class="modal-footer">
-          <button type="button" class="btn btn-outline-cancel" data-dismiss="modal">cancelar</button>
+          <button id="btnCancelAddService" type="button" class="btn btn-outline-cancel">cancelar</button>
           <button id="btnSaveService" name="btnSaveService" type="button" class="btn btn-primary dark">salvar serviço</button>
         </div>
       </div>
@@ -664,6 +664,8 @@
   </script>
 
   <script src="https://apis.google.com/js/platform.js?onload=onLoad" async defer></script>
+
+
 
 </body>
 
