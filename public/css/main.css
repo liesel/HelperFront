@@ -423,3 +423,25 @@ div.side-status-item:hover:not(.clicked) > span, div.side-status-item:hover:not(
     box-shadow: 0 0 2px #159CCF;
     border: 2.7px solid #159CCF;
 }
+
+.custom-google {
+    width: 240px !important;
+    margin-top: -16px !important;
+}
+
+.custom-google span {
+    font-weight: bold !important;
+    font-family: Raleway,Roboto,Helvetica,Arial,sans-serif !important;
+    font-weight: 600 !important;
+}
+
+.abcRioButton {
+    color: var(--theme-primary-main, #042189) !important;
+    border: 1px solid #042189 !important;
+    border-radius: 4px !important;
+    transition: background-color 0.25s ease-in-out;
+}
+
+.abcRioButton:focus, .abcRioButton:hover {
+    background-color: #F5F9FF !important;
+}

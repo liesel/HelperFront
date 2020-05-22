@@ -50,7 +50,7 @@
     </button>
     <div class="collapse navbar-collapse flex-row-reverse" id="navbarSupportedContent">
       <div class="form-inline pr-22">
-        <div class="g-signin2" data-onsuccess="onSignIn" data-theme="light" style="width: 240px !important; margin-top: -16px !important;"></div>
+        <div class="g-signin2 custom-google" data-onsuccess="onSignIn" data-theme="light"></div>
       </div>
     </div>
   </nav>
@@ -255,12 +255,13 @@ crossorigin="anonymous"></script>
 <script>
 
   function fixElements(){
+    const text = "Iniciar sessão com o Google"
     // NOT AUTHENTICATED
-    $('[id^=not_signed]').text("Iniciar sessão com o Google")
+    $('[id^=not_signed]').text(text)
 
     // AUTHENTICATED
     //$('[id^=connected').text("Registrar-se com o Google")
-    $('[id^=connected').text("Iniciar sessão com o Google")
+    $('[id^=connected').text(text)
   }
   
   function onSignIn(googleUser) {
