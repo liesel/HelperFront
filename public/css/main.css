@@ -436,8 +436,8 @@ div.side-status-item:hover:not(.clicked) > span, div.side-status-item:hover:not(
 }
 
 .abcRioButton {
-    color: var(--theme-primary-main, #042189) !important;
-    border: 1px solid #042189 !important;
+    color: #159CCF !important;
+    border: 1px solid #159CCF !important;
     border-radius: 4px !important;
     transition: background-color 0.25s ease-in-out;
 }
