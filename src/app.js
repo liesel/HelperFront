@@ -483,6 +483,7 @@ app.post('/userEdit', userIsAuthenticated, (req, res) => {
     })
 })
 
+
 app.post('/userEditAvatar', userIsAuthenticated, (req, res) => {
     var avatar                = req.body.avatar;
     axios.patch(`${BACK_END_URL}/v1/user/EditMyUser`, 
