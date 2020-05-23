@@ -242,14 +242,13 @@ app.post("/doSaveService", userIsAuthenticated, (req, res) => {
 })
 
 app.post("/doEditService", userIsAuthenticated, (req, res) => {
-    console.log(req.body);
     var categories = []
     for (let index = 0; index < req.body.categories.length; index++) {
         categories.push({
             category: req.body.categories[index]._id
         });
     }
-    axios.post(`${BACK_END_URL}/v1/schedule/Edit`,
+    axios.patch(`${BACK_END_URL}/v1/schedule/Edit`,
     {
         whereby: 			req.body.whereBy,
         picpay: 			req.body.picpay,
@@ -266,7 +265,6 @@ app.post("/doEditService", userIsAuthenticated, (req, res) => {
         }
     })
     .then(function (response) {
-        console.log(response);
         res.send({status:"ok"});
     })
     .catch(function (error) {

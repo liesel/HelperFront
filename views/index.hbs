@@ -50,14 +50,13 @@
     </button>
     <div class="collapse navbar-collapse flex-row-reverse" id="navbarSupportedContent">
       <div class="form-inline pr-22">
-        <button id="login" class="btn my-1 px-3 mr-3 my-sm-0 no-animation login">entrar</button>
-        <button id="register" class="btn my-1 my-sm-0 no-animation fill">cadastrar-se</button>
+        <div class="g-signin2 custom-google" data-onsuccess="onSignIn" data-theme="light"></div>
       </div>
     </div>
   </nav>
 
   <!-- Side Modal -->
-  <div class="backdrop">
+  {{!-- <div class="backdrop">
     <div class="side-modal shadow-lg">
       <div data-form="login" class="pb-4">
         <h2 class="modal-title">Login</h2>
@@ -114,10 +113,9 @@
           <button type="submit" id="btnLogin" name="btnLogin" class="btn btn-primary btn-block btn-raised register">entrar</button>
           <div class="login-info">Ainda não tem cadastro? <a id="redirect-signup" style="cursor: pointer;">Crie uma conta</a></div>
 
-          <div class="g-signin2" data-onsuccess="onSignIn" data-theme="dark" style="width: 100% !important;"></div>
         
-      </div>
-      <div data-form="register" class="invisible">
+      </div> --}}
+      {{!-- <div data-form="register" class="invisible">
         <h2 class="modal-title">Crie sua conta</h2>
         <form>
           <div class="pt-4">
@@ -179,7 +177,6 @@
             </label>
           </div>
           <button type="submit" id="btnRegisterUser"  name="btnRegisterUser" class="btn btn-primary btn-block btn-raised register">entrar</button>
-          <div class="g-signin2" data-onsuccess="onSignIn" data-theme="dark" style="width: 100% !important;"></div>
 
           <div class="mdc-form-field pt-3" style="margin-left: -12px !important;">
             <div class="mdc-checkbox">
@@ -197,7 +194,7 @@
           </div>
         </form>
       </div>
-      <div data-form="forgot" class="invisible">
+      <div data-form="forgot" class="invisible"> 
         <h2 class="modal-title">Recuperar senha</h2>
         <form>
           <div class="pt-4 pb-4">
@@ -219,7 +216,7 @@
       </div>
     </div>
   </div>
-
+--}}
   <helper-service-modal>
   </helper-service-modal>
 
@@ -256,11 +253,22 @@ crossorigin="anonymous"></script>
 <script src="/controllers/register.controller.js"></script>
 
 <script>
+
+  function fixElements(){
+    const text = "Iniciar sessão com o Google"
+    // NOT AUTHENTICATED
+    $('[id^=not_signed]').text(text)
+
+    // AUTHENTICATED
+    //$('[id^=connected').text("Registrar-se com o Google")
+    $('[id^=connected').text(text)
+  }
   
   function onSignIn(googleUser) {
     
     var id_token = googleUser.getAuthResponse().id_token;
     var profile = googleUser.getBasicProfile();
+    console.log(profile)
 
     $.ajax({
       url: "/doGoogleLogin",
@@ -302,7 +310,7 @@ crossorigin="anonymous"></script>
 
 </script>
 
-<script src="https://apis.google.com/js/platform.js" async defer></script>
+<script src="https://apis.google.com/js/platform.js?onload=fixElements" async defer></script>
 
 </body>
 

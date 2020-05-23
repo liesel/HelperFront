@@ -12,7 +12,7 @@ $(() => {
     fetchServicesCount()
     fetchMySchedulesCount()
     fetchSchedules()
-
+    
     // 
     // SUCCESS
     // 
@@ -333,6 +333,7 @@ $(() => {
                 break;
             default:
                 // CLEAN SERVICE
+                idService = 0;
                 $('#nameAddService').css("display", "block")
 
                 // DISABLE
@@ -343,6 +344,13 @@ $(() => {
                 var textfields = ['#txtServiceName', '#qtdPersons', '#txtServiceDate',
                                   '#txtInitialTime', '#txtFinalTime', '#txtWhereby',
                                   '#txtPicpay', '#txtDescription']
+
+
+                textfields.forEach(element => {
+                    $(element).val('')
+                    $(element).attr('disabled', false)
+                    $(element).removeClass('mdc-text-field--disabled')
+                });
 
                 labels.forEach(element => {
                     $(element).removeClass('mdc-text-field--disabled')
@@ -358,14 +366,12 @@ $(() => {
                     $(element).css('background','#fff')
                     $(element).css('padding-left','6px')
                     $(element).css('padding-right','6px')
+                    $($($(element).parent()).parent()).removeClass('mdc-notched-outline--notched')
                 }) 
 
-                textfields.forEach(element => {
-                    $(element).val('')
-                    console.log($(element).val())
-                    $(element).attr('disabled', false)
-                    $(element).removeClass('mdc-text-field--disabled')
-                });
+                $($('#linkwhere').parent()).css("width","")
+                $($('#linkpic').parent()).css("width","")
+                $($('#servicedesc').parent()).css("width","")
 
                 $("#labelCategoriesSelect").removeClass("mdc-floating-label--float-above");
 
@@ -441,24 +447,24 @@ $(() => {
                     contentType: 'application/json',
                     success: function (data) {
                         Loading().close()
+                        $('#modalAddService').modal('hide');
+                        window.changeLayout(3)
 
                         if (data.status == "ok") {
                             openServiceModal('Sucesso', data.responseText, 2, 'OK', closeModalAndBackServices);
                         }
 
-                        window.changeLayout(3)
-                        $('#modalAddService').modal('hide');
-
                     },
                     error: function (data) {
                         Loading().close()
+                        $('#modalAddService').modal('hide');
+                        window.changeLayout(3)
 
                         if (data.status == 401) {
                             window.location = "/";
                         } else if (data.status == 500) {
                             openServiceModal('Atenção', data.responseText, 3, "OK");
                         }
-                        window.changeLayout(3)
                     },
                     data: JSON.stringify(
                         {
@@ -496,21 +502,24 @@ $(() => {
                     contentType: 'application/json',
                     success: function (data) {
                         Loading().close()
-
-                        if (data.status == "ok") {
-                            openServiceModal('Sucesso', data.responseText, 2, 'OK', closeModalAndBackServices);
-                        }
+                        $('#modalAddService').modal('hide');
                         window.changeLayout(3)
+
+                        console.log('sucesso?')
+                        if (data.status == "ok") {
+                            openServiceModal('Sucesso', 'Serviço atualizado.', 2, 'OK', closeModalAndBackServices);
+                        }
                     },
                     error: function (data) {
                         Loading().close()
+                        $('#modalAddService').modal('hide');
+                        window.changeLayout(3)
 
                         if (data.status == 401) {
                             window.location = "/";
                         } else if (data.status == 500) {
                             openServiceModal('Atenção', data.responseText, 3, "OK");
                         }
-                        window.changeLayout(3)
                     },
                     data: JSON.stringify(
                     {
@@ -522,6 +531,8 @@ $(() => {
                         id: idService
                     })
                 });
+                console.log('sucesso?')
+
             }
         }
     });
@@ -641,6 +652,7 @@ $(() => {
         $('#txtWhereby').val(data.whereby)
         $('#txtPicpay').val(data.picpay)
         $('#txtDescription').val(data.description)
+        idService = data.id
 
         data.categories.forEach(el => {
             var category =  el.category.name
