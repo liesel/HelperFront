@@ -1,56 +1,19 @@
 $(() => {
     //HOME
-    var selectedAvatar = "";
-    var selectedCategories = [];
-    var toggleService = false;
-    var idService = 0;
+    var selectedAvatar      = "";
+    var selectedCategories  = [];
+    var toggleService       = false;
+    var idService           = 0;
+    let homeService         = new HomeService();
     AddLoadingHUD()
 
     getMyEvents();
     fetchCategories()
-    fetchNextSchedules()
+    
     fetchServicesCount()
     fetchMySchedulesCount()
     fetchSchedules()
-    
-    // 
-    // SUCCESS
-    // 
-
-    // callAlert({
-    //     title: "Sucesso",
-    //     type: 2,
-    //     subtitle: "Descrição"
-    // }, ()=>{
-    //     alert("success")
-    // })
-
-    // 
-    // ALERT
-    // 
-
-    // callAlert({
-    //     title: "Confirmação de e-mail",
-    //     type: 1,
-    //     email: "Karem.carvalho@fcamara.com.br"
-    // }, ()=>{
-    //     alert("warning")
-    // })
-
-    // 
-    // ERROR
-    // 
-
-    // callAlert({
-    //     title: "Error",
-    //     type: 3,
-    //     subtitle: "Descrição"
-
-    // }, ()=>{
-    //     alert("error")
-    // })
-
-
+   
     const itemStatus = $('div.row.side-status-item')
     itemStatus.on("click", (event) => {
         for (const item of itemStatus) {
@@ -73,7 +36,6 @@ $(() => {
                 fetchMySchedules()
                 break;
             case "favoritos":
-                // fetchSchedules()
                 break;
         }
         item.addClass("clicked")
@@ -92,15 +54,15 @@ $(() => {
         return realCategories;
     };
 
-    function openServiceModal(title, subtittle, modalType, text, field, next) {
-        var serviceModal = $("helper-service-modal")[0]
-        var func = errorHandlerModal
+    function openServiceModal(title, subtittle, modalType, btnText, field, next) {
+        var serviceModal    = $("helper-service-modal")[0]
+        var func            = errorHandlerModal
         serviceModal.config(
             {
-                type: modalType,
-                title: title,
-                subtitle: subtittle,
-                btnText: text
+                type:       modalType,
+                title:      title,
+                subtitle:   subtittle,
+                btnText:    btnText
             }, func.bind(null, field), next )
         serviceModal.open()
     }
@@ -402,17 +364,17 @@ $(() => {
         SERVICE_DESCRIPTION   = "#labelDescription",
         SERVICE_QTD           = "#labelQtdPeople"
 
-        var serviceName = $("#txtServiceName").val();
-        var serviceDate = $("#txtServiceDate").val();
-        var startTime = $("#txtInitialTime").val();
-        var endTime = $("#txtFinalTime").val();
-        var whereBy = $("#txtWhereby").val();
-        var picpay = $("#txtPicpay").val();
-        var description = $("#txtDescription").val();
-        var type = $('input[name=person-radios]:checked').val();
-        var qtdPeople = $("#qtdPersons").val()
-        var numberStartTime = startTime.replace(':', '');
-        var numberEndTime = endTime.replace(':', '');
+        var serviceName       = $("#txtServiceName").val();
+        var serviceDate       = $("#txtServiceDate").val();
+        var startTime         = $("#txtInitialTime").val();
+        var endTime           = $("#txtFinalTime").val();
+        var whereBy           = $("#txtWhereby").val();
+        var picpay            = $("#txtPicpay").val();
+        var description       = $("#txtDescription").val();
+        var type              = $('input[name=person-radios]:checked').val();
+        var qtdPeople         = $("#qtdPersons").val()
+        var numberStartTime   = startTime.replace(':', '');
+        var numberEndTime     = endTime.replace(':', '');
 
         if(!toggleService){
             if (selectedCategories.length < 1) {
@@ -620,13 +582,34 @@ $(() => {
     }
 
     function scheduleAgendar(data) {
-        console.log(data)
-        openServiceModal('Atenção', `Tem certeza que deseja agendar?`, 1, undefined, undefined, confirmModalAfterSchedule.bind(null, data));
+        openServiceModal('Atenção', `Tem certeza que deseja agendar com ${data.specialistName} para a atividade: ${data.title}?`, 1, null, "field", confirmModalAfterSchedule.bind(null, data));
     }
 
-    function serviceCancel(){
+    function scheduleCancel(data){
+        console.log(JSON.stringify(data));
         window.changeLayout(3)
-        openServiceModal('Opa!', `Tem certeza que deseja cancelar esse serviço?`, 1, undefined, undefined, closeModalAndBackServices.bind(null));
+        openServiceModal('Opa!', `Tem certeza que deseja cancelar esse agendamento?`, 1, undefined, undefined, function(){
+            console.log('cancelou');
+            console.log(data);
+        });
+    }
+
+    function serviceCancel(data){
+        window.changeLayout(3)
+        openServiceModal('Opa!', `Tem certeza que deseja cancelar esse serviço?`, 1, undefined, undefined, function(){
+            homeService.cancelService(data)
+            .then(data =>{
+                $('#modalAddService').modal('hide');
+                openServiceModal('Opa!', data.status, 2, undefined, undefined);
+                fetchServices()
+                fetchServicesCount()
+            })
+            .catch(error => {
+                $('#modalAddService').modal('hide');
+                openServiceModal('Opa!', error.responseText, 3);
+                
+            })
+        });
     }
 
     $("#cancelServiceX").on("click", async () => {
@@ -641,9 +624,9 @@ $(() => {
         // CONFIGURE - SESSION !!!
 
         moment.locale('pt-BR');
-        var startHour = moment(data.startDate).format("HH:mm");
-        var endHour = moment(data.endDate).format("HH:mm");
-        var date = moment(data.startDate).format("DD/MM/YYYY")
+        var startHour   = moment(data.startDate).format("HH:mm");
+        var endHour     = moment(data.endDate).format("HH:mm");
+        var date        = moment(data.startDate).format("DD/MM/YYYY")
 
         $('#txtServiceName').val(data.title)
         $('#txtInitialTime').val(startHour)
@@ -664,8 +647,17 @@ $(() => {
         Loading().close()
     }
 
-    function confirmModalAfterSchedule(data){
-        alert(JSON.stringify(data))
+    function confirmModalAfterSchedule(schedule){
+        homeService.registerAppointment({schedule: schedule.id})
+        .then(data =>{
+            $("helper-service-modal")[0].close();
+            openServiceModal('Aviso', `Agendamento realizado com sucesso`, 2, "OK", fetchSchedules);
+            
+        })
+        .catch(error =>{
+            $("helper-service-modal")[0].close();
+            openServiceModal('Erro', error, 3, "OK");
+        })
     }
 
     function closeModalAndBackhome() {
@@ -678,16 +670,19 @@ $(() => {
         $("div[data-link='servicos']").click()
     }
 
-    async function setSchedules(schedules) {
+    async function setMySchedules(schedules){
+        setSchedules(schedules,true);
+    }
+
+    async function setSchedules(schedules, isMine=false) {
         const container = $($('feed-container')[0].shadow);
         container.find('helper-schedule').remove()
         const fragment = $(document.createDocumentFragment())
         schedules.forEach(schedule => {
             const el = document.createElement('helper-schedule')
             el.config(schedule._id, schedule.CreatorId.avatar, schedule.CreatorId, schedule.ScheduleDate, schedule.ScheduleDateEnd,
-                schedule.serviceName, schedule.description, schedule.isScheduled, schedule.isFavorited, schedule.categories, schedule.picpay, schedule.whereby,
-                schedule.ScheduleType, scheduleAgendar
-            )
+                schedule.serviceName, schedule.description, (schedule.ClientId != "" && schedule.ClientId != undefined), schedule.isFavorited, schedule.categories, schedule.picpay, schedule.whereby,
+                schedule.ScheduleType, scheduleAgendar, scheduleCancel, isMine)
             fragment.append(el)
         });
         container.append(fragment)
@@ -737,26 +732,19 @@ $(() => {
 
     async function fetchServices(){
         Loading().open()
-        $.ajax({
-            url: "/getAllServices",
-            type: 'get',
-            dataType: 'json',
-            contentType: 'application/json',
-            success: function (data) {
-                setServices(data.schedules)
-                Loading().close()
-            },
-            error: function (data) {
-                Loading().close()
-
-                if (data.status == 401) {
-                    window.location.href = "/";
-                } else if (data.status == 500) {
-                    openServiceModal('Atenção', data.responseText, 3, 'OK');
-                }
-            },
-            data: {}
-        });
+        homeService.getAllServices()
+        .then( data =>{
+            setServices(data.schedules)
+            Loading().close()
+        })
+        .catch( error =>{
+            Loading().close()
+            if (data.status == 401) {
+                window.location.href = "/";
+            } else if (data.status == 500) {
+                openServiceModal('Atenção', data.responseText, 3, 'OK');
+            } 
+        })
     }
 
     async function fetchMySchedulesCount(){
@@ -773,7 +761,6 @@ $(() => {
             },
             error: function (data) {
                 Loading().close()
-
                 if (data.status == 401) {
                     window.location.href = "/";
                 } else if (data.status == 500) {
@@ -792,7 +779,8 @@ $(() => {
             dataType: 'json',
             contentType: 'application/json',
             success: function (data) {
-                setSchedules(data.schedules)
+                setMySchedules(data.schedules)
+                fetchNextSchedules(data.schedules)
                 Loading().close()
             },
             error: function (data) {
@@ -810,26 +798,19 @@ $(() => {
 
     async function fetchSchedules(){
         Loading().open()
-        $.ajax({
-            url: "/getAllSchedules",
-            type: 'get',
-            dataType: 'json',
-            contentType: 'application/json',
-            success: function (data) {
-                setSchedules(data.schedules)
-                Loading().close()
-            },
-            error: function (data) {
-                Loading().close()
-
-                if (data.status == 401) {
-                    window.location.href = "/";
-                } else if (data.status == 500) {
-                    openServiceModal('Atenção', data.responseText, 3, 'OK');
-                }
-            },
-            data: {}
-        });
+        homeService.getAllSchedules()
+        .then( data =>{
+            setSchedules(data.schedules)
+            Loading().close()
+        })
+        .catch( error => {
+            Loading().close()
+            if (data.status == 401) {
+                window.location.href = "/";
+            } else if (data.status == 500) {
+                openServiceModal('Atenção', data.responseText, 3, 'OK');
+            }
+        })
     }
 
     async function fetchCategories() {
@@ -890,17 +871,16 @@ $(() => {
 
     }
 
-    async function fetchNextSchedules() {
+    async function fetchNextSchedules(schedules) {
         const container = $('#side-feed');
-        const fragment = $(document.createDocumentFragment())
-
-        for (let i = 0; i < 3; i++) {
-            const el = document.createElement('helper-schedule-next')
+        const fragment  = $(document.createDocumentFragment())
+       
+        for (let i = 0; i < schedules.count; i++) {
+            
+            const el    = document.createElement('helper-schedule-next')
             el.schedule = {};
             fragment.append(el);
-            // el.countLines()
         }
-
         container.append(fragment)
     }
 
@@ -933,14 +913,13 @@ function Loading(){
 
 function CheckboxDropdown(el) {
 
-    var _this = this;
-
-    this.isOpen = false;
-    this.areAllChecked = false;
-    this.$el = $(el);
-    this.$label = this.$el.find(".mdc-select__selected-text");
-    this.$inputs = this.$el.find("[type='checkbox']");
-    this.$dropdown = this.$el.find(".mdc-select__anchor");
+    var _this           = this;
+    this.isOpen         = false;
+    this.areAllChecked  = false;
+    this.$el            = $(el);
+    this.$label         = this.$el.find(".mdc-select__selected-text");
+    this.$inputs        = this.$el.find("[type='checkbox']");
+    this.$dropdown      = this.$el.find(".mdc-select__anchor");
     this.$floatinglabel = this.$el.find(".mdc-floating-label");
 
     // Add Event Handlers

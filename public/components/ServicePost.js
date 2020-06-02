@@ -8,19 +8,19 @@ class ServicePost extends HTMLElement {
     }
 
     config(id, photo, creator, startDate, endDate, title, description, categories, picpay, whereby, type, editSchedule, cancelSchedule, number) {
-        this.id = id;
-        this.creator = creator;
-        this.photo = "/images/"+photo+".svg";
-        this.name = creator.name + " " + creator.surname;
-        this.specialization = creator.specialization;
-        this.startDate = startDate;
-        this.endDate = endDate;
-        this.modelIcon = type == 0 ? "person" : "group";
-        this.model = type == 0 ? "Individual" : "Grupo";
-        this.title = title;
-        this.text = description || "";
-        this.categories = categories;
-        this.numberOfSchedules = number || 0;
+        this.id                 = id;
+        this.creator            = creator;
+        this.photo              = "/images/"+photo+".svg";
+        this.name               = creator.name + " " + creator.surname;
+        this.specialization     = creator.specialization;
+        this.startDate          = startDate;
+        this.endDate            = endDate;
+        this.modelIcon          = type == 0 ? "person" : "group";
+        this.model              = type == 0 ? "Individual" : "Grupo";
+        this.title              = title;
+        this.text               = description || "";
+        this.categories         = categories;
+        this.numberOfSchedules  = number || 0;
         
         this.render();
 
@@ -39,7 +39,7 @@ class ServicePost extends HTMLElement {
         }
 
         let btnCancel = $(this).find('#cancelar')
-        btnCancel.on('click', cancelSchedule.bind(null))
+        btnCancel.on('click', cancelSchedule.bind(null, data))
 
         let btnEdit = $(this).find('#edit')
         btnEdit.on('click', editSchedule.bind(null, data))

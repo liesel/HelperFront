@@ -5,13 +5,13 @@ class ServiceModal extends HTMLElement {
     }
 
     connectedCallback(){
-        console.log("modal connected");
+        
     }
 
     config(data, cancel, next) {
         var {type, title, subtitle, btnText} = data;
-        this.type = type || 3;
-        this.btnText = btnText || 'fechar';
+        this.type       = type || 3;
+        this.btnText    = btnText || 'fechar';
 
         switch(this.type){
             case 1:
@@ -46,8 +46,8 @@ class ServiceModal extends HTMLElement {
         this.render()
 
         // ADD event handlers
-        var btnConfirm = $(this.root).find("#btnConfirm")
-        var btnCustom = $(this.root).find("#btnCustom")
+        var btnConfirm      = $(this.root).find("#btnConfirm")
+        var btnCustom       = $(this.root).find("#btnCustom")
         if($(btnConfirm).length != 0){
             $(btnConfirm).on("click", next)
         } else if ($(btnCustom).length != 0) {

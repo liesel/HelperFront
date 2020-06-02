@@ -5,24 +5,19 @@ class SchedulePostNext extends HTMLElement {
     }
 
     set schedule(schedule){
-
-        this.id = schedule.id || '1';
-        this.text = schedule.text || "Aprenda ser reconhecido, muito bem remunerado para crescer como um(a) profissional de sucesso!"
-        this.createdDate = schedule.created || "Seg, 03 de abril - 19:00 às 21:00";
-        this.title = schedule.title || "Consultoria de Carreira";
-        this.categories = schedule.categories || ["Tech", "Psycho", "Science"]
-
+        this.id           = schedule.id || '1';
+        this.text         = schedule.text || "Aprenda ser reconhecido, muito bem remunerado para crescer como um(a) profissional de sucesso!"
+        this.createdDate  = schedule.created || "Seg, 03 de abril - 19:00 às 21:00";
+        this.title        = schedule.title || "Consultoria de Carreira";
+        this.categories   = schedule.categories || ["Tech", "Psycho", "Science"]
         this.render()
     }
 
     render (){
-
         var listOfCategories = ""
-
         this.categories.forEach((item) => {
           listOfCategories += "#"+item + "  ";
         })
-
         this.root.innerHTML = `
                 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" />
                 <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
