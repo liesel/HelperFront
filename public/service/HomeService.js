@@ -51,6 +51,19 @@ class HomeService {
         });
     }
 
+    cancelSchedule(schedule){
+        return new Promise((resolve, reject) => {
+            this._http.patch("/cancelSchedule", schedule)
+            .then( data =>{
+                resolve(data);
+            })
+            .catch( data =>{
+                reject(data.responseText);
+            })
+        });
+    }
+    
+
     registerAppointment(schedule){
         return new Promise((resolve, reject) => {
             this._http.post("/registerAppointment", schedule)

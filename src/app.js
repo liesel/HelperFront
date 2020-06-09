@@ -30,7 +30,6 @@ const redirectLogin = (req, res, next) => {
         console.log("redireciono");        
         res.redirect('/');
     }else{
-        console.log("deixou passar");
         next();
     }
 }
@@ -67,7 +66,7 @@ app.set('view engine', 'hbs')
 // Setup static directory to serve
 app.use(express.static(publicDirectoryPath))
 app.use( bodyParser.json() );
-console.log('TÁ EM PROD!!!!!!!!!!! '+IN_PROD);
+
 
 app.use(session({
     nanme:                  SESS_NAME,
@@ -320,7 +319,7 @@ app.get("/getSchedulesByName", userIsAuthenticated, (req, res) => {
     })
 })
 
-app.delete('/cancelService', (req, res) => {
+app.delete('/cancelService', userIsAuthenticated, (req, res) => {
     axios.delete(`${BACK_END_URL}/v1/schedule/cancelService`,
     {
         headers: {
@@ -337,6 +336,25 @@ app.delete('/cancelService', (req, res) => {
     })
     .catch(function (error) {
         res.status(500).json(error.response.data.status);
+    })
+})
+
+app.patch('/cancelSchedule', userIsAuthenticated, (req, res) => {
+    axios.patch(`${BACK_END_URL}/v1/schedule/cancelSchedule`,
+    {
+        data: req.body
+    }, 
+    {
+        headers: {
+            'accept': 'application/json',
+            'HelperAutorization': `Bearer ${req.session.token}`
+        }
+    })
+    .then(function (response) {
+        res.json(response.data);
+    })
+    .catch(function (error) {
+        res.status(500).json(error.response);
     })
 })
 

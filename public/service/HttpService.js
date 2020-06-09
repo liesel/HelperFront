@@ -53,4 +53,24 @@ class HttpService {
             });
         });
     }
+
+    patch(url, data={}) {
+        return new Promise((resolve, reject) => {
+            $.ajax({
+                url:            url,
+                data :          JSON.stringify(data),
+                type :          'PATCH',
+                contentType :   'application/json',
+                processData:    false,
+                dataType:       'json',
+                success:        function (result) {
+                    resolve(result)
+                },
+                error: function (error) {
+                   reject(error.response)
+                },
+                data: JSON.stringify(data)
+            });
+        });
+    }
 }

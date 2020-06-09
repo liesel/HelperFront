@@ -9,10 +9,10 @@ $(() => {
 
     getMyEvents();
     fetchCategories()
-    
     fetchServicesCount()
     fetchMySchedulesCount()
     fetchSchedules()
+    fetchMySchedules()
    
     const itemStatus = $('div.row.side-status-item')
     itemStatus.on("click", (event) => {
@@ -111,10 +111,10 @@ $(() => {
               SERVICE_SPECIALIZATION  = "#labelEditEspecializacao",
               SERVICE_DESCRIPTION     = "#labelEditServiceDescription"
 
-        var name = $("#txtEditName").val();
-        var surname = $("#txtEditSurname").val();
-        var specialization = $("#txtEditEspecializacao").val();
-        var serviceDescription = $("#txaServiceDescription").val();
+        var name                      = $("#txtEditName").val();
+        var surname                   = $("#txtEditSurname").val();
+        var specialization            = $("#txtEditEspecializacao").val();
+        var serviceDescription        = $("#txaServiceDescription").val();
         if (name == "" || name == undefined) {
             openServiceModal('Atenção', "Informe seu nome", 3, "OK", SERVICE_NAME);
         } else if (surname == "" || surname == undefined) {
@@ -589,8 +589,18 @@ $(() => {
         console.log(JSON.stringify(data));
         window.changeLayout(3)
         openServiceModal('Opa!', `Tem certeza que deseja cancelar esse agendamento?`, 1, undefined, undefined, function(){
-            console.log('cancelou');
-            console.log(data);
+            homeService.cancelSchedule(data)
+            .then( data =>{
+                $('#modalAddService').modal('hide');
+                openServiceModal('Opa!', data.message, 2, undefined, undefined);
+                fetchMySchedulesCount()
+                getMyEvents()
+                fetchMySchedules()
+            })
+            .catch(error => {
+                $('#modalAddService').modal('hide');
+                openServiceModal('Opa!', error.responseText, 3);
+            })
         });
     }
 
@@ -874,13 +884,12 @@ $(() => {
     async function fetchNextSchedules(schedules) {
         const container = $('#side-feed');
         const fragment  = $(document.createDocumentFragment())
-       
-        for (let i = 0; i < schedules.count; i++) {
-            
+        console.table(schedules);
+        schedules.forEach( (schedule) =>{
             const el    = document.createElement('helper-schedule-next')
-            el.schedule = {};
+            el.schedule = schedule;
             fragment.append(el);
-        }
+        })
         container.append(fragment)
     }
 

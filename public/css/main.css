@@ -445,3 +445,8 @@ div.side-status-item:hover:not(.clicked) > span, div.side-status-item:hover:not(
 .abcRioButton:focus, .abcRioButton:hover {
     background-color: #F5F9FF !important;
 }
+
+#side-feed{
+    height: 328px;
+    overflow: scroll;
+}
