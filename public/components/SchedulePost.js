@@ -4,26 +4,36 @@ class SchedulePost extends HTMLElement {
     }
 
     connectedCallback(){
-        console.log('schedule connected')
+    
+    }
+
+    removeSchedule(){
+        console.log('chamo de dentro da classe e cancelou');
+        this.cancelSchedule({scheduleId: this.id, specialization: this.specialization, creatorName: this.name});
     }
 
     config(id, photo, creator, startDate, endDate, title, description, isScheduled, isFavorited, categories, picpay, whereby,  type, addSchedule, cancelSchedule, isMine) {
-        this.id = id;
-        this.creator = creator;
-        this.photo = "/images/"+photo+".svg";
-        this.name = creator.name + " " + creator.surname;
+        this.id             = id;
+        this.creator        = creator;
+        this.photo          = "/images/"+photo+".svg";
+        this.name           = creator.name + " " + creator.surname;
         this.specialization = creator.specialization;
-        this.startDate = startDate;
-        this.endDate = endDate;
-        this.modelIcon = type == 0 ? "person" : "group";
-        this.model = type == 0 ? "Individual" : "Grupo";
-        this.title = title;
-        this.text = description || "";
-        this.isScheduled = isScheduled || true;
-        this.favoriteIcon = isFavorited ? 'favorite' : 'favorite_border';
-        this.categories = categories;
-        this.isMine = isMine || false;
-
+        this.startDate      = startDate;
+        this.endDate        = endDate;
+        this.modelIcon      = type == 0 ? "person" : "group";
+        this.model          = type == 0 ? "Individual" : "Grupo";
+        this.title          = title;
+        this.text           = description || "";
+        this.isScheduled    = isScheduled || false;
+        this.favoriteIcon   = isFavorited ? 'favorite' : 'favorite_border';
+        this.categories     = categories;
+        this.isMine         = isMine || false;
+        var data = {
+            id:             id,
+            startDate:      startDate,
+            title:          title,
+            specialistName: `${creator.name} ${creator.surname}`
+        }
         this.render();
         
         let btnLike = $(this).find('#add-to-favorites')
@@ -31,17 +41,15 @@ class SchedulePost extends HTMLElement {
 
         if(this.isMine){
             let btnCancel = $(this).find('#cancelar')
-            btnCancel.on('click', cancelSchedule.bind(null))
+            btnCancel.on('click', cancelSchedule.bind(null, data))
         }
 
         btnLike.on('click', this.like.bind(this))
 
-        var data = {
-            id: id,
-            startDate: startDate
+       
+        if (!isScheduled) {
+            btnSchedule.on("click", addSchedule.bind(null, data))    
         }
-
-        btnSchedule.on("click", addSchedule.bind(null, data))
     }
 
     like() {
@@ -92,14 +100,18 @@ class SchedulePost extends HTMLElement {
 
         // DATE CONFIG
         moment.locale('pt-BR');
-        var format = "ddd, D of MMMM - ";
-        var startHour = moment(`${this.startDate}`).format("HH:mm");
-        var endHour = moment(`${this.endDate}`).format("HH:mm");
-        var date = moment(`${this.startDate}`).format(format);
-        date = date.replace("of", "de");
-        date += startHour + " às " + endHour; 
-
-        this.innerHTML = `
+        var format      = "ddd, D of MMMM - ";
+        var startHour   = moment(`${this.startDate}`).format("HH:mm");
+        var endHour     = moment(`${this.endDate}`).format("HH:mm");
+        var date        = moment(`${this.startDate}`).format(format);
+        date            = date.replace("of", "de");
+        date            += startHour + " às " + endHour; 
+        let htmlButton = `<button id="agendar" class="mdc-button ${this.isMine ? 'light' : 'dark'}">
+        <div class="mdc-button__ripple"></div>
+        <i class="material-icons mdc-button__icon" aria-hidden="true">event</i>
+        <span class="mdc-button__label">${this.isMine ? 'agendado' : 'agendar'}</span>
+        </button>`;
+        this.innerHTML  = `
                 
                 <div class="card mt-4" style="padding: 32px;">
                     <div class="row header">
@@ -147,11 +159,8 @@ class SchedulePost extends HTMLElement {
                     <div class="row footer">
                         <div class="ml-auto">
                             ${btnCancel}
-                            <button id="agendar" class="mdc-button ${this.isMine ? 'light' : 'dark'}">
-                            <div class="mdc-button__ripple"></div>
-                            <i class="material-icons mdc-button__icon" aria-hidden="true">event</i>
-                            <span class="mdc-button__label">${this.isMine ? 'agendado' : 'agendar'}</span>
-                            </button>
+                            ${ this.isScheduled ? '': htmlButton}
+                           
                         </div>
                     </div>
                 </div>

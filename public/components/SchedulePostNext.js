@@ -5,24 +5,25 @@ class SchedulePostNext extends HTMLElement {
     }
 
     set schedule(schedule){
-
-        this.id = schedule.id || '1';
-        this.text = schedule.text || "Aprenda ser reconhecido, muito bem remunerado para crescer como um(a) profissional de sucesso!"
-        this.createdDate = schedule.created || "Seg, 03 de abril - 19:00 às 21:00";
-        this.title = schedule.title || "Consultoria de Carreira";
-        this.categories = schedule.categories || ["Tech", "Psycho", "Science"]
-
+        this.id           = schedule._id;
+        this.text         = schedule.description;
+        var startDate     = new Date(schedule.ScheduleDate);
+        var endDate       = new Date(schedule.ScheduleDateEnd);
+        console.log(startDate);
+        this.createdDate  = schedule.created || `${DateUtils.getDayOfWeek(startDate)}, ${startDate.getDate()} de ${DateUtils.getMonthName(startDate)} - ${startDate.getHours()}:${startDate.getMinutes()} às ${endDate.getHours()}:${endDate.getMinutes()}`;
+        this.title        = schedule.serviceName;
+        this.categories   = [];
+        schedule.categories.forEach((category) =>{
+          this.categories.push(category.category.name)
+        })
         this.render()
     }
 
     render (){
-
         var listOfCategories = ""
-
         this.categories.forEach((item) => {
           listOfCategories += "#"+item + "  ";
         })
-
         this.root.innerHTML = `
                 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" />
                 <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">

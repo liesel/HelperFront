@@ -21,7 +21,7 @@ const  {
     SESS_LIFETIME   = TWO_HOURS,
     SESS_NAME       = 'sid',
     SESS_SECRET     = 'IT`S A SECRET!!__\o/',
-    BACK_END_URL    = 'http://localhost.charlesproxy.com:3000',
+    BACK_END_URL    = 'http://localhost:3000',
     MONGO_URI       = 'mongodb://localhost:27017/helper-session'
 } = process.env
 
@@ -30,7 +30,6 @@ const redirectLogin = (req, res, next) => {
         console.log("redireciono");        
         res.redirect('/');
     }else{
-        console.log("deixou passar");
         next();
     }
 }
@@ -67,7 +66,7 @@ app.set('view engine', 'hbs')
 // Setup static directory to serve
 app.use(express.static(publicDirectoryPath))
 app.use( bodyParser.json() );
-console.log('TÁ EM PROD!!!!!!!!!!! '+IN_PROD);
+
 
 app.use(session({
     nanme:                  SESS_NAME,
@@ -320,6 +319,45 @@ app.get("/getSchedulesByName", userIsAuthenticated, (req, res) => {
     })
 })
 
+app.delete('/cancelService', userIsAuthenticated, (req, res) => {
+    axios.delete(`${BACK_END_URL}/v1/schedule/cancelService`,
+    {
+        headers: {
+            'accept': 'application/json',
+            'HelperAutorization': `Bearer ${req.session.token}`
+        },
+        data: {
+            schedule: req.body
+        },
+
+    })
+    .then(function (response) {
+        res.json(response.data);
+    })
+    .catch(function (error) {
+        res.status(500).json(error.response.data.status);
+    })
+})
+
+app.patch('/cancelSchedule', userIsAuthenticated, (req, res) => {
+    axios.patch(`${BACK_END_URL}/v1/schedule/cancelSchedule`,
+    {
+        data: req.body
+    }, 
+    {
+        headers: {
+            'accept': 'application/json',
+            'HelperAutorization': `Bearer ${req.session.token}`
+        }
+    })
+    .then(function (response) {
+        res.json(response.data);
+    })
+    .catch(function (error) {
+        res.status(500).json(error.response);
+    })
+})
+
 app.get("/getSchedulesByDateStart", userIsAuthenticated, (req, res) => {
     axios.get(`${BACK_END_URL}/v1/schedule/SchedulesForDateStart`,
     {
@@ -478,6 +516,27 @@ app.post('/userEdit', userIsAuthenticated, (req, res) => {
     .catch(function (error) {
         console.log(error);
         res.send(error);
+    })
+})
+
+
+
+app.post('/registerAppointment', userIsAuthenticated, (req, res) => {
+    axios.post(`${BACK_END_URL}/v1/schedule/reserveSchedule`, 
+    {
+        schedule: req.body.schedule
+    },
+    {
+        headers: {
+            'accept': 'application/json',
+            'HelperAutorization': `Bearer ${req.session.token}`
+        }
+    })
+    .then(function (response) {
+        res.send(response.data);
+    })
+    .catch(function (error) {
+        res.status(500).send(error.response.data.message);
     })
 })
 

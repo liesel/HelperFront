@@ -5,22 +5,22 @@
         // CONSTANTS
         //
 
-        const btnLogin = $("#login")
-        const btnRegister = $("#register")
-        const btnForgot = $("#forgot")
-        const modal = $("div.backdrop")
-        const textFieldPassword1 =  $("input[aria-labelledby='password1']")
-        const textFieldPassword2 =  $("input[aria-labelledby='password2']")
-        const passwordIcon1 = $("#secretPassword1")
-        const passwordIcon2 = $("#secretPassword2")
-        const checkbox = $('.mdc-checkbox')
-        const formField = $('.mdc-form-field')
-        const registerDiv = $('[data-form=register]')
-        const loginDiv = $('[data-form=login]')
-        const forgotDiv = $('[data-form=forgot]')
+        const btnLogin              = $("#login")
+        const btnRegister           = $("#register")
+        const btnForgot             = $("#forgot")
+        const modal                 = $("div.backdrop")
+        const textFieldPassword1    =  $("input[aria-labelledby='password1']")
+        const textFieldPassword2    =  $("input[aria-labelledby='password2']")
+        const passwordIcon1         = $("#secretPassword1")
+        const passwordIcon2         = $("#secretPassword2")
+        const checkbox              = $('.mdc-checkbox')
+        const formField             = $('.mdc-form-field')
+        const registerDiv           = $('[data-form=register]')
+        const loginDiv              = $('[data-form=login]')
+        const forgotDiv             = $('[data-form=forgot]')
         $('[data-toggle="tooltip"]').tooltip()
-        const calendar = $('#calendar')
-        const scheduleds = $(".schedule")
+        const calendar              = $('#calendar')
+        const scheduleds            = $(".schedule")
 
         //
         // CONFIG
