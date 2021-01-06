@@ -4,7 +4,7 @@
   "description": "Aapp to help people to offer his services online",
   "main": "src/app.js",
   "dependencies": {
-    "axios": "^0.19.2",
+    "axios": "^0.21.1",
     "body-parser": "^1.19.0",
     "connect-mongo": "^3.2.0",
     "dotenv": "^8.2.0",
